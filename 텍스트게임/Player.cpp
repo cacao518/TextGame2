@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include "Timer.h"
 Player::Player(POS position)
 	:GameObject(position)
 {
@@ -42,17 +42,19 @@ int Player::Update()
 	//isDone = keyPress[27];
 
 	if (keyPress[72]) {
-		m_pos.y--;
+		m_pos.y-=Timer::DeltaTime()*10; //속도같은거 곱하면 됩니다
 	}
 	if (keyPress[80]) {
-		m_pos.y++;
+		m_pos.y += Timer::DeltaTime() * 10;
 	}
 	if (keyPress[75]) {
-		m_pos.x--;
+		m_pos.x -= Timer::DeltaTime() * 10;
 	}
 	if (keyPress[77]) {
-		m_pos.x++;
+		m_pos.x += Timer::DeltaTime() * 10;
 	}
+	if (keyPress[VK_ESCAPE])
+		ObjectMgr::GetInstance()->done = true;
 
 	keyPress.reset();
 	keyLock.unlock();
