@@ -1,6 +1,8 @@
 #include "Enemy.h"
 #include "Timer.h"
 #include "Bullet.h"
+#include "Timer.h"
+
 Enemy::Enemy(POS position)
 	:GameObject(position)
 {
@@ -22,12 +24,12 @@ Enemy::Enemy(POS position)
 		}
 	});
 
-	char heroImg[6] = { '*', '*', 'M', 'M'};
+	char monsterImg[4] = { '*', '*', 'M', 'M'};
 
 	m_width = 2;
 	m_height = 2;
 	m_sprite = new char[m_width * m_height];
-	memcpy(m_sprite, heroImg, sizeof(char) * m_width * m_height);
+	memcpy(m_sprite, monsterImg, sizeof(char) * m_width * m_height);
 
 	m_name = "Enemy";
 }
@@ -44,23 +46,21 @@ int Enemy::Update()
 	//isDone = keyPress[27];
 
 	
-	//if(m_dir) m_pos.x += 0.1;
-	//else  m_pos.x -= 0.1;
+	if(m_dir) m_pos.x += Timer::DeltaTime() * 5;
+	else  m_pos.x -= Timer::DeltaTime() * 5;
 
-	//m_MoveCount++;
-	//if(m_MoveCount==100) m_dir
+	m_MoveCount++;
+	if (m_MoveCount == 1000)
+	{
+		m_MoveCount = 0;
+		m_dir = !m_dir;
+	}
 			
 	
-	//else {
-	//	m_MoveCount--;
-	//	m_pos.x -= 0.1;
-	//}
+	
 		
 
 
-	keyPress.reset();
-	keyLock.unlock();
-	return 1;
 
 	keyPress.reset();
 	keyLock.unlock();

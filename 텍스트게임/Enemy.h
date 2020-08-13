@@ -20,6 +20,6 @@ private:
 
 	bool m_dir = true; //오른쪽이 트루임
 	//bool isGround = true;
-	float m_MoveCount = 1;
+	float m_MoveCount = 0;
 };
 
