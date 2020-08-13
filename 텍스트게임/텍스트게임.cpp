@@ -2,6 +2,7 @@
 #include "Struct.h"
 #include "ObjectMgr.h"
 #include "ScrollMgr.h"
+#include "Timer.h"
 #include "Player.h"
 #include "Terrain.h"
 using namespace std;
@@ -16,8 +17,8 @@ int main() {
 
 	std::thread t1(&ObjectMgr::Update, objectMgr);
 
-	scrollMgr->SetScreenSize(ObjectMgr::GetScreenWidth(), ObjectMgr::GetScreenHeight());
-	scrollMgr->SetMapSize(MapWidth, MapHeight);
+	scrollMgr->SetScreenSize((float)ObjectMgr::GetScreenWidth(), (float)ObjectMgr::GetScreenHeight());
+	scrollMgr->SetMapSize((float)MapWidth, (float)MapHeight);
 	int x = 3, y = 20;
 	
 	int map[MapWidth][MapHeight];
@@ -42,16 +43,18 @@ int main() {
 		}
 	}
 	
+	Timer::Reset();
+
 	std::thread Update([&] {
 		while (true) {
+			Timer::Update();
 
-			bool isDone = false;
+
 			objectMgr->UpdateObjects();
 			objectMgr->LateUpdateObjects();
 			objectMgr->RenderObjects();
 
-			if (isDone) {
-				objectMgr->done = true;
+			if (objectMgr->done == true) {
 				break;
 			}
 		}
