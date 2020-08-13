@@ -8,6 +8,8 @@ Terrain::Terrain(char* sprite, int width, int height, POS position)
 
 	m_sprite = new char[m_width * m_height];
 	memcpy(m_sprite, sprite, sizeof(char) * width * height);
+
+	m_name = "Terrain";
 }
 Terrain::~Terrain()
 {

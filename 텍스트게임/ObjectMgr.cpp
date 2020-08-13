@@ -76,9 +76,34 @@ void ObjectMgr::present()
 	backLock.unlock();
 }
 
-void ObjectMgr::Collide(GameObject * obj1, GameObject * obj2)
+void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 {
-
+	if (!strcmp(obj1->GetName(), "Player") && !strcmp(obj2->GetName(), "Terrain"))
+	{
+		if (obj1->GetPos().x + obj1->GetWidth()-1 >= obj2->GetPos().x &&
+			obj1->GetPos().x <= obj2->GetPos().x && 
+			obj1->GetPos().y + obj1->GetHeight()-1 >= obj2->GetPos().y &&
+			obj1->GetPos().y <= obj2->GetPos().y)
+		{
+			obj1->SetIsLand(true);
+			printf("바닥착지");
+		}
+		else
+			obj1->SetIsLand(false);
+	}
+	if (!strcmp(obj1->GetName(), "Player") && !strcmp(obj2->GetName(), "Enemy"))
+	{
+		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x &&
+			obj1->GetPos().x <= obj2->GetPos().x &&
+			obj1->GetPos().y + obj1->GetHeight() - 1 >= obj2->GetPos().y &&
+			obj1->GetPos().y <= obj2->GetPos().y)
+		{
+			obj1->SetIsAttacked(true);
+			printf("플레이어 공격 당함");
+		}
+		else
+			obj1->SetIsAttacked(false);
+	}
 }
 
 void ObjectMgr::Draw(const char * img, int w, int h, int x, int y)
@@ -132,6 +157,15 @@ void ObjectMgr::UpdateObjects()
 			object->Update();
 		}
 	}
+	for (auto& object : m_ObjectList[TERRAIN])
+		CheckCollider(m_ObjectList[PLAYER].front().get(), object.get()); // player, terrain
+
+	for (auto& object : m_ObjectList[ENEMY])
+		CheckCollider(m_ObjectList[PLAYER].front().get(), object.get()); // pleyer, enemy
+
+	for (auto& object1 : m_ObjectList[BULLET])
+		for (auto& object2 : m_ObjectList[ENEMY])
+			CheckCollider(object1.get(), object2.get()); // bullet, enemy
 }
 
 void ObjectMgr::LateUpdateObjects()
@@ -143,6 +177,7 @@ void ObjectMgr::LateUpdateObjects()
 			object->LateUpdate();
 		}
 	}
+
 }
 
 void ObjectMgr::RenderObjects()

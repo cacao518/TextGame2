@@ -21,9 +21,9 @@ Player::Player(POS position)
 		}
 	});
 
-	char heroImg[4] = { '[',']','[',']' };
+	char heroImg[6] = { '0',' ','[','r','L',' ' };
 	m_width = 2;
-	m_height = 2;
+	m_height = 3;
 	m_sprite = new char[m_width * m_height];
 	memcpy(m_sprite, heroImg, sizeof(char) * m_width * m_height);
 

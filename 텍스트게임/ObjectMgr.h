@@ -24,7 +24,7 @@ private:
 	void end();
 	void present();
 
-	void Collide(GameObject* obj1, GameObject* obj2);
+	void CheckCollider(GameObject* obj1, GameObject* obj2);
 private:
 	explicit ObjectMgr();
 	~ObjectMgr();
