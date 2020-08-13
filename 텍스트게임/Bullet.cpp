@@ -44,7 +44,7 @@ int Bullet::Update()
 
 	//isDone = keyPress[27];
 
-	m_pos.x += 1;
+	m_pos.x += 0.1;
 
 
 
