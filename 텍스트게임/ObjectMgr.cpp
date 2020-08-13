@@ -78,6 +78,7 @@ void ObjectMgr::present()
 
 void ObjectMgr::Collide(GameObject * obj1, GameObject * obj2)
 {
+
 }
 
 void ObjectMgr::Draw(const char * img, int w, int h, int x, int y)

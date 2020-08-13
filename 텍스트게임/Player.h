@@ -3,8 +3,8 @@
 class Player :public GameObject
 {
 public:
-	Player(char* sprite, int width, int height, POS position);
-	~Player();
+	Player(POS position);
+	virtual ~Player();
 
 	// GameObject을(를) 통해 상속됨
 	virtual int Update() override;

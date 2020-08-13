@@ -1,9 +1,13 @@
 #include "Terrain.h"
 
 Terrain::Terrain(char* sprite, int width, int height, POS position)
-	:GameObject(sprite, width, height, position)
+	:GameObject(position)
 {
+	this->width = width;
+	this->height = height;
 
+	this->sprite = new char[width * height];
+	memcpy(this->sprite, sprite, sizeof(char) * width * height);
 }
 Terrain::~Terrain()
 {

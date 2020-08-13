@@ -2,8 +2,9 @@
 #include "Bullet.h"
 
 
-Player::Player(char * sprite, int width, int height, POS position)
-	:GameObject(sprite, width, height, position)
+
+Player::Player(POS position)
+	:GameObject(sprite,width,height,position)
 {
 	KeyUpdate = std::thread([&] {
 		int c;
@@ -22,6 +23,12 @@ Player::Player(char * sprite, int width, int height, POS position)
 
 		}
 	});
+
+	char heroImg[4] = { '[',']','[',']' };
+	this->width = 2;
+	this->height = 2;
+	this->sprite = new char[width * height];
+	memcpy(sprite, heroImg, sizeof(char) * width * height);
 
 	name = "Player";
 

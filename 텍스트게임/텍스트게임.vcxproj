@@ -150,6 +150,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="ObjectMgr.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ScrollMgr.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="텍스트게임.cpp" />
   </ItemGroup>
@@ -160,6 +161,7 @@
     <ClInclude Include="ObjectMgr.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="ScrollMgr.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="Terrain.h" />
   </ItemGroup>

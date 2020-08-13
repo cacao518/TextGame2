@@ -5,7 +5,7 @@
 class GameObject
 {
 public:
-	GameObject(char* sprite, int width, int height, POS initPos);
+	GameObject(POS initPos);
 	~GameObject();
 
 public:
