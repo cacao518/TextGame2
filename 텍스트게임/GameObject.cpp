@@ -25,3 +25,5 @@ void GameObject::Render()
 {
 	ObjectMgr::GetInstance()->Draw(sprite, width, height, pos.x, pos.y);
 }
+
+////////Å×½ºÆ®
