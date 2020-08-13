@@ -27,8 +27,8 @@
     <Filter Include="Object\02.Terrain">
       <UniqueIdentifier>{5ca38bdf-cd32-46ce-a135-7d5e5e819ea7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager\ScrollMgr">
-      <UniqueIdentifier>{b88660ee-ff6a-484e-98d7-d2cf9df75ab6}</UniqueIdentifier>
+    <Filter Include="Object\03.Bullet">
+      <UniqueIdentifier>{7c7174f0-18b5-4b65-b60d-8cda028e0951}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -47,8 +47,8 @@
     <ClCompile Include="Terrain.cpp">
       <Filter>Object\02.Terrain</Filter>
     </ClCompile>
-    <ClCompile Include="ScrollMgr.cpp">
-      <Filter>Manager\ScrollMgr</Filter>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Object\03.Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -71,8 +71,8 @@
       <Filter>Object\02.Terrain</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="ScrollMgr.h">
-      <Filter>Manager\ScrollMgr</Filter>
+    <ClInclude Include="Bullet.h">
+      <Filter>Object\03.Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

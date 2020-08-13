@@ -1,23 +1,19 @@
 #pragma once
 #include "GameObject.h"
-class Player :public GameObject
+class Bullet :public GameObject
 {
 public:
-	Player(POS position);
-	virtual ~Player();
+	Bullet(char* sprite, int width, int height, POS position);
+	~Bullet();
 
 	// GameObject을(를) 통해 상속됨
 	virtual int Update() override;
 	virtual int LateUpdate() override;
-	bool attack;
 
 private:
 	std::bitset<0xff> keyPress;
 	std::mutex keyLock;
 	std::thread KeyUpdate;
 
-	ObjectMgr* objectMgr = ObjectMgr::GetInstance();
-	char bulletImg[2] = { '0','0' };
-	bool dir = true; //오른쪽이 트루임
 };
 

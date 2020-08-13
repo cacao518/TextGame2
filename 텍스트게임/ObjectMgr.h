@@ -4,7 +4,7 @@ class GameObject;
 class ObjectMgr
 {
 public:
-	enum OBJTYPE{TERRAIN,PLAYER,ENEMY,TYPE_END};
+	enum OBJTYPE{TERRAIN,PLAYER,ENEMY,BULLET,TYPE_END};
 public:
 	static const int GetScreenWidth() { return ScreenWidth; }
 	static const int GetScreenHeight() { return ScreenHeight; }
