@@ -21,15 +21,26 @@ Player::Player(POS position)
 
 		}
 	});
+	
 
-	char heroImg[6] = { '0', ' ', '[', 'r', 'L', ' ' };
 
 	m_width = 2;
 	m_height = 3;
-	m_sprite = new char[m_width * m_height];
-	memcpy(m_sprite, heroImg, sizeof(char) * m_width * m_height);
+	
 
 	m_name = "Player";
+	
+	char leftImg[6] = { ' ', '0', '<', ']', ' ', 'L' };
+	memcpy(m_leftImg, leftImg, sizeof(char)*m_width*m_height);
+
+	char rightImg[6] = { '0', ' ', '[', 'r', 'L', ' ' };
+	memcpy(m_rightImg, rightImg, sizeof(char)*m_width*m_height);
+
+	char attackImg[6] = { '0', ' ', '[', 'r', 'L', ' ' };
+	memcpy(m_attackImg, attackImg, sizeof(char)*m_width*m_height);
+
+	m_sprite = new char[m_width * m_height];
+	memcpy(m_sprite, rightImg, sizeof(char) * m_width * m_height);
 }
 
 Player::~Player()
@@ -77,6 +88,10 @@ int Player::Update()
 		objectMgr->InsertObject(ObjectMgr::BULLET, std::dynamic_pointer_cast<GameObject>(std::make_shared<Bullet>(m_dir,POS(m_pos.x, m_pos.y+1))));
 
 	}
+	if(m_dir)
+		memcpy(m_sprite, m_rightImg, sizeof(char) * m_width * m_height);
+	else
+		memcpy(m_sprite, m_leftImg, sizeof(char) * m_width * m_height);
 
 	keyPress.reset();
 	keyLock.unlock();

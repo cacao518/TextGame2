@@ -20,5 +20,7 @@ private:
 
 	bool m_dir = true; //오른쪽이 트루임
 	bool isGround = true;
+
+	char m_leftImg[6], m_rightImg[6], m_attackImg[6];
 };
 
