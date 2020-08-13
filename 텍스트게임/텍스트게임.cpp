@@ -5,6 +5,7 @@
 #include "Timer.h"
 #include "Player.h"
 #include "Terrain.h"
+#include "BackGround.h"
 using namespace std;
 
 const int MapWidth = 160;
@@ -19,14 +20,11 @@ int main() {
 
 	scrollMgr->SetScreenSize((float)ObjectMgr::GetScreenWidth(), (float)ObjectMgr::GetScreenHeight());
 	scrollMgr->SetMapSize((float)MapWidth, (float)MapHeight);
-	int x = 3, y = 20;
+	int x = 3, y = 18;
 	
 	int map[MapWidth][MapHeight];
-	char GroundBlockImg[3] = { 'm','U','U' };
+	char GroundBlockImg[5] = { 'm','U','U','U','U' };
 	char AirBlockImg[2] = { 'm','U' };
-
-	objectMgr->InsertObject(ObjectMgr::PLAYER, std::dynamic_pointer_cast<GameObject>(std::make_shared<Player>(POS(x,y))));
-	
 	ifstream fp;
 	fp.open("map.txt");
 	for (int i = 0; i < MapHeight; i++){
@@ -34,7 +32,7 @@ int main() {
 			fp >> map[j][i];
 			if (map[j][i] == 1){ // 바닥 지형
 				objectMgr->InsertObject(ObjectMgr::TERRAIN,
-					std::dynamic_pointer_cast<GameObject>(std::make_shared<Terrain>(GroundBlockImg, 1, 3, POS(j, i))));
+					std::dynamic_pointer_cast<GameObject>(std::make_shared<Terrain>(GroundBlockImg, 1, 5, POS(j, i))));
 			}
 			if (map[j][i] == 2) { // 공중 지형
 				objectMgr->InsertObject(ObjectMgr::TERRAIN,
@@ -42,6 +40,10 @@ int main() {
 			}
 		}
 	}
+	fp.close();
+
+	objectMgr->InsertObject(ObjectMgr::PLAYER, std::dynamic_pointer_cast<GameObject>(std::make_shared<Player>(POS(x, y))));
+	//objectMgr->InsertObject(ObjectMgr::BACKGROUND, std::dynamic_pointer_cast<GameObject>(std::make_shared<BackGround>(POS(0, 0))));
 	
 	Timer::Reset();
 
