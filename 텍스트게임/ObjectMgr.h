@@ -4,7 +4,7 @@ class GameObject;
 class ObjectMgr
 {
 public:
-	enum OBJTYPE{TERRAIN,PLAYER,ENEMY,TYPE_END};
+	enum OBJTYPE{TERRAIN,PLAYER,ENEMY,BULLET,TYPE_END};
 public:
 	void Update();
 	void Draw(const char* img, int w, int h, int x, int y);

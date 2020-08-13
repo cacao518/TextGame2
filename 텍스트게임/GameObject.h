@@ -5,7 +5,7 @@
 class GameObject
 {
 public:
-	GameObject(char* sprite,int width,int height,POS initPos);
+	GameObject(char* sprite, int width, int height, POS initPos);
 	~GameObject();
 
 public:
@@ -17,7 +17,7 @@ protected:
 	char* sprite;
 	int width, height;
 	POS pos;
-
 	const char* name;
+	bool isGround = false;
 };
 

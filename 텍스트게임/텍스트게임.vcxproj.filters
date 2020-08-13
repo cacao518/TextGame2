@@ -27,6 +27,9 @@
     <Filter Include="Object\02.Terrain">
       <UniqueIdentifier>{5ca38bdf-cd32-46ce-a135-7d5e5e819ea7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\03.Bullet">
+      <UniqueIdentifier>{7c7174f0-18b5-4b65-b60d-8cda028e0951}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="텍스트게임.cpp">
@@ -43,6 +46,9 @@
     </ClCompile>
     <ClCompile Include="Terrain.cpp">
       <Filter>Object\02.Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Object\03.Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +71,9 @@
       <Filter>Object\02.Terrain</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Bullet.h">
+      <Filter>Object\03.Bullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="텍스트게임.rc">

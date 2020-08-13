@@ -12,7 +12,7 @@ int main() {
 	ObjectMgr* objectMgr=ObjectMgr::GetInstance();
 	std::thread t1(&ObjectMgr::Update, objectMgr);
 
-	int x = 3, y = 20;
+	int x = 3, y = 2;
 	
 	int map[MapWidth][MapHeight];
 	char heroImg[4] = { '[',']','[',']' };
