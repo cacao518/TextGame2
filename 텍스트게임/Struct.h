@@ -1,7 +1,7 @@
 #pragma once
 typedef struct Position
 {
-	int x;
-	int y;
-	struct Position(int x, int y) :x(x), y(y) {}
+	float x;
+	float y;
+	struct Position(float x, float y) :x(x), y(y) {}
 }POS;

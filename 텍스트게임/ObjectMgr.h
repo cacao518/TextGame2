@@ -6,6 +6,9 @@ class ObjectMgr
 public:
 	enum OBJTYPE{TERRAIN,PLAYER,ENEMY,TYPE_END};
 public:
+	static const int GetScreenWidth() { return ScreenWidth; }
+	static const int GetScreenHeight() { return ScreenHeight; }
+public:
 	void Update();
 	void Draw(const char* img, int w, int h, int x, int y);
 

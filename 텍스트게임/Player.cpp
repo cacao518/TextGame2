@@ -1,7 +1,5 @@
 #include "Player.h"
 
-
-
 Player::Player(POS position)
 	:GameObject(position)
 {
@@ -24,12 +22,12 @@ Player::Player(POS position)
 	});
 
 	char heroImg[4] = { '[',']','[',']' };
-	this->width = 2;
-	this->height = 2;
-	this->sprite = new char[width * height];
-	memcpy(sprite, heroImg, sizeof(char) * width * height);
+	m_width = 2;
+	m_height = 2;
+	m_sprite = new char[m_width * m_height];
+	memcpy(m_sprite, heroImg, sizeof(char) * m_width * m_height);
 
-	name = "Player";
+	m_name = "Player";
 }
 
 Player::~Player()
@@ -44,24 +42,27 @@ int Player::Update()
 	//isDone = keyPress[27];
 
 	if (keyPress[72]) {
-		pos.y--;
+		m_pos.y--;
 	}
 	if (keyPress[80]) {
-		pos.y++;
+		m_pos.y++;
 	}
 	if (keyPress[75]) {
-		pos.x--;
+		m_pos.x--;
 	}
 	if (keyPress[77]) {
-		pos.x++;
+		m_pos.x++;
 	}
 
 	keyPress.reset();
 	keyLock.unlock();
+
+
 	return 1;
 }
 
 int Player::LateUpdate()
 {
+	ScrollMgr::GetInstance()->ScrollMap(m_pos);
 	return 1;
 }

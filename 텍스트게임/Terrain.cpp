@@ -3,11 +3,11 @@
 Terrain::Terrain(char* sprite, int width, int height, POS position)
 	:GameObject(position)
 {
-	this->width = width;
-	this->height = height;
+	m_width = width;
+	m_height = height;
 
-	this->sprite = new char[width * height];
-	memcpy(this->sprite, sprite, sizeof(char) * width * height);
+	m_sprite = new char[m_width * m_height];
+	memcpy(m_sprite, sprite, sizeof(char) * width * height);
 }
 Terrain::~Terrain()
 {

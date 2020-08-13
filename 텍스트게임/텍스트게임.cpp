@@ -1,6 +1,7 @@
 #include "Header.h"
 #include "Struct.h"
 #include "ObjectMgr.h"
+#include "ScrollMgr.h"
 #include "Player.h"
 #include "Terrain.h"
 using namespace std;
@@ -10,8 +11,13 @@ const int MapHeight = 80;
 
 int main() {
 	ObjectMgr* objectMgr=ObjectMgr::GetInstance();
+	ScrollMgr* scrollMgr = ScrollMgr::GetInstance();
+
+
 	std::thread t1(&ObjectMgr::Update, objectMgr);
 
+	scrollMgr->SetScreenSize(ObjectMgr::GetScreenWidth(), ObjectMgr::GetScreenHeight());
+	scrollMgr->SetMapSize(MapWidth, MapHeight);
 	int x = 3, y = 20;
 	
 	int map[MapWidth][MapHeight];
@@ -55,7 +61,7 @@ int main() {
 	t1.join();
 
 	objectMgr->DestroyInstance();
-
+	scrollMgr->DestroyInstance();
 	printf("Á¾·á!");
 
 

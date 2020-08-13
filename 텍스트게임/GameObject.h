@@ -2,6 +2,8 @@
 #include "Struct.h"
 #include "Header.h"
 #include "ObjectMgr.h"
+#include "ScrollMgr.h"
+
 class GameObject
 {
 public:
@@ -14,10 +16,10 @@ public:
 	void Render();
 
 protected:
-	char* sprite;
-	int width, height;
-	POS pos;
+	char* m_sprite;
+	int m_width, m_height;
+	POS m_pos;
 
-	const char* name;
+	const char* m_name = nullptr;
 };
 
