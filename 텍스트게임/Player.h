@@ -18,6 +18,7 @@ private:
 
 	ObjectMgr* objectMgr = ObjectMgr::GetInstance();
 	char bulletImg[2] = { '0','0' };
-	bool dir = true; //오른쪽이 트루임
+	bool m_dir = true; //오른쪽이 트루임
+	bool isGround = true;
 };
 

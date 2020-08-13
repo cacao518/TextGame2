@@ -1,7 +1,7 @@
 #include "Bullet.h"
 #include<iostream>
 
-Bullet::Bullet(POS position)
+Bullet::Bullet(bool dir,POS position)
 	:GameObject(position)
 {
 	KeyUpdate = std::thread([&] {
@@ -28,7 +28,7 @@ Bullet::Bullet(POS position)
 	m_sprite = new char[m_width * m_height];
 	memcpy(m_sprite, bulletImg, sizeof(char) * m_width * m_height);
 
-
+	m_dir = dir;
 	m_name = "Bullet";
 
 }
@@ -43,9 +43,10 @@ int Bullet::Update()
 	keyLock.lock();
 
 	//isDone = keyPress[27];
-
-	m_pos.x += 0.1;
-
+	if(m_dir)
+		m_pos.x += 0.1;
+	else
+		m_pos.x -= 0.1;
 
 
 	keyPress.reset();
