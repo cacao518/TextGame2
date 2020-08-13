@@ -17,3 +17,5 @@ void GameObject::Render()
 	if(nullptr!=sprite)
 		ObjectMgr::GetInstance()->Draw(sprite, width, height, pos.x, pos.y);
 }
+
+////////Å×½ºÆ®
