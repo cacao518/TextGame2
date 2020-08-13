@@ -1,15 +1,15 @@
 #pragma once
 #include "GameObject.h"
-class Player :public GameObject
+class Enemy :public GameObject
 {
 public:
-	Player(POS position);
-	virtual ~Player();
+	Enemy(POS position);
+	virtual ~Enemy();
 
 	// GameObject을(를) 통해 상속됨
 	virtual int Update() override;
 	virtual int LateUpdate() override;
-	bool attack;
+
 
 private:
 	std::bitset<0xff> keyPress;
@@ -19,8 +19,7 @@ private:
 	ObjectMgr* objectMgr = ObjectMgr::GetInstance();
 
 	bool m_dir = true; //오른쪽이 트루임
-	bool isGround = true;
-
-	char m_leftImg[6], m_rightImg[6], m_attackImg[6];
+	//bool isGround = true;
+	float m_MoveCount = 0;
 };
 

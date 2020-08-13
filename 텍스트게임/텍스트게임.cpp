@@ -5,7 +5,7 @@
 #include "Timer.h"
 #include "Player.h"
 #include "Terrain.h"
-#include "BackGround.h"
+#include "Enemy.h"
 using namespace std;
 
 const int MapWidth = 160;
@@ -20,11 +20,14 @@ int main() {
 
 	scrollMgr->SetScreenSize((float)ObjectMgr::GetScreenWidth(), (float)ObjectMgr::GetScreenHeight());
 	scrollMgr->SetMapSize((float)MapWidth, (float)MapHeight);
-	int x = 3, y = 18;
+	int x = 3, y = 19;
 	
 	int map[MapWidth][MapHeight];
 	char GroundBlockImg[5] = { 'm','U','U','U','U' };
 	char AirBlockImg[2] = { 'm','U' };
+
+	
+	
 	ifstream fp;
 	fp.open("map.txt");
 	for (int i = 0; i < MapHeight; i++){

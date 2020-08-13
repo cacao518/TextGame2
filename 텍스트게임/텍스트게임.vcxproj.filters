@@ -62,8 +62,8 @@
     <ClCompile Include="Timer.cpp">
       <Filter>Timer</Filter>
     </ClCompile>
-    <ClCompile Include="BackGround.cpp">
-      <Filter>Object\02.Terrain</Filter>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Object\01.Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,8 +95,8 @@
     <ClInclude Include="Timer.h">
       <Filter>Timer</Filter>
     </ClInclude>
-    <ClInclude Include="BackGround.h">
-      <Filter>Object\02.Terrain</Filter>
+    <ClInclude Include="Enemy.h">
+      <Filter>Object\01.Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -106,9 +106,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="map.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
-    <Text Include="BackGround.txt">
       <Filter>리소스 파일</Filter>
     </Text>
   </ItemGroup>
