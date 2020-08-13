@@ -22,7 +22,8 @@ Player::Player(POS position)
 		}
 	});
 
-	char heroImg[6] = { '0',' ','[','r','L',' ' };
+	char heroImg[6] = { '0', ' ', '[', 'r', 'L', ' ' };
+
 	m_width = 2;
 	m_height = 3;
 	m_sprite = new char[m_width * m_height];
@@ -60,10 +61,10 @@ int Player::Update()
 	if (keyPress[VK_ESCAPE])
 		ObjectMgr::GetInstance()->done = true;
 
-	if (m_pos.y >= 20)
+	if (m_pos.y >= 19)
 		isGround = true;
 
-	if (m_pos.y < 20)
+	if (m_pos.y < 19)
 		isGround = false;
 
 	if (!isGround)
@@ -73,7 +74,7 @@ int Player::Update()
 	if (attack)
 	{
 		attack = false;
-		objectMgr->InsertObject(ObjectMgr::BULLET, std::dynamic_pointer_cast<GameObject>(std::make_shared<Bullet>(m_dir,POS(m_pos.x, m_pos.y))));
+		objectMgr->InsertObject(ObjectMgr::BULLET, std::dynamic_pointer_cast<GameObject>(std::make_shared<Bullet>(m_dir,POS(m_pos.x, m_pos.y+1))));
 
 	}
 
