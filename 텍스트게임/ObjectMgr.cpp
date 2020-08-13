@@ -86,7 +86,7 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 			obj1->GetPos().y <= obj2->GetPos().y)
 		{
 			obj1->SetIsLand(true);
-			//printf("바닥착지");
+			printf("바닥착지");
 		}
 		else
 			obj1->SetIsLand(false);
@@ -99,7 +99,7 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 			obj1->GetPos().y <= obj2->GetPos().y)
 		{
 			obj1->SetIsAttacked(true);
-			//printf("플레이어 공격 당함");
+			printf("플레이어 공격 당함");
 		}
 		else
 			obj1->SetIsAttacked(false);
@@ -152,9 +152,12 @@ void ObjectMgr::UpdateObjects()
 {
 	for (int i = 0; i < TYPE_END; ++i)
 	{
-		for (auto& object : m_ObjectList[i])
+		for (auto iter = m_ObjectList[i].begin(); iter != m_ObjectList[i].end();)
 		{
-			object->Update();
+			if ((*iter).get()->Update() < 0)
+				m_ObjectList[i].erase(iter++);
+			else
+				++iter;
 		}
 	}
 	for (auto& object : m_ObjectList[TERRAIN])
@@ -172,9 +175,12 @@ void ObjectMgr::LateUpdateObjects()
 {
 	for (int i = 0; i < TYPE_END; ++i)
 	{
-		for (auto& object : m_ObjectList[i])
+		for (auto iter = m_ObjectList[i].begin(); iter != m_ObjectList[i].end();)
 		{
-			object->LateUpdate();
+			if ((*iter).get()->LateUpdate() < 0)
+				m_ObjectList[i].erase(iter++);
+			else
+				++iter;
 		}
 	}
 

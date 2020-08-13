@@ -79,7 +79,7 @@ int Player::Update()
 		isGround = false;
 
 	if (!isGround)
-		m_pos.y += Timer::DeltaTime() * 0.7;
+		m_pos.y += Timer::DeltaTime() * 0.7f;
 
 
 	if (attack)

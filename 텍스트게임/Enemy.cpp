@@ -6,23 +6,7 @@
 Enemy::Enemy(POS position)
 	:GameObject(position)
 {
-	KeyUpdate = std::thread([&] {
-		int c;
-
-		while (true) {
-
-			c = _getch();
-			if (c < 256) {
-				keyLock.lock();
-				keyPress[c] = 1;
-				keyLock.unlock();
-				if (c == 27) {
-					break;
-				}
-			}
-
-		}
-	});
+	
 
 	char monsterImg[4] = { '*', '*', 'M', 'M'};
 
@@ -36,16 +20,11 @@ Enemy::Enemy(POS position)
 
 Enemy::~Enemy()
 {
-	KeyUpdate.join();
+	
 }
 
 int Enemy::Update()
 {
-	keyLock.lock();
-
-	//isDone = keyPress[27];
-
-	
 	if(m_dir) m_pos.x += Timer::DeltaTime() * 5;
 	else  m_pos.x -= Timer::DeltaTime() * 5;
 
@@ -55,22 +34,19 @@ int Enemy::Update()
 		m_MoveCount = 0;
 		m_dir = !m_dir;
 	}
-			
-	
-	
-		
 
+	m_timer += Timer::DeltaTime();
+	bool isDie = false;
+	if (m_timer >= 2.f)
+		isDie = true;
 
-
-	keyPress.reset();
-	keyLock.unlock();
-
-
-	return 1;
+	if (!isDie)
+		return 1;
+	else
+		return -1;
 }
 
 int Enemy::LateUpdate()
 {
-	ScrollMgr::GetInstance()->ScrollMap(m_pos);
 	return 1;
 }

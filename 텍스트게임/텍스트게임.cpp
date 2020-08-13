@@ -20,15 +20,16 @@ int main() {
 
 	scrollMgr->SetScreenSize((float)ObjectMgr::GetScreenWidth(), (float)ObjectMgr::GetScreenHeight());
 	scrollMgr->SetMapSize((float)MapWidth, (float)MapHeight);
-	int x = 3, y = 19;
+	int x = 3, y = 20;
 	
 	int map[MapWidth][MapHeight];
 	char GroundBlockImg[3] = { 'm','U','U' };
 	char AirBlockImg[2] = { 'm','U' };
 
 	objectMgr->InsertObject(ObjectMgr::PLAYER, std::dynamic_pointer_cast<GameObject>(std::make_shared<Player>(POS(x,y))));
-	objectMgr->InsertObject(ObjectMgr::ENEMY, std::dynamic_pointer_cast<GameObject>(std::make_shared<Enemy>(POS(x+19, y+1))));
 
+	x = 20;
+	objectMgr->InsertObject(ObjectMgr::ENEMY, std::dynamic_pointer_cast<GameObject>(std::make_shared<Enemy>(POS(x, y))));
 
 	ifstream fp;
 	fp.open("map.txt");
@@ -63,8 +64,8 @@ int main() {
 		}
 	});
 
-	Update.join();
 	t1.join();
+	Update.join();
 
 	objectMgr->DestroyInstance();
 	scrollMgr->DestroyInstance();

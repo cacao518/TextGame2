@@ -11,9 +11,7 @@ public:
 	virtual int LateUpdate() override;
 
 private:
-	std::bitset<0xff> keyPress;
-	std::mutex keyLock;
-	std::thread KeyUpdate;
+
 	bool m_dir;
 };
 
