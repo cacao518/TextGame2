@@ -30,6 +30,9 @@
     <Filter Include="Object\03.Bullet">
       <UniqueIdentifier>{7c7174f0-18b5-4b65-b60d-8cda028e0951}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager\ScrollMgr">
+      <UniqueIdentifier>{8846f97c-58bd-4d58-8118-fe5a88f15886}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="텍스트게임.cpp">
@@ -49,6 +52,9 @@
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Object\03.Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="ScrollMgr.cpp">
+      <Filter>Manager\ScrollMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +79,9 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Bullet.h">
       <Filter>Object\03.Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="ScrollMgr.h">
+      <Filter>Manager\ScrollMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

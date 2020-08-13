@@ -1,8 +1,8 @@
 #include "Bullet.h"
 #include<iostream>
 
-Bullet::Bullet(char* sprite, int width, int height, POS position)
-	:GameObject(sprite, width, height, position)
+Bullet::Bullet(POS position)
+	:GameObject(position)
 {
 	KeyUpdate = std::thread([&] {
 		int c;
@@ -21,8 +21,15 @@ Bullet::Bullet(char* sprite, int width, int height, POS position)
 
 		}
 	});
+	char bulletImg[2] = { '0','0' };
 
-	name = "Bullet";
+	m_width = 2;
+	m_height = 1;
+	m_sprite = new char[m_width * m_height];
+	memcpy(m_sprite, bulletImg, sizeof(char) * m_width * m_height);
+
+
+	m_name = "Bullet";
 
 }
 
@@ -37,7 +44,7 @@ int Bullet::Update()
 
 	//isDone = keyPress[27];
 
-	pos.x += 1;
+	m_pos.x += 1;
 
 
 
