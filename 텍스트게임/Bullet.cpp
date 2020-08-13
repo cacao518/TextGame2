@@ -4,23 +4,7 @@
 Bullet::Bullet(bool dir,POS position)
 	:GameObject(position)
 {
-	KeyUpdate = std::thread([&] {
-		int c;
-
-		while (true) {
-
-			c = _getch();
-			if (c < 256) {
-				keyLock.lock();
-				keyPress[c] = 1;
-				keyLock.unlock();
-				if (c == 27) {
-					break;
-				}
-			}
-
-		}
-	});
+	
 	char bulletImg[2] = { '0','0' };
 
 	m_width = 2;
@@ -35,22 +19,16 @@ Bullet::Bullet(bool dir,POS position)
 
 Bullet::~Bullet()
 {
-	KeyUpdate.join();
 }
 
 int Bullet::Update()
 {
-	keyLock.lock();
-
-	//isDone = keyPress[27];
+	
 	if(m_dir)
 		m_pos.x += 0.1;
 	else
 		m_pos.x -= 0.1;
 
-
-	keyPress.reset();
-	keyLock.unlock();
 	return 1;
 }
 

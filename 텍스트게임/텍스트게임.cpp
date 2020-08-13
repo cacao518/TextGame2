@@ -60,8 +60,8 @@ int main() {
 		}
 	});
 
-	Update.join();
 	t1.join();
+	Update.join();
 
 	objectMgr->DestroyInstance();
 	scrollMgr->DestroyInstance();

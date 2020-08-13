@@ -60,6 +60,10 @@ int Player::Update()
 	if (keyPress[VK_ESCAPE])
 		ObjectMgr::GetInstance()->done = true;
 
+	bool isDie = false;
+	if (keyPress[VK_SPACE])
+		isDie = true;
+
 	if (m_pos.y >= 20)
 		isGround = true;
 
@@ -80,8 +84,10 @@ int Player::Update()
 	keyPress.reset();
 	keyLock.unlock();
 
-
-	return 1;
+	if(!isDie)
+		return 1;
+	else
+		return -1;
 }
 
 int Player::LateUpdate()
