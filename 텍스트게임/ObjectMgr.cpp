@@ -86,7 +86,7 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 			obj1->GetPos().y <= obj2->GetPos().y)
 		{
 			obj1->SetIsLand(true);
-			//printf("바닥착지");
+			printf("바닥착지");
 		}
 		else
 			obj1->SetIsLand(false);
@@ -99,7 +99,7 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 			obj1->GetPos().y <= obj2->GetPos().y)
 		{
 			obj1->SetIsAttacked(true);
-			//printf("플레이어 공격 당함");
+			printf("플레이어 공격 당함");
 		}
 		else
 			obj1->SetIsAttacked(false);
