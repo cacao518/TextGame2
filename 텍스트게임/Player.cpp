@@ -1,5 +1,6 @@
 #include "Player.h"
-
+#include "Timer.h"
+#include "Bullet.h"
 Player::Player(POS position)
 	:GameObject(position)
 {
@@ -41,17 +42,39 @@ int Player::Update()
 
 	//isDone = keyPress[27];
 
-	if (keyPress[72]) {
-		m_pos.y--;
+	if (keyPress[72] && isGround) {
+		m_pos.y-=Timer::DeltaTime()*10; //속도같은거 곱하면 됩니다
 	}
 	if (keyPress[80]) {
-		m_pos.y++;
+		//m_pos.y += Timer::DeltaTime() * 10;
+		attack = true;
 	}
 	if (keyPress[75]) {
-		m_pos.x--;
+		m_dir = false;
+		m_pos.x -= Timer::DeltaTime() * 10;
 	}
 	if (keyPress[77]) {
-		m_pos.x++;
+		m_dir = true;
+		m_pos.x += Timer::DeltaTime() * 10;
+	}
+	if (keyPress[VK_ESCAPE])
+		ObjectMgr::GetInstance()->done = true;
+
+	if (m_pos.y >= 20)
+		isGround = true;
+
+	if (m_pos.y < 20)
+		isGround = false;
+
+	if (!isGround)
+		m_pos.y += Timer::DeltaTime() * 0.7;
+
+
+	if (attack)
+	{
+		attack = false;
+		objectMgr->InsertObject(ObjectMgr::BULLET, std::dynamic_pointer_cast<GameObject>(std::make_shared<Bullet>(m_dir,POS(m_pos.x, m_pos.y))));
+
 	}
 
 	keyPress.reset();

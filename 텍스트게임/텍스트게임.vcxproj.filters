@@ -33,6 +33,9 @@
     <Filter Include="Manager\ScrollMgr">
       <UniqueIdentifier>{8846f97c-58bd-4d58-8118-fe5a88f15886}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Timer">
+      <UniqueIdentifier>{2f20b108-ae0f-4584-9511-209529bb8624}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="텍스트게임.cpp">
@@ -55,6 +58,9 @@
     </ClCompile>
     <ClCompile Include="ScrollMgr.cpp">
       <Filter>Manager\ScrollMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Timer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="ScrollMgr.h">
       <Filter>Manager\ScrollMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Timer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

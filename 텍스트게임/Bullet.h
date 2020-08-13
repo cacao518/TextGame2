@@ -3,7 +3,7 @@
 class Bullet :public GameObject
 {
 public:
-	Bullet(POS position);
+	Bullet(bool dir,POS position);
 	~Bullet();
 
 	// GameObject을(를) 통해 상속됨
@@ -14,6 +14,6 @@ private:
 	std::bitset<0xff> keyPress;
 	std::mutex keyLock;
 	std::thread KeyUpdate;
-
+	bool m_dir;
 };
 
