@@ -152,24 +152,12 @@ void ObjectMgr::UpdateObjects()
 {
 	for (int i = 0; i < TYPE_END; ++i)
 	{
-		/*for (auto& object : m_ObjectList[i])
+		for (auto iter = m_ObjectList[i].begin(); iter != m_ObjectList[i].end();)
 		{
-			object->Update();
-		}*/
-		for (auto iter = m_ObjectList[i].begin(); iter != m_ObjectList[i].end(); ++iter)
-		{
-			if (i == PLAYER)
-			{
-				if ((*iter).get()->Update() < 0)
-				{
-					m_ObjectList[i].erase(iter);
-
-
-				}
-			}
+			if ((*iter).get()->Update() < 0)
+				m_ObjectList[i].erase(iter++);
 			else
-				(*iter).get()->Update();
-			
+				++iter;
 		}
 	}
 	for (auto& object : m_ObjectList[TERRAIN])
@@ -187,9 +175,12 @@ void ObjectMgr::LateUpdateObjects()
 {
 	for (int i = 0; i < TYPE_END; ++i)
 	{
-		for (auto& object : m_ObjectList[i])
+		for (auto iter = m_ObjectList[i].begin(); iter != m_ObjectList[i].end();)
 		{
-			object->LateUpdate();
+			if ((*iter).get()->LateUpdate() < 0)
+				m_ObjectList[i].erase(iter++);
+			else
+				++iter;
 		}
 	}
 

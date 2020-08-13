@@ -5,6 +5,7 @@
 #include "Timer.h"
 #include "Player.h"
 #include "Terrain.h"
+#include "Enemy.h"
 using namespace std;
 
 const int MapWidth = 160;
@@ -26,7 +27,10 @@ int main() {
 	char AirBlockImg[2] = { 'm','U' };
 
 	objectMgr->InsertObject(ObjectMgr::PLAYER, std::dynamic_pointer_cast<GameObject>(std::make_shared<Player>(POS(x,y))));
-	
+
+	x = 20;
+	objectMgr->InsertObject(ObjectMgr::ENEMY, std::dynamic_pointer_cast<GameObject>(std::make_shared<Enemy>(POS(x, y))));
+
 	ifstream fp;
 	fp.open("map.txt");
 	for (int i = 0; i < MapHeight; i++){
