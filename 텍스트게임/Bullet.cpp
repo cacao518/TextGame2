@@ -1,5 +1,5 @@
 #include "Bullet.h"
-#include<iostream>
+#include"Timer.h"
 
 Bullet::Bullet(bool dir,POS position)
 	:GameObject(position)
@@ -25,9 +25,9 @@ int Bullet::Update()
 {
 	
 	if(m_dir)
-		m_pos.x += 0.1;
+		m_pos.x += Timer::DeltaTime() * 100;
 	else
-		m_pos.x -= 0.1;
+		m_pos.x -= Timer::DeltaTime() * 100;
 
 	return 1;
 }
