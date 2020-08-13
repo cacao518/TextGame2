@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Terrain.h"
 #include "Enemy.h"
+#include "BackGround.h"
 using namespace std;
 
 const int MapWidth = 160;
@@ -20,7 +21,7 @@ int main() {
 
 	scrollMgr->SetScreenSize((float)ObjectMgr::GetScreenWidth(), (float)ObjectMgr::GetScreenHeight());
 	scrollMgr->SetMapSize((float)MapWidth, (float)MapHeight);
-	int x = 3, y = 20;
+	int x = 3, y = 19;
 	
 	int map[MapWidth][MapHeight];
 	char GroundBlockImg[5] = { 'm','U','U','U','U' };
@@ -48,8 +49,7 @@ int main() {
 	}
 	fp.close();
 
-	objectMgr->InsertObject(ObjectMgr::PLAYER, std::dynamic_pointer_cast<GameObject>(std::make_shared<Player>(POS(x, y))));
-	//objectMgr->InsertObject(ObjectMgr::BACKGROUND, std::dynamic_pointer_cast<GameObject>(std::make_shared<BackGround>(POS(0, 0))));
+	objectMgr->InsertObject(ObjectMgr::BACKGROUND, std::dynamic_pointer_cast<GameObject>(std::make_shared<BackGround>(POS(0, 0))));
 	
 	Timer::Reset();
 
