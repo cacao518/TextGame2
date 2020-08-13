@@ -5,8 +5,8 @@
 class GameObject
 {
 public:
-	GameObject(char* sprite,int width,int height,POS initPos);
-	~GameObject();
+	GameObject(POS initPos);
+	virtual ~GameObject();
 
 public:
 	virtual int Update() = 0;

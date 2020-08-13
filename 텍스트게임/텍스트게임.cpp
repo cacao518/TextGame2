@@ -15,11 +15,10 @@ int main() {
 	int x = 3, y = 20;
 	
 	int map[MapWidth][MapHeight];
-	char heroImg[4] = { '[',']','[',']' };
 	char GroundBlockImg[3] = { 'm','U','U' };
 	char AirBlockImg[2] = { 'm','U' };
 
-	objectMgr->InsertObject(ObjectMgr::PLAYER, std::dynamic_pointer_cast<GameObject>(std::make_shared<Player>(heroImg, 2, 2, POS(x,y))));
+	objectMgr->InsertObject(ObjectMgr::PLAYER, std::dynamic_pointer_cast<GameObject>(std::make_shared<Player>(POS(x,y))));
 	
 	ifstream fp;
 	fp.open("map.txt");
