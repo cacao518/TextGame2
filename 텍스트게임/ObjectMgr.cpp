@@ -132,11 +132,26 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 
 	if (!wcscmp(obj1->GetName(), L"Bullet") && !wcscmp(obj2->GetName(), L"Enemy"))
 	{
-		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x )
+		Bullet* B = static_cast<Bullet*>(obj1);
+
+			// 높이 && (오른쪽 || 왼쪽)
+			if(
+				(obj2->GetPos().y + obj2->GetHeight() - 1 >= obj1->GetPos().y &&
+					obj2->GetPos().y <= obj1->GetPos().y) && 
+				(
+				(B->m_dir &&
+				obj1->GetPos().x + obj1->GetWidth()  >= obj2->GetPos().x  &&
+				obj1->GetPos().x <= obj2->GetPos().x ) ||
+				(!B->m_dir && 
+					obj2->GetPos().x + obj2->GetWidth() >= obj1->GetPos().x  &&
+					obj2->GetPos().x <= obj1->GetPos().x )
+				)
+
+			  )
 		{
 			//obj2->SetIsAttacked(true);
 			obj1->SetIsAttacked(true);
-			Bullet* B = static_cast<Bullet*>(obj1);
+			
 			Enemy* E = static_cast<Enemy*>(obj2);
 			E->SetHp(B->m_bulletDamage);
 			
