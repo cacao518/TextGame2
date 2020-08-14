@@ -77,7 +77,7 @@ int Player::Update()
 	}
 
 	if (!GetIsLand()) // 공중에 떠있는 상태
-		m_pos.y += Timer::DeltaTime() * 5.0f;
+		m_pos.y += Timer::DeltaTime() * 3.0f;
 	else // 충돌한 벽에 서있기
 		m_pos.y = GetCollisionObjPos().y;
 
