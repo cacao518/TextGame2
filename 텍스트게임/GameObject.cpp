@@ -1,6 +1,6 @@
 #include "GameObject.h"
 GameObject::GameObject(POS initPos)
-	:m_pos(initPos),m_sprite(nullptr),m_name(nullptr),m_width(0),m_height(0)
+	:m_pos(initPos),m_sprite(nullptr),m_name(nullptr),m_width(0),m_height(0), m_collisionObjPos(initPos)
 {
 	
 }
@@ -54,4 +54,26 @@ int GameObject::GetHeight()
 	return m_height;
 }
 
+POS GameObject::GetCollisionObjPos()
+{
+	return m_pos;
+}
+
+void GameObject::SetCollisionObjPos(POS pos)
+{
+	m_collisionObjPos = pos;
+}
+int GameObject::GetCollisionCount()
+{
+	return m_collisionCount;
+}
+void GameObject::AddCollisionCount()
+{
+	m_collisionCount++;
+}
+void GameObject::SubCollisionCount()
+{
+	if(m_collisionCount != 0)
+		m_collisionCount--;
+}
 ////////Å×½ºÆ®

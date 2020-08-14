@@ -23,6 +23,11 @@ public:
 	void SetIsLand(bool flag);
 	int GetWidth();
 	int GetHeight();
+	POS GetCollisionObjPos();
+	void SetCollisionObjPos(POS pos);
+	int GetCollisionCount();
+	void AddCollisionCount();
+	void SubCollisionCount();
 protected:
 	char* m_sprite;
 	int m_width, m_height;
@@ -32,5 +37,7 @@ protected:
 
 	bool m_isAttacked = false; // 공격 당함
 	bool m_isLand = false; // 지형에 서있음
+	POS m_collisionObjPos; // 충돌 당한 오브젝트 pos
+	int m_collisionCount = 0; // 충돌 카운트
 };
 

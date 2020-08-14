@@ -52,9 +52,8 @@ int Player::Update()
 
 	//isDone = keyPress[27];
 
-	if (keyPress[72] && isGround) {
-		m_pos.y-=Timer::DeltaTime()*10; //속도같은거 곱하면 됩니다
-	
+	if (keyPress[72] && GetIsLand()) {
+		m_pos.y-=Timer::DeltaTime()*30; //속도같은거 곱하면 됩니다
 	}
 	if (keyPress[80]) {
 		//m_pos.y += Timer::DeltaTime() * 10;
@@ -71,29 +70,30 @@ int Player::Update()
 	if (keyPress[VK_ESCAPE])
 		ObjectMgr::GetInstance()->done = true;
 
-	if (m_pos.y >= 19)
-		isGround = true;
-	else
-		isGround = false;
-
-	if (!isGround)
-		m_pos.y += Timer::DeltaTime() * 0.7f;
-
-
-	if (attack)
+	if (m_collisionCount == 0)
 	{
-		attack = false;
-		objectMgr->InsertObject(ObjectMgr::BULLET, std::dynamic_pointer_cast<GameObject>(std::make_shared<Bullet>(m_dir,POS(m_pos.x, m_pos.y+1))));
-
+		m_isLand = false;
+		SetCollisionObjPos(POS());
 	}
-	if(m_dir)
-		memcpy(m_sprite, m_rightImg, sizeof(char) * m_width * m_height);
+
+	if (!GetIsLand()) // 공중에 떠있는 상태
+		m_pos.y += Timer::DeltaTime() * 5.0f;
 	else
-		memcpy(m_sprite, m_leftImg, sizeof(char) * m_width * m_height);
+		m_pos.y = GetCollisionObjPos().y;
 
 	keyPress.reset();
 	keyLock.unlock();
 
+	if (attack)
+	{
+		attack = false;
+		objectMgr->InsertObject(ObjectMgr::BULLET, std::dynamic_pointer_cast<GameObject>(std::make_shared<Bullet>(m_dir, POS(m_pos.x, m_pos.y + 1))));
+
+	}
+	if (m_dir)
+		memcpy(m_sprite, m_rightImg, sizeof(char) * m_width * m_height);
+	else
+		memcpy(m_sprite, m_leftImg, sizeof(char) * m_width * m_height);
 
 	return 1;
 }
@@ -103,3 +103,19 @@ int Player::LateUpdate()
 	ScrollMgr::GetInstance()->ScrollMap(m_pos);
 	return 1;
 }
+
+
+
+void Player::SetHp(int damage)
+{
+	m_Status.hp -= damage;
+}
+
+
+
+STATUS Player::GetStatus()
+{
+	return m_Status;
+}
+
+
