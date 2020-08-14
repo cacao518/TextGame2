@@ -9,8 +9,8 @@ Bullet::Bullet(bool dir, POS position)
 
 	m_width = 2;
 	m_height = 1;
-	m_sprite = new char[m_width * m_height];
-	memcpy(m_sprite, bulletImg, sizeof(char) * m_width * m_height);
+	m_sprite = new wchar_t[m_width * m_height];
+	memcpy(m_sprite, bulletImg, sizeof(wchar_t) * m_width * m_height);
 
 	m_dir = dir;
 	m_name = "Bullet";

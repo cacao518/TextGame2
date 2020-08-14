@@ -28,18 +28,17 @@ Player::Player(POS position)
 
 	m_name = "Player";
 	m_color = 9;
+	wchar_t leftImg[6] = { ' ', '0', '<', ']', ' ', 'L' };
+	memcpy(m_leftImg, leftImg, sizeof(wchar_t)*m_width*m_height);
 
-	char leftImg[6] = { ' ', '0', '<', ']', ' ', 'L' };
-	memcpy(m_leftImg, leftImg, sizeof(char)*m_width*m_height);
+	wchar_t rightImg[6] = { '0', ' ', '[', 'r', 'L', ' ' };
+	memcpy(m_rightImg, rightImg, sizeof(wchar_t)*m_width*m_height);
 
-	char rightImg[6] = { '0', ' ', '[', 'r', 'L', ' ' };
-	memcpy(m_rightImg, rightImg, sizeof(char)*m_width*m_height);
+	wchar_t attackImg[6] = { '0', ' ', '[', 'r', 'L', ' ' };
+	memcpy(m_attackImg, attackImg, sizeof(wchar_t)*m_width*m_height);
 
-	char attackImg[6] = { '0', ' ', '[', 'r', 'L', ' ' };
-	memcpy(m_attackImg, attackImg, sizeof(char)*m_width*m_height);
-
-	m_sprite = new char[m_width * m_height];
-	memcpy(m_sprite, rightImg, sizeof(char) * m_width * m_height);
+	m_sprite = new wchar_t[m_width * m_height];
+	memcpy(m_sprite, rightImg, sizeof(wchar_t) * m_width * m_height);
 }
 
 Player::~Player()
@@ -92,9 +91,9 @@ int Player::Update()
 
 	}
 	if (m_dir)
-		memcpy(m_sprite, m_rightImg, sizeof(char) * m_width * m_height);
+		memcpy(m_sprite, m_rightImg, sizeof(wchar_t) * m_width * m_height);
 	else
-		memcpy(m_sprite, m_leftImg, sizeof(char) * m_width * m_height);
+		memcpy(m_sprite, m_leftImg, sizeof(wchar_t) * m_width * m_height);
 
 	return 1;
 }
@@ -109,6 +108,7 @@ int Player::LateUpdate()
 
 void Player::SetHp(int damage)
 {
+	printf("공격당했다");
 	m_Status.hp -= damage;
 }
 

@@ -1,6 +1,6 @@
 #include "ObjectMgr.h"
 #include "GameObject.h"
-
+#include "Player.h"
 ObjectMgr* ObjectMgr::instance = nullptr;
 
 ObjectMgr::ObjectMgr() :done(false), scBuff1(), scBuff2(), frontBuff(nullptr), backBuff(nullptr) {
@@ -119,8 +119,9 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 			obj1->GetPos().y <= obj2->GetPos().y)
 		{
 			obj1->SetIsAttacked(true);
-			obj1->SetCollisionObjPos(obj2->GetPos());
-			//printf("플레이어 공격 당함");
+			Player* a = static_cast<Player*>(obj1);
+			a->SetHp(10);
+			printf("플레이어 공격 당함");
 		}
 		else
 			obj1->SetIsAttacked(false);
@@ -142,7 +143,7 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 	}
 }
 
-void ObjectMgr::Draw(const char * img, int w, int h, int x, int y, int color)
+void ObjectMgr::Draw(const wchar_t * img, int w, int h, int x, int y, int color)
 {
 	int i, j;
 	for (i = 0; i < w; i++) {
@@ -177,7 +178,7 @@ void ObjectMgr::Update()
 			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 			for (x = 0; x < ScreenWidth; x++) {
 				SetColor(frontColorBuff[y * ScreenWidth + x], 0);
-				putchar((int)frontBuff[y * ScreenWidth + x]);
+				putwchar((int)frontBuff[y * ScreenWidth + x]);
 			}
 		}
 		ShowConsoleCursor(false);

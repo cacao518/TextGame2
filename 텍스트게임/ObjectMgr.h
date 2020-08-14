@@ -1,16 +1,18 @@
 #pragma once
 #include "Header.h"
 class GameObject;
+class Player;
+
 class ObjectMgr
 {
 public:
-	enum OBJTYPE{BACKGROUND,TERRAIN,PLAYER,ENEMY,BULLET,TYPE_END};
+	enum OBJTYPE{BACKGROUND,TERRAIN,PLAYER,ENEMY,BULLET,UI,TYPE_END};
 public:
 	static const int GetScreenWidth() { return ScreenWidth; }
 	static const int GetScreenHeight() { return ScreenHeight; }
 public:
 	void Update();
-	void Draw(const char* img, int w, int h, int x, int y, int color);
+	void Draw(const wchar_t* img, int w, int h, int x, int y, int color);
 
 	void UpdateObjects();
 	void LateUpdateObjects();
@@ -55,13 +57,13 @@ private:
 	static const int ScreenWidth = 80;
 	static const int ScreenHeight = 30;
 
-	char scBuff1[ScreenWidth * ScreenHeight];
-	char scBuff2[ScreenWidth * ScreenHeight];
+	wchar_t scBuff1[ScreenWidth * ScreenHeight];
+	wchar_t scBuff2[ScreenWidth * ScreenHeight];
 
 	int scColorBuff1[ScreenWidth * ScreenHeight];
 	int scColorBuff2[ScreenWidth * ScreenHeight];
 
-	char * frontBuff, *backBuff;
+	wchar_t * frontBuff, *backBuff;
 	int* frontColorBuff, * backColorBuff;
 	std::mutex frontLock, backLock;
 
