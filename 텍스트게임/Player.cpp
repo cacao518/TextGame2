@@ -2,9 +2,9 @@
 #include "Timer.h"
 #include "Bullet.h"
 Player::Player(POS position)
-	:GameObject(position)
+	:GameObject(position),m_Status(STATUS(10.f,10.f,10.f))
 {
-	KeyUpdate = std::thread([&] {
+	KeyUpdate=std::thread([&] {
 		int c;
 
 		while (true) {
@@ -21,15 +21,13 @@ Player::Player(POS position)
 
 		}
 	});
-
-
-
+	
 	m_width = 2;
 	m_height = 3;
-
+	
 
 	m_name = "Player";
-
+	
 	char leftImg[6] = { ' ', '0', '<', ']', ' ', 'L' };
 	memcpy(m_leftImg, leftImg, sizeof(char)*m_width*m_height);
 
@@ -54,8 +52,9 @@ int Player::Update()
 
 	//isDone = keyPress[27];
 
-	if (keyPress[72] && m_isLand) {
-		m_pos.y -= Timer::DeltaTime() * 10; //속도같은거 곱하면 됩니다
+	if (keyPress[72] && isGround) {
+		m_pos.y-=Timer::DeltaTime()*10; //속도같은거 곱하면 됩니다
+	
 	}
 	if (keyPress[80]) {
 		//m_pos.y += Timer::DeltaTime() * 10;
@@ -71,24 +70,23 @@ int Player::Update()
 	}
 	if (keyPress[VK_ESCAPE])
 		ObjectMgr::GetInstance()->done = true;
-	/*
+
 	if (m_pos.y >= 19)
 		isGround = true;
-
-	if (m_pos.y < 19)
+	else
 		isGround = false;
-		*/
-	if (!m_isLand)
+
+	if (!isGround)
 		m_pos.y += Timer::DeltaTime() * 0.7f;
 
 
 	if (attack)
 	{
 		attack = false;
-		objectMgr->InsertObject(ObjectMgr::BULLET, std::dynamic_pointer_cast<GameObject>(std::make_shared<Bullet>(m_dir, POS(m_pos.x, m_pos.y + 1))));
+		objectMgr->InsertObject(ObjectMgr::BULLET, std::dynamic_pointer_cast<GameObject>(std::make_shared<Bullet>(m_dir,POS(m_pos.x, m_pos.y+1))));
 
 	}
-	if (m_dir)
+	if(m_dir)
 		memcpy(m_sprite, m_rightImg, sizeof(char) * m_width * m_height);
 	else
 		memcpy(m_sprite, m_leftImg, sizeof(char) * m_width * m_height);
