@@ -4,13 +4,13 @@ class GameObject;
 class ObjectMgr
 {
 public:
-	enum OBJTYPE{BACKGROUND,TERRAIN,PLAYER,ENEMY,BULLET,TYPE_END};
+	enum OBJTYPE{BACKGROUND,TERRAIN,PLAYER,ENEMY,BULLET,UI,TYPE_END};
 public:
 	static const int GetScreenWidth() { return ScreenWidth; }
 	static const int GetScreenHeight() { return ScreenHeight; }
 public:
 	void Update();
-	void Draw(const char* img, int w, int h, int x, int y);
+	void Draw(const wchar_t* img, int w, int h, int x, int y);
 
 	void UpdateObjects();
 	void LateUpdateObjects();
@@ -54,10 +54,10 @@ private:
 	static const int ScreenWidth = 80;
 	static const int ScreenHeight = 30;
 
-	char scBuff1[ScreenWidth * ScreenHeight];
-	char scBuff2[ScreenWidth * ScreenHeight];
+	wchar_t scBuff1[ScreenWidth * ScreenHeight];
+	wchar_t scBuff2[ScreenWidth * ScreenHeight];
 
-	char * frontBuff, *backBuff;
+	wchar_t * frontBuff, *backBuff;
 	std::mutex frontLock, backLock;
 
 

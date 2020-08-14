@@ -137,7 +137,7 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 	}
 }
 
-void ObjectMgr::Draw(const char * img, int w, int h, int x, int y)
+void ObjectMgr::Draw(const wchar_t * img, int w, int h, int x, int y)
 {
 	int i, j;
 	for (i = 0; i < w; i++) {
@@ -170,7 +170,7 @@ void ObjectMgr::Update()
 			pos.Y = y;
 			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 			for (x = 0; x < ScreenWidth; x++) {
-				putchar((int)frontBuff[y * ScreenWidth + x]);
+				putwchar((int)frontBuff[y * ScreenWidth + x]);
 			}
 		}
 		ShowConsoleCursor(false);

@@ -8,12 +8,12 @@ Enemy::Enemy(POS position)
 {
 
 
-	char monsterImg[4] = { '*', '*', 'M', 'M' };
+	wchar_t monsterImg[4] = { '*', '*', 'M', 'M' };
 
 	m_width = 2;
 	m_height = 2;
-	m_sprite = new char[m_width * m_height];
-	memcpy(m_sprite, monsterImg, sizeof(char) * m_width * m_height);
+	m_sprite = new wchar_t[m_width * m_height];
+	memcpy(m_sprite, monsterImg, sizeof(wchar_t) * m_width * m_height);
 
 	m_name = "Enemy";
 }

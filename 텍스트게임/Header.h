@@ -10,7 +10,7 @@
 #include <memory>
 #include <iostream>
 #include <fstream>
-
+#include <locale>
 #define BLACK 0 
 #define BLUE 1 
 #define GREEN 2 

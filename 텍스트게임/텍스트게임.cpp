@@ -2,20 +2,23 @@
 #include "Struct.h"
 #include "ObjectMgr.h"
 #include "ScrollMgr.h"
+#include "GameMgr.h"
 #include "Timer.h"
 #include "Player.h"
 #include "Terrain.h"
 #include "Enemy.h"
 #include "BackGround.h"
+#include "PlayerUI.h"
 using namespace std;
 
 const int MapWidth = 160;
 const int MapHeight = 80;
 
 int main() {
+	setlocale(LC_ALL, "");
 	ObjectMgr* objectMgr = ObjectMgr::GetInstance();
 	ScrollMgr* scrollMgr = ScrollMgr::GetInstance();
-
+	GameMgr*gameMgr = GameMgr::GetInstance();
 
 	std::thread t1(&ObjectMgr::Update, objectMgr);
 
@@ -24,10 +27,20 @@ int main() {
 	int x = 3, y = 19;
 
 	int map[MapWidth][MapHeight];
-	char GroundBlockImg[5] = { 'm','U','U','U','U' };
-	char AirBlockImg[2] = { 'm','U' };
+	wchar_t GroundBlockImg[5] = { 'm','U','U','U','U' };
+	wchar_t AirBlockImg[2] = { 'm','U' };
 
-	objectMgr->InsertObject(ObjectMgr::PLAYER, std::dynamic_pointer_cast<GameObject>(std::make_shared<Player>(POS(x, y))));
+	{
+		std::shared_ptr<Player> player = std::make_shared<Player>(POS(x, y));
+		gameMgr->SetPlayer(player);
+		objectMgr->InsertObject(ObjectMgr::PLAYER, std::dynamic_pointer_cast<GameObject>(player));
+	}
+
+	{
+		std::shared_ptr<PlayerUI> playerUI = std::make_shared<PlayerUI>();
+		gameMgr->SetPlayerUI(playerUI);
+		objectMgr->InsertObject(ObjectMgr::UI, std::dynamic_pointer_cast<GameObject>(playerUI));
+	}
 
 	x = 20;
 	objectMgr->InsertObject(ObjectMgr::ENEMY, std::dynamic_pointer_cast<GameObject>(std::make_shared<Enemy>(POS(x, y + 1))));
@@ -62,6 +75,7 @@ int main() {
 		while (true) {
 			Timer::Update();
 
+			gameMgr->Update();
 
 			objectMgr->UpdateObjects();
 			objectMgr->LateUpdateObjects();

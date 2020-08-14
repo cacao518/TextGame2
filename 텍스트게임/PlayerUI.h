@@ -17,6 +17,6 @@ private:
 	void UpdateHpBar();
 private:
 	STATUS m_playerStatus;
-	char m_BaseImg[36];
+	wchar_t m_BaseImg[36];
 };
 

@@ -29,7 +29,7 @@ public:
 	void AddCollisionCount();
 	void SubCollisionCount();
 protected:
-	char* m_sprite;
+	wchar_t* m_sprite;
 	int m_width, m_height;
 	POS m_pos;
 
