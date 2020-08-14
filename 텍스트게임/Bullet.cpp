@@ -1,10 +1,10 @@
 #include "Bullet.h"
 #include"Timer.h"
 
-Bullet::Bullet(bool dir, POS position)
+Bullet::Bullet(bool dir,float bulletDamage, POS position)
 	:GameObject(position)
 {
-
+	m_bulletDamage = bulletDamage;
 	wchar_t bulletImg[2] = { L'-',L'-' };
 
 	m_width = 2;

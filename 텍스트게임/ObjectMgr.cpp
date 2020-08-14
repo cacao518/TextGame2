@@ -1,6 +1,8 @@
 #include "ObjectMgr.h"
 #include "GameObject.h"
 #include "Player.h"
+#include "Enemy.h"
+#include "Bullet.h"
 ObjectMgr* ObjectMgr::instance = nullptr;
 
 ObjectMgr::ObjectMgr() :done(false), scBuff1(), scBuff2(), frontBuff(nullptr), backBuff(nullptr) {
@@ -119,8 +121,9 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 			obj1->GetPos().y <= obj2->GetPos().y)
 		{
 			obj1->SetIsAttacked(true);
-			Player* a = static_cast<Player*>(obj1);
-			a->SetHp(10);
+			Player* P = static_cast<Player*>(obj1);
+			Enemy* E = static_cast<Enemy*>(obj2);
+			P->SetHp(E->m_Status.attackDamage);
 			printf("플레이어 공격 당함");
 		}
 		else
@@ -131,9 +134,12 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 	{
 		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x )
 		{
-			obj2->SetIsAttacked(true);
+			//obj2->SetIsAttacked(true);
 			obj1->SetIsAttacked(true);
-			printf("총알 명중");
+			Bullet* B = static_cast<Bullet*>(obj1);
+			Enemy* E = static_cast<Enemy*>(obj2);
+			E->SetHp(B->m_bulletDamage);
+			
 		}
 		else
 		{

@@ -4,7 +4,7 @@
 #include "Timer.h"
 
 Enemy::Enemy(POS position)
-	:GameObject(position)
+	:GameObject(position), m_Status(STATUS(10.f, 10.f, 0.1f))
 {
 	wchar_t monsterImg[4] = { '*', '*', 'M', 'M' };
 
@@ -42,7 +42,7 @@ int Enemy::Update()
 
 
 		*/
-	if (!m_isAttacked)
+	if (m_Status.hp > 0)
 		return 1;
 	else
 		return -1;
@@ -52,3 +52,13 @@ int Enemy::LateUpdate()
 {
 	return 1;
 }
+
+
+void Enemy::SetHp(float damage)
+{
+	printf("ÀûÃ¼·Â %f ", m_Status.hp);
+	m_Status.hp -= damage;
+}
+
+
+
