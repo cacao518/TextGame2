@@ -80,16 +80,27 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 {
 	if (!strcmp(obj1->GetName(), "Player") && !strcmp(obj2->GetName(), "Terrain"))
 	{
-		if (obj1->GetPos().x + obj1->GetWidth()-1 >= obj2->GetPos().x &&
-			obj1->GetPos().x <= obj2->GetPos().x && 
-			obj1->GetPos().y + obj1->GetHeight()-1 >= obj2->GetPos().y &&
-			obj1->GetPos().y <= obj2->GetPos().y)
+		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x &&
+			obj1->GetPos().x <= obj2->GetPos().x &&
+			obj1->GetPos().y + obj1->GetHeight() - 1 >= obj2->GetPos().y - 1 &&
+			obj1->GetPos().y <= obj2->GetPos().y - 1)
 		{
-			obj1->SetIsLand(true);
-			printf("바닥착지");
+			if (!(obj1->GetIsLand()) && !(obj2->GetIsLand()))
+			{
+				obj1->SetIsLand(true);
+				obj2->SetIsLand(true);
+				obj1->SetCollisionObjPos(obj2->GetPos());
+				obj1->AddCollisionCount();
+			}
 		}
 		else
-			obj1->SetIsLand(false);
+		{
+			if (obj2->GetIsLand())
+			{
+				obj2->SetIsLand(false);
+				obj1->SubCollisionCount();
+			}
+		}
 	}
 	if (!strcmp(obj1->GetName(), "Player") && !strcmp(obj2->GetName(), "Enemy"))
 	{
@@ -99,7 +110,8 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 			obj1->GetPos().y <= obj2->GetPos().y)
 		{
 			obj1->SetIsAttacked(true);
-			printf("플레이어 공격 당함");
+			obj1->SetCollisionObjPos(obj2->GetPos());
+			//printf("플레이어 공격 당함");
 		}
 		else
 			obj1->SetIsAttacked(false);

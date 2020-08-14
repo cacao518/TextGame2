@@ -49,7 +49,7 @@ int main() {
 	}
 	fp.close();
 
-	objectMgr->InsertObject(ObjectMgr::BACKGROUND, std::dynamic_pointer_cast<GameObject>(std::make_shared<BackGround>(POS(0, 0))));
+	//objectMgr->InsertObject(ObjectMgr::BACKGROUND, std::dynamic_pointer_cast<GameObject>(std::make_shared<BackGround>(POS(0, 0))));
 	
 	Timer::Reset();
 
