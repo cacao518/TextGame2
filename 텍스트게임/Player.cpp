@@ -77,7 +77,7 @@ int Player::Update()
 	if (m_gravitySpeed > 0)
 	{
 		m_pos.y -= Timer::DeltaTime() * 5;
-		m_gravitySpeed--;
+		m_gravitySpeed -= Timer::DeltaTime() * 0.2f;
 	}
 	printf("%d", m_gravitySpeed);
 	if (!GetIsLand() && m_gravitySpeed <= 0) // ÇÏ°­
