@@ -127,6 +127,20 @@ STATUS Player::GetStatus()
 	return m_Status;
 }
 
+void Player::Knockback()
+{
+	if (m_dir)
+	{
+		m_pos.x -= Timer::DeltaTime() * 10;
+	}
+	else
+	{
+		m_pos.x += Timer::DeltaTime() * 10;
+	}
+	m_pos.y -= Timer::DeltaTime() * 10;
+
+}
+
  
 
 

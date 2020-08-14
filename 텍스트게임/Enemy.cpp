@@ -34,6 +34,9 @@ int Enemy::Update()
 		m_dir = !m_dir;
 	}
 
+
+		
+
 	/*
 	m_timer += Timer::DeltaTime();
 	bool isDie = false;
@@ -60,5 +63,17 @@ void Enemy::SetHp(float damage)
 	m_Status.hp -= damage;
 }
 
+void Enemy::Knockback()
+{
+	if (m_dir)
+	{
+		m_pos.x -= Timer::DeltaTime() * 10;
+	}
+	else
+	{
+		m_pos.x += Timer::DeltaTime() * 10;
+	}
+	m_pos.y -= Timer::DeltaTime() * 10;
+}
 
 

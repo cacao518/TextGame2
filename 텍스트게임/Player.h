@@ -12,7 +12,7 @@ public:
 	void SetHp(float damage);
 	STATUS m_Status;
 	STATUS GetStatus();
-	
+	void Knockback();
 
 private:
 	std::bitset<0xff> keyPress;

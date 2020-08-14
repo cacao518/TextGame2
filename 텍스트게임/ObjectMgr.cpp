@@ -90,7 +90,7 @@ void ObjectMgr::present()
 
 void ObjectMgr::CheckCollider(std::shared_ptr<GameObject>& obj1, std::shared_ptr<GameObject>& obj2)
 {
-	if (!wcscmp(obj1->GetName(), L"Player") && !wcscmp(obj2->GetName(), L"Terrain"))
+	if (!wcscmp(obj1->GetName(), L"Enemy") && !wcscmp(obj2->GetName(), L"Terrain"))
 	{
 		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x &&
 			obj1->GetPos().x <= obj2->GetPos().x &&
@@ -114,6 +114,32 @@ void ObjectMgr::CheckCollider(std::shared_ptr<GameObject>& obj1, std::shared_ptr
 			}
 		}
 	}
+
+	if (!wcscmp(obj1->GetName(), L"Player") && !wcscmp(obj2->GetName(), L"Terrain"))
+	{
+		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x &&
+			obj1->GetPos().x <= obj2->GetPos().x &&
+			obj1->GetPos().y + obj1->GetHeight() - 1 >= obj2->GetPos().y - 1 &&
+			obj1->GetPos().y <= obj2->GetPos().y - 1)
+		{
+			if (!(obj1->GetIsLand()) && !(obj2->GetIsLand()))
+			{
+				obj1->SetIsLand(true);
+				obj2->SetIsLand(true);
+				obj1->SetCollisionObjPos(obj2->GetPos());
+				obj1->AddCollisionCount();
+			}
+		}
+		else
+		{
+			if (obj2->GetIsLand())
+			{
+				obj2->SetIsLand(false);
+				obj1->SubCollisionCount();
+			}
+		}
+	}
+
 	if (!wcscmp(obj1->GetName(), L"Player") && !wcscmp(obj2->GetName(), L"Enemy"))
 	{
 		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x &&
@@ -126,6 +152,7 @@ void ObjectMgr::CheckCollider(std::shared_ptr<GameObject>& obj1, std::shared_ptr
 			std::shared_ptr<Enemy> E = std::dynamic_pointer_cast<Enemy>(obj2);
 			P->SetHp(E->GetStatus().attackDamage);
 			printf("플레이어 공격 당함");
+			P->Knockback();
 		}
 		else
 			obj1->SetIsAttacked(false);
@@ -156,6 +183,8 @@ void ObjectMgr::CheckCollider(std::shared_ptr<GameObject>& obj1, std::shared_ptr
 			std::shared_ptr<Enemy> E = std::dynamic_pointer_cast<Enemy>(obj2);
 			E->SetHp(B->m_bulletDamage);
 			GameMgr::GetInstance()->SetEnemy(E);
+			//E->Knockback();
+			
 		}
 		else
 		{
