@@ -9,6 +9,7 @@ typedef struct tagPosition
 typedef struct tagStatus
 {
 	float hp;//체력
+	float maxHp; //최대체력
 	float moveSpeed; //이속
 	float attackDamage; //공격력
 	//필요한 능력치 요소 있으면 추가

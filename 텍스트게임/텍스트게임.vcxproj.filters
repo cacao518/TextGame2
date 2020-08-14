@@ -42,6 +42,12 @@
     <Filter Include="Object\10.UI">
       <UniqueIdentifier>{8e25cedd-d161-41d2-9110-60fc00fb29f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\10.UI\PlayerUI">
+      <UniqueIdentifier>{6e321edc-ec88-43e4-b817-67afb1081d79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\10.UI\EnemyUI">
+      <UniqueIdentifier>{de828365-75c5-4cf1-aa7a-f03fa390520d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="텍스트게임.cpp">
@@ -79,6 +85,9 @@
     </ClCompile>
     <ClCompile Include="BaseUI.cpp">
       <Filter>Object\10.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerUI.cpp">
+      <Filter>Object\10.UI\PlayerUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +132,9 @@
     </ClInclude>
     <ClInclude Include="BaseUI.h">
       <Filter>Object\10.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerUI.h">
+      <Filter>Object\10.UI\PlayerUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

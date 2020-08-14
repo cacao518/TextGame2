@@ -154,6 +154,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="ObjectMgr.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerUI.cpp" />
     <ClCompile Include="ScrollMgr.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="Header.h" />
     <ClInclude Include="ObjectMgr.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerUI.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ScrollMgr.h" />
     <ClInclude Include="Struct.h" />
