@@ -110,8 +110,7 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 
 	if (!strcmp(obj1->GetName(), "Bullet") && !strcmp(obj2->GetName(), "Enemy"))
 	{
-		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x
-			)
+		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x )
 
 
 		{
