@@ -9,7 +9,7 @@ Terrain::Terrain(wchar_t* sprite, int width, int height, POS position)
 	m_sprite = new wchar_t[m_width * m_height];
 	memcpy(m_sprite, sprite, sizeof(wchar_t) * width * height);
 
-	m_name = "Terrain";
+	m_name = L"Terrain";
 }
 Terrain::~Terrain()
 {

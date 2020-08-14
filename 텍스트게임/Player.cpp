@@ -26,7 +26,7 @@ Player::Player(POS position)
 	m_height = 3;
 	
 
-	m_name = "Player";
+	m_name = L"Player";
 	m_color = 9;
 	wchar_t leftImg[6] = { ' ', '0', '<', ']', ' ', 'L' };
 	memcpy(m_leftImg, leftImg, sizeof(wchar_t)*m_width*m_height);

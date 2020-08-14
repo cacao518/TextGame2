@@ -31,7 +31,7 @@ void GameMgr::Update()
 	if (!playerUI)
 		return;
 
-	playerUI->UpdatePlayerStatus(player->GetStatus());
+	playerUI->UpdatePlayerStatus(player->GetStatus(),player->GetName());
 	
 }
 

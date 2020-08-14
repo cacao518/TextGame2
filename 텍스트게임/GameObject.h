@@ -14,7 +14,7 @@ public:
 	virtual int Update() = 0;
 	virtual int LateUpdate() = 0;
 	virtual void Render();
-	const char* GetName();
+	const wchar_t* GetName();
 	POS GetPos();
 
 	bool GetIsAttacked();
@@ -33,7 +33,7 @@ protected:
 	int m_width, m_height;
 	POS m_pos;
 	int m_color;
-	const char* m_name = nullptr;
+	const wchar_t* m_name = nullptr;
 
 	bool m_isAttacked = false; // 공격 당함
 	bool m_isLand = false; // 지형에 서있음
