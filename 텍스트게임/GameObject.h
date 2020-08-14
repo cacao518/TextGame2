@@ -13,7 +13,7 @@ public:
 public:
 	virtual int Update() = 0;
 	virtual int LateUpdate() = 0;
-	void Render();
+	virtual void Render();
 	const char* GetName();
 	POS GetPos();
 
