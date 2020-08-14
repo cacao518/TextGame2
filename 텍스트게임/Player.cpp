@@ -51,13 +51,11 @@ int Player::Update()
 	keyLock.lock();
 
 	//isDone = keyPress[27];
-
-
-	if (keyPress[72] && GetIsLand()) {
-		m_pos.y-=Timer::DeltaTime()*55; //속도같은거 곱하면 됩니다
+	if (keyPress[72] && (GetIsLand() || m_jumpCount < 2)) {
+		m_gravitySpeed += m_jumpPower;
+		m_jumpCount++;
 	}
 	if (keyPress[80]) {
-		//m_pos.y += Timer::DeltaTime() * 10;
 		attack = true;
 	}
 	if (keyPress[75]) {
@@ -76,11 +74,21 @@ int Player::Update()
 		m_isLand = false;
 		SetCollisionObjPos(POS());
 	}
-
-	if (!GetIsLand()) // 공중에 떠있는 상태
+	if (m_gravitySpeed > 0)
+	{
+		m_pos.y -= Timer::DeltaTime() * 5;
+		m_gravitySpeed--;
+	}
+	printf("%d", m_gravitySpeed);
+	if (!GetIsLand() && m_gravitySpeed <= 0) // 하강
 		m_pos.y += Timer::DeltaTime() * 3.0f;
-	else // 충돌한 벽에 서있기
+	else if(m_gravitySpeed <= 0)// 충돌한 벽에 서있기
+	{
 		m_pos.y = GetCollisionObjPos().y;
+		m_jumpState = 0;
+		m_jumpCount = 0;
+		m_gravitySpeed = 0;
+	}
 
 	keyPress.reset();
 	keyLock.unlock();
