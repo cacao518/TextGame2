@@ -89,6 +89,9 @@
     <ClCompile Include="PlayerUI.cpp">
       <Filter>Object\10.UI\PlayerUI</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyUI.cpp">
+      <Filter>Object\10.UI\EnemyUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectMgr.h">
@@ -135,6 +138,9 @@
     </ClInclude>
     <ClInclude Include="PlayerUI.h">
       <Filter>Object\10.UI\PlayerUI</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyUI.h">
+      <Filter>Object\10.UI\EnemyUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

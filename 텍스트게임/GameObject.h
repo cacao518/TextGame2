@@ -14,7 +14,7 @@ public:
 	virtual int Update() = 0;
 	virtual int LateUpdate() = 0;
 	virtual void Render();
-	const char* GetName();
+	const wchar_t* GetName();
 	POS GetPos();
 
 	bool GetIsAttacked();
@@ -29,11 +29,11 @@ public:
 	void AddCollisionCount();
 	void SubCollisionCount();
 protected:
-	char* m_sprite;
+	wchar_t* m_sprite;
 	int m_width, m_height;
 	POS m_pos;
-
-	const char* m_name = nullptr;
+	int m_color;
+	const wchar_t* m_name = nullptr;
 
 	bool m_isAttacked = false; // 공격 당함
 	bool m_isLand = false; // 지형에 서있음

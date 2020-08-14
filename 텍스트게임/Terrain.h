@@ -4,7 +4,7 @@
 class Terrain :public GameObject
 {
 public:
-	Terrain(char* sprite, int width, int height, POS position);
+	Terrain(wchar_t* sprite, int width, int height, POS position);
 	~Terrain();
 
 	// GameObject을(를) 통해 상속됨

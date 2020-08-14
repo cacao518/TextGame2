@@ -5,16 +5,17 @@ Bullet::Bullet(bool dir,float bulletDamage, POS position)
 	:GameObject(position)
 {
 	m_bulletDamage = bulletDamage;
-	char bulletImg[2] = { '0','0' };
+	wchar_t bulletImg[2] = { L'-',L'-' };
 
 	m_width = 2;
 	m_height = 1;
-	m_sprite = new char[m_width * m_height];
-	memcpy(m_sprite, bulletImg, sizeof(char) * m_width * m_height);
+	m_sprite = new wchar_t[m_width * m_height];
+	memcpy(m_sprite, bulletImg, sizeof(wchar_t) * m_width * m_height);
 
 	m_dir = dir;
-	m_name = "Bullet";
+	m_name = L"Bullet";
 
+	m_color = 12;
 }
 
 Bullet::~Bullet()

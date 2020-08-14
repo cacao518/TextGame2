@@ -3,17 +3,18 @@
 BackGround::BackGround(POS position)
 	:GameObject(position)
 {
-	char BackGroundImg[6841] = { 0 }; // 2660
+	wchar_t BackGroundImg[6841] = { 0 }; // 2660
 	m_width = 228; //  76
 	m_height = 30; 
-	std::ifstream fp;
+	std::wifstream fp;
 	fp.open("BackGround.txt");
 	fp.getline(BackGroundImg, 6841);
 	fp.close();
-	m_sprite = new char[m_width * m_height];
-	memcpy(m_sprite, BackGroundImg, sizeof(char) * m_width * m_height);
+	m_sprite = new wchar_t[m_width * m_height];
+	memcpy(m_sprite, BackGroundImg, sizeof(wchar_t) * m_width * m_height);
 
-	m_name = "BackGround";
+	m_name = L"BackGround";
+	m_color = 8;
 }
 BackGround::~BackGround()
 {

@@ -26,19 +26,19 @@ Player::Player(POS position)
 	m_height = 3;
 	
 
-	m_name = "Player";
-	
-	char leftImg[6] = { ' ', '0', '<', ']', ' ', 'L' };
-	memcpy(m_leftImg, leftImg, sizeof(char)*m_width*m_height);
+	m_name = L"Player";
+	m_color = 9;
+	wchar_t leftImg[6] = { ' ', '0', '<', ']', ' ', 'L' };
+	memcpy(m_leftImg, leftImg, sizeof(wchar_t)*m_width*m_height);
 
-	char rightImg[6] = { '0', ' ', '[', 'r', 'L', ' ' };
-	memcpy(m_rightImg, rightImg, sizeof(char)*m_width*m_height);
+	wchar_t rightImg[6] = { '0', ' ', '[', 'r', 'L', ' ' };
+	memcpy(m_rightImg, rightImg, sizeof(wchar_t)*m_width*m_height);
 
-	char attackImg[6] = { '0', ' ', '[', 'r', 'L', ' ' };
-	memcpy(m_attackImg, attackImg, sizeof(char)*m_width*m_height);
+	wchar_t attackImg[6] = { '0', ' ', '[', 'r', 'L', ' ' };
+	memcpy(m_attackImg, attackImg, sizeof(wchar_t)*m_width*m_height);
 
-	m_sprite = new char[m_width * m_height];
-	memcpy(m_sprite, rightImg, sizeof(char) * m_width * m_height);
+	m_sprite = new wchar_t[m_width * m_height];
+	memcpy(m_sprite, rightImg, sizeof(wchar_t) * m_width * m_height);
 }
 
 Player::~Player()
@@ -53,7 +53,7 @@ int Player::Update()
 	//isDone = keyPress[27];
 
 	if (keyPress[72] && GetIsLand()) {
-		m_pos.y-=Timer::DeltaTime()*30; //속도같은거 곱하면 됩니다
+		m_pos.y-=Timer::DeltaTime()*15; //속도같은거 곱하면 됩니다
 	}
 	if (keyPress[80]) {
 		//m_pos.y += Timer::DeltaTime() * 10;
@@ -70,7 +70,7 @@ int Player::Update()
 	if (keyPress[VK_ESCAPE])
 		ObjectMgr::GetInstance()->done = true;
 
-	if (m_collisionCount == 0)
+	if (m_collisionCount == 0) // 충돌한 벽이 없으면 공중 상태
 	{
 		m_isLand = false;
 		SetCollisionObjPos(POS());
@@ -78,7 +78,7 @@ int Player::Update()
 
 	if (!GetIsLand()) // 공중에 떠있는 상태
 		m_pos.y += Timer::DeltaTime() * 5.0f;
-	else
+	else // 충돌한 벽에 서있기
 		m_pos.y = GetCollisionObjPos().y;
 
 	keyPress.reset();
@@ -91,9 +91,9 @@ int Player::Update()
 
 	}
 	if (m_dir)
-		memcpy(m_sprite, m_rightImg, sizeof(char) * m_width * m_height);
+		memcpy(m_sprite, m_rightImg, sizeof(wchar_t) * m_width * m_height);
 	else
-		memcpy(m_sprite, m_leftImg, sizeof(char) * m_width * m_height);
+		memcpy(m_sprite, m_leftImg, sizeof(wchar_t) * m_width * m_height);
 
 	return 1;
 }

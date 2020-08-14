@@ -150,6 +150,7 @@
     <ClCompile Include="BaseUI.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyUI.cpp" />
     <ClCompile Include="GameMgr.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="ObjectMgr.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="BaseUI.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyUI.h" />
     <ClInclude Include="GameMgr.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Header.h" />

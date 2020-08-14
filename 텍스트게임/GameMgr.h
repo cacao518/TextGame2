@@ -4,6 +4,7 @@ class Player;
 class PlayerUI;
 class GameMgr
 {
+public:
 	HRESULT SetPlayer(std::shared_ptr<Player> player);
 	HRESULT SetPlayerUI(std::shared_ptr<PlayerUI> playerUI);
 

@@ -20,10 +20,10 @@ private:
 	std::thread KeyUpdate;
 
 	ObjectMgr* objectMgr = ObjectMgr::GetInstance();
-	char bulletImg[2] = { '0','0' };
+	wchar_t bulletImg[2] = { '0','0' };
 	bool m_dir = true; //오른쪽이 트루임
 	bool attack;
-	char m_leftImg[6], m_rightImg[6], m_attackImg[6];
+	wchar_t m_leftImg[6], m_rightImg[6], m_attackImg[6];
 
 
 };
