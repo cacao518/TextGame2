@@ -12,6 +12,7 @@ public:
 
 private:
 
+	float m_timer = 0.f;
 	bool m_dir;
 };
 

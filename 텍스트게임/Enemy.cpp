@@ -6,9 +6,9 @@
 Enemy::Enemy(POS position)
 	:GameObject(position)
 {
-	
 
-	char monsterImg[4] = { '*', '*', 'M', 'M'};
+
+	char monsterImg[4] = { '*', '*', 'M', 'M' };
 
 	m_width = 2;
 	m_height = 2;
@@ -20,27 +20,30 @@ Enemy::Enemy(POS position)
 
 Enemy::~Enemy()
 {
-	
+
 }
 
 int Enemy::Update()
 {
-	if(m_dir) m_pos.x += Timer::DeltaTime() * 5;
+	if (m_dir) m_pos.x += Timer::DeltaTime() * 5;
 	else  m_pos.x -= Timer::DeltaTime() * 5;
 
-	m_MoveCount++;
-	if (m_MoveCount == 1000)
+	m_MoveCount+= Timer::DeltaTime();
+	if (m_MoveCount > 1 )
 	{
-		m_MoveCount = 0;
+		m_MoveCount =0;
 		m_dir = !m_dir;
 	}
 
+	/*
 	m_timer += Timer::DeltaTime();
 	bool isDie = false;
 	if (m_timer >= 2.f)
 		isDie = true;
 
-	if (!isDie)
+
+		*/
+	if (!m_isAttacked)
 		return 1;
 	else
 		return -1;
