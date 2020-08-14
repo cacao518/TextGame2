@@ -36,6 +36,12 @@
     <Filter Include="Timer">
       <UniqueIdentifier>{2f20b108-ae0f-4584-9511-209529bb8624}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager\GameMgr">
+      <UniqueIdentifier>{4b039ddf-ea27-4dad-8ebc-63931be45af2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\10.UI">
+      <UniqueIdentifier>{8e25cedd-d161-41d2-9110-60fc00fb29f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="텍스트게임.cpp">
@@ -68,6 +74,12 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Object\01.Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="GameMgr.cpp">
+      <Filter>Manager\GameMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseUI.cpp">
+      <Filter>Object\10.UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectMgr.h">
@@ -88,9 +100,6 @@
     <ClInclude Include="Terrain.h">
       <Filter>Object\02.Terrain</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Object\03.Bullet</Filter>
-    </ClInclude>
     <ClInclude Include="ScrollMgr.h">
       <Filter>Manager\ScrollMgr</Filter>
     </ClInclude>
@@ -105,6 +114,15 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMgr.h">
+      <Filter>Manager\GameMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseUI.h">
+      <Filter>Object\10.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Object\10.UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

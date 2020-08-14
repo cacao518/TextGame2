@@ -13,7 +13,7 @@ const int MapWidth = 160;
 const int MapHeight = 80;
 
 int main() {
-	ObjectMgr* objectMgr=ObjectMgr::GetInstance();
+	ObjectMgr* objectMgr = ObjectMgr::GetInstance();
 	ScrollMgr* scrollMgr = ScrollMgr::GetInstance();
 
 
@@ -22,22 +22,27 @@ int main() {
 	scrollMgr->SetScreenSize((float)ObjectMgr::GetScreenWidth(), (float)ObjectMgr::GetScreenHeight());
 	scrollMgr->SetMapSize((float)MapWidth, (float)MapHeight);
 	int x = 3, y = 19;
-	
+
 	int map[MapWidth][MapHeight];
 	char GroundBlockImg[5] = { 'm','U','U','U','U' };
 	char AirBlockImg[2] = { 'm','U' };
 
-	objectMgr->InsertObject(ObjectMgr::PLAYER, std::dynamic_pointer_cast<GameObject>(std::make_shared<Player>(POS(x,y))));
+	objectMgr->InsertObject(ObjectMgr::PLAYER, std::dynamic_pointer_cast<GameObject>(std::make_shared<Player>(POS(x, y))));
 
 	x = 20;
-	objectMgr->InsertObject(ObjectMgr::ENEMY, std::dynamic_pointer_cast<GameObject>(std::make_shared<Enemy>(POS(x, y))));
+	objectMgr->InsertObject(ObjectMgr::ENEMY, std::dynamic_pointer_cast<GameObject>(std::make_shared<Enemy>(POS(x, y + 1))));
 
+	x = 40;
+	objectMgr->InsertObject(ObjectMgr::ENEMY, std::dynamic_pointer_cast<GameObject>(std::make_shared<Enemy>(POS(x, y+1))));
+
+	x = 60;
+	objectMgr->InsertObject(ObjectMgr::ENEMY, std::dynamic_pointer_cast<GameObject>(std::make_shared<Enemy>(POS(x, y + 1))));
 	ifstream fp;
 	fp.open("map.txt");
-	for (int i = 0; i < MapHeight; i++){
-		for (int j = 0; j < MapWidth; j++){
+	for (int i = 0; i < MapHeight; i++) {
+		for (int j = 0; j < MapWidth; j++) {
 			fp >> map[j][i];
-			if (map[j][i] == 1){ // ¹Ù´Ú ÁöÇü
+			if (map[j][i] == 1) { // ¹Ù´Ú ÁöÇü
 				objectMgr->InsertObject(ObjectMgr::TERRAIN,
 					std::dynamic_pointer_cast<GameObject>(std::make_shared<Terrain>(GroundBlockImg, 1, 5, POS(j, i))));
 			}
@@ -49,8 +54,8 @@ int main() {
 	}
 	fp.close();
 
-	//objectMgr->InsertObject(ObjectMgr::BACKGROUND, std::dynamic_pointer_cast<GameObject>(std::make_shared<BackGround>(POS(0, 0))));
-	
+	objectMgr->InsertObject(ObjectMgr::BACKGROUND, std::dynamic_pointer_cast<GameObject>(std::make_shared<BackGround>(POS(0, 0))));
+
 	Timer::Reset();
 
 	std::thread Update([&] {

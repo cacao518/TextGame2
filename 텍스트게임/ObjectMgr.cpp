@@ -3,7 +3,7 @@
 
 ObjectMgr* ObjectMgr::instance = nullptr;
 
-ObjectMgr::ObjectMgr():done(false), scBuff1(), scBuff2(), frontBuff(nullptr), backBuff(nullptr) {
+ObjectMgr::ObjectMgr() :done(false), scBuff1(), scBuff2(), frontBuff(nullptr), backBuff(nullptr) {
 
 	ShowConsoleCursor(false);
 
@@ -101,6 +101,9 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 				obj1->SubCollisionCount();
 			}
 		}
+			//	printf("점프상태");
+		}
+
 	}
 	if (!strcmp(obj1->GetName(), "Player") && !strcmp(obj2->GetName(), "Enemy"))
 	{
@@ -115,6 +118,25 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 		}
 		else
 			obj1->SetIsAttacked(false);
+	}
+
+	if (!strcmp(obj1->GetName(), "Bullet") && !strcmp(obj2->GetName(), "Enemy"))
+	{
+		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x )
+
+
+		{
+			obj2->SetIsAttacked(true);
+			obj1->SetIsAttacked(true);
+
+			printf("총알 명중");
+		}
+		else
+		{
+			//obj1->SetIsAttacked(false);
+			obj2->SetIsAttacked(false);
+		}
+
 	}
 }
 
@@ -210,14 +232,14 @@ void ObjectMgr::RenderObjects()
 			object->Render();
 		}
 	}
-	
+
 	end();
 	present();
 }
 
 HRESULT ObjectMgr::InsertObject(OBJTYPE objType, std::shared_ptr<GameObject>& obj)
 {
-	if(obj.get()==nullptr)
+	if (obj.get() == nullptr)
 		return E_FAIL;
 	m_ObjectList[objType].push_back(obj);
 	return S_OK;
