@@ -76,19 +76,20 @@ int Player::Update()
 	}
 	if (m_gravitySpeed > 0)
 	{
-		m_pos.y -= Timer::DeltaTime() * 5;
-		m_gravitySpeed--;
+		m_pos.y -= Timer::DeltaTime() * 4;
+		m_gravitySpeed -= Timer::DeltaTime() * 5.0f;
 	}
-	printf("%d", m_gravitySpeed);
+
+	//printf("%d", m_gravitySpeed);
 	if (!GetIsLand() && m_gravitySpeed <= 0) // 하강
 		m_pos.y += Timer::DeltaTime() * 3.0f;
 	else if(m_gravitySpeed <= 0)// 충돌한 벽에 서있기
 	{
 		m_pos.y = GetCollisionObjPos().y;
-		m_jumpState = 0;
 		m_jumpCount = 0;
 		m_gravitySpeed = 0;
 	}
+
 
 	keyPress.reset();
 	keyLock.unlock();

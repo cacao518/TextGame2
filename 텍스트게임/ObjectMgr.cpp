@@ -188,11 +188,7 @@ void ObjectMgr::Update()
 {
 	COORD pos;
 	while (done == false) {
-
-
 		frontLock.lock();
-
-
 		int x, y;
 		for (y = 0; y < ScreenHeight; y++) {
 			pos.X = 0;
