@@ -71,12 +71,12 @@ int Player::Update()
 	if (keyPress[VK_ESCAPE])
 		ObjectMgr::GetInstance()->done = true;
 
-	if (m_pos.y >= 19)
-		isGround = true;
-	else
-		isGround = false;
+	//if (m_pos.y >= 19)
+	//	isGround = true;
+	//else
+	//	isGround = false;
 
-	if (!isGround)
+	if (!m_isLand)
 		m_pos.y += Timer::DeltaTime() * 0.7f;
 
 
