@@ -35,6 +35,14 @@ int Enemy::Update()
 	}
 
 	/*
+	if (!GetIsLand()) // 공중에 떠있는 상태
+		m_pos.y += Timer::DeltaTime() * 3.0f;
+	else // 충돌한 벽에 서있기
+		m_pos.y = GetCollisionObjPos().y;
+		*/
+		
+
+	/*
 	m_timer += Timer::DeltaTime();
 	bool isDie = false;
 	if (m_timer >= 2.f)
@@ -60,5 +68,17 @@ void Enemy::SetHp(float damage)
 	m_Status.hp -= damage;
 }
 
+void Enemy::Knockback()
+{
+	if (m_dir)
+	{
+		m_pos.x -= Timer::DeltaTime() * 10;
+	}
+	else
+	{
+		m_pos.x += Timer::DeltaTime() * 10;
+	}
+	m_pos.y -= Timer::DeltaTime() * 10;
+}
 
 

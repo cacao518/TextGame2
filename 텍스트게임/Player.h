@@ -12,7 +12,7 @@ public:
 	void SetHp(float damage);
 	STATUS m_Status;
 	STATUS GetStatus();
-	
+	void Knockback();
 
 private:
 	std::bitset<0xff> keyPress;
@@ -24,7 +24,7 @@ private:
 	bool m_dir = true; //오른쪽이 트루임
 	bool attack;
 	wchar_t m_leftImg[6], m_rightImg[6], m_attackImg[6];
-
+	
 
 };
 

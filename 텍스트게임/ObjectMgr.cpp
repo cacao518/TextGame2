@@ -124,7 +124,10 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 			Player* P = static_cast<Player*>(obj1);
 			Enemy* E = static_cast<Enemy*>(obj2);
 			P->SetHp(E->m_Status.attackDamage);
+
+
 			printf("플레이어 공격 당함");
+			P->Knockback();
 		}
 		else
 			obj1->SetIsAttacked(false);
@@ -154,6 +157,7 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 			
 			Enemy* E = static_cast<Enemy*>(obj2);
 			E->SetHp(B->m_bulletDamage);
+		//	E->Knockback();
 			
 		}
 		else

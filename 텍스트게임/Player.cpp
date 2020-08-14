@@ -52,6 +52,7 @@ int Player::Update()
 
 	//isDone = keyPress[27];
 
+
 	if (keyPress[72] && GetIsLand()) {
 		m_pos.y-=Timer::DeltaTime()*55; //속도같은거 곱하면 됩니다
 	}
@@ -115,6 +116,20 @@ void Player::SetHp(float damage)
 STATUS Player::GetStatus()
 {
 	return m_Status;
+}
+
+void Player::Knockback()
+{
+	if (m_dir)
+	{
+		m_pos.x -= Timer::DeltaTime() * 10;
+	}
+	else
+	{
+		m_pos.x += Timer::DeltaTime() * 10;
+	}
+	m_pos.y -= Timer::DeltaTime() * 10;
+
 }
 
  
