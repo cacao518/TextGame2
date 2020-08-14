@@ -105,3 +105,17 @@ int Player::LateUpdate()
 }
 
 
+
+void Player::SetHp(int damage)
+{
+	m_Status.hp -= damage;
+}
+
+
+
+STATUS Player::GetStatus()
+{
+	return m_Status;
+}
+
+
