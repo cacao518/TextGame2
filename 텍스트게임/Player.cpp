@@ -2,7 +2,7 @@
 #include "Timer.h"
 #include "Bullet.h"
 Player::Player(POS position)
-	:GameObject(position)
+	:GameObject(position),m_Status(STATUS(10.f,10.f,10.f))
 {
 	KeyUpdate=std::thread([&] {
 		int c;
@@ -22,8 +22,6 @@ Player::Player(POS position)
 		}
 	});
 	
-
-
 	m_width = 2;
 	m_height = 3;
 	
