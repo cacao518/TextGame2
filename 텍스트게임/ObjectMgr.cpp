@@ -80,19 +80,27 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 {
 	if (!strcmp(obj1->GetName(), "Player") && !strcmp(obj2->GetName(), "Terrain"))
 	{
-		//if (obj1->GetPos().x >= obj2->GetPos().x &&
-
-		if (obj1->GetPos().y + obj1->GetHeight() >= obj2->GetPos().y)
+		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x &&
+			obj1->GetPos().x <= obj2->GetPos().x &&
+			obj1->GetPos().y + obj1->GetHeight() - 1 >= obj2->GetPos().y - 1 &&
+			obj1->GetPos().y <= obj2->GetPos().y - 1)
 		{
-			obj1->SetIsLand(true);
-			//printf("¹Ù´ÚÂøÁö");
+			if (!(obj1->GetIsLand()) && !(obj2->GetIsLand()))
+			{
+				obj1->SetIsLand(true);
+				obj2->SetIsLand(true);
+				obj1->SetCollisionObjPos(obj2->GetPos());
+				obj1->AddCollisionCount();
+			}
 		}
 		else
 		{
-			obj1->SetIsLand(false);
-			//	printf("Á¡ÇÁ»óÅÂ");
+			if (obj2->GetIsLand())
+			{
+				obj2->SetIsLand(false);
+				obj1->SubCollisionCount();
+			}
 		}
-
 	}
 	if (!strcmp(obj1->GetName(), "Player") && !strcmp(obj2->GetName(), "Enemy"))
 	{
