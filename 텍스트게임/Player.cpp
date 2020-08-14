@@ -54,6 +54,7 @@ int Player::Update()
 
 	if (keyPress[72] && isGround) {
 		m_pos.y-=Timer::DeltaTime()*10; //속도같은거 곱하면 됩니다
+	
 	}
 	if (keyPress[80]) {
 		//m_pos.y += Timer::DeltaTime() * 10;
@@ -72,8 +73,7 @@ int Player::Update()
 
 	if (m_pos.y >= 19)
 		isGround = true;
-
-	if (m_pos.y < 19)
+	else
 		isGround = false;
 
 	if (!isGround)
