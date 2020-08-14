@@ -4,6 +4,7 @@ typedef struct tagPosition
 	float x;
 	float y;
 	struct tagPosition(float x, float y) :x(x), y(y) {}
+	struct tagPosition() :x(0), y(0) {}
 }POS;
 
 typedef struct tagStatus
@@ -16,6 +17,4 @@ typedef struct tagStatus
 	struct tagStatus(float hp, float moveSpeed, float attackDamage) :hp(hp), moveSpeed(moveSpeed),attackDamage(attackDamage) {}
 
 }STATUS;
-	struct Position(float x, float y) :x(x), y(y) {}
-	struct Position():x(0),y(0){}
-}POS;
+	

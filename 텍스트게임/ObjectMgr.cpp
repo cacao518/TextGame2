@@ -101,9 +101,6 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 				obj1->SubCollisionCount();
 			}
 		}
-			//	printf("점프상태");
-		}
-
 	}
 	if (!strcmp(obj1->GetName(), "Player") && !strcmp(obj2->GetName(), "Enemy"))
 	{
