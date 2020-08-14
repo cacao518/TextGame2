@@ -27,7 +27,8 @@ Player::Player(POS position)
 	
 
 	m_name = "Player";
-	
+	m_color = 9;
+
 	char leftImg[6] = { ' ', '0', '<', ']', ' ', 'L' };
 	memcpy(m_leftImg, leftImg, sizeof(char)*m_width*m_height);
 
@@ -70,7 +71,7 @@ int Player::Update()
 	if (keyPress[VK_ESCAPE])
 		ObjectMgr::GetInstance()->done = true;
 
-	if (m_collisionCount == 0)
+	if (m_collisionCount == 0) // 충돌한 벽이 없으면 공중 상태
 	{
 		m_isLand = false;
 		SetCollisionObjPos(POS());
@@ -78,7 +79,7 @@ int Player::Update()
 
 	if (!GetIsLand()) // 공중에 떠있는 상태
 		m_pos.y += Timer::DeltaTime() * 5.0f;
-	else
+	else // 충돌한 벽에 서있기
 		m_pos.y = GetCollisionObjPos().y;
 
 	keyPress.reset();

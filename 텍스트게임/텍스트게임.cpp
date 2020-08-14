@@ -25,6 +25,7 @@ int main() {
 
 	int map[MapWidth][MapHeight];
 	char GroundBlockImg[5] = { 'm','U','U','U','U' };
+	char HighGroundBlockImg[10] = { 'm','U','U','U','U','U','U','U','U','U' };
 	char AirBlockImg[2] = { 'm','U' };
 
 	objectMgr->InsertObject(ObjectMgr::PLAYER, std::dynamic_pointer_cast<GameObject>(std::make_shared<Player>(POS(x, y))));
@@ -49,6 +50,10 @@ int main() {
 			if (map[j][i] == 2) { // 공중 지형
 				objectMgr->InsertObject(ObjectMgr::TERRAIN,
 					std::dynamic_pointer_cast<GameObject>(std::make_shared<Terrain>(AirBlockImg, 1, 2, POS(j, i))));
+			}
+			if (map[j][i] == 3) { // 언덕 지형
+				objectMgr->InsertObject(ObjectMgr::TERRAIN,
+					std::dynamic_pointer_cast<GameObject>(std::make_shared<Terrain>(HighGroundBlockImg, 1, 10, POS(j, i))));
 			}
 		}
 	}

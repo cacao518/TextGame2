@@ -6,8 +6,6 @@
 Enemy::Enemy(POS position)
 	:GameObject(position)
 {
-
-
 	char monsterImg[4] = { '*', '*', 'M', 'M' };
 
 	m_width = 2;
@@ -16,6 +14,7 @@ Enemy::Enemy(POS position)
 	memcpy(m_sprite, monsterImg, sizeof(char) * m_width * m_height);
 
 	m_name = "Enemy";
+	m_color = 2;
 }
 
 Enemy::~Enemy()

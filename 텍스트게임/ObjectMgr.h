@@ -10,12 +10,13 @@ public:
 	static const int GetScreenHeight() { return ScreenHeight; }
 public:
 	void Update();
-	void Draw(const char* img, int w, int h, int x, int y);
+	void Draw(const char* img, int w, int h, int x, int y, int color);
 
 	void UpdateObjects();
 	void LateUpdateObjects();
 	void RenderObjects();
 
+	void SetColor(int color, int bgcolor) { SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), ((bgcolor & 0xf) << 4) | (color & 0xf)); };
 	HRESULT InsertObject(OBJTYPE objType, std::shared_ptr<GameObject>& obj);
 private:
 	void ShowConsoleCursor(bool showFlag);
@@ -57,7 +58,11 @@ private:
 	char scBuff1[ScreenWidth * ScreenHeight];
 	char scBuff2[ScreenWidth * ScreenHeight];
 
+	int scColorBuff1[ScreenWidth * ScreenHeight];
+	int scColorBuff2[ScreenWidth * ScreenHeight];
+
 	char * frontBuff, *backBuff;
+	int* frontColorBuff, * backColorBuff;
 	std::mutex frontLock, backLock;
 
 

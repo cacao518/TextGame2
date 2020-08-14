@@ -32,7 +32,7 @@ protected:
 	char* m_sprite;
 	int m_width, m_height;
 	POS m_pos;
-
+	int m_color;
 	const char* m_name = nullptr;
 
 	bool m_isAttacked = false; // 공격 당함

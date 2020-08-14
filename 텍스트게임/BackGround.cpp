@@ -14,6 +14,7 @@ BackGround::BackGround(POS position)
 	memcpy(m_sprite, BackGroundImg, sizeof(char) * m_width * m_height);
 
 	m_name = "BackGround";
+	m_color = 8;
 }
 BackGround::~BackGround()
 {
