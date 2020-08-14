@@ -1,6 +1,6 @@
 #include "ObjectMgr.h"
 #include "GameObject.h"
-
+#include "Player.h"
 ObjectMgr* ObjectMgr::instance = nullptr;
 
 ObjectMgr::ObjectMgr() :done(false), scBuff1(), scBuff2(), frontBuff(nullptr), backBuff(nullptr) {
@@ -102,7 +102,8 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 			obj1->GetPos().y <= obj2->GetPos().y)
 		{
 			obj1->SetIsAttacked(true);
-
+			Player* a = static_cast<Player*>(obj1);
+			a->SetHp(10);
 			printf("플레이어 공격 당함");
 		}
 		else
