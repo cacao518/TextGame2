@@ -6,8 +6,6 @@
 Enemy::Enemy(POS position)
 	:GameObject(position), m_Status(STATUS(10.f, 10.f, 0.1f))
 {
-
-
 	wchar_t monsterImg[4] = { '*', '*', 'M', 'M' };
 
 	m_width = 2;

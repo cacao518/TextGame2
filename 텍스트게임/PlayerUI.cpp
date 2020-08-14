@@ -1,5 +1,5 @@
 #include "PlayerUI.h"
-
+#include "Player.h"
 PlayerUI::PlayerUI()
 	:BaseUI(),m_playerStatus(STATUS(0.f,0.f,0.f))
 {
@@ -15,7 +15,7 @@ PlayerUI::PlayerUI()
 	m_sprite = new wchar_t[m_width * m_height];
 	memcpy(m_sprite, m_BaseImg, sizeof(wchar_t) * m_width * m_height);
 
-	m_pos = POS(2, 2);
+	m_pos = POS(2, 27);
 	m_name = L"PlayerUI";
 
 	m_objectName = nullptr;
@@ -25,10 +25,18 @@ PlayerUI::~PlayerUI()
 {
 }
 
-void PlayerUI::UpdatePlayerStatus(const STATUS& status, const wchar_t* name)
+void PlayerUI::SetPlayer(std::shared_ptr<Player> player)
 {
-	m_playerStatus = status;
-	m_objectName = name;
+	m_player = player;
+}
+
+void PlayerUI::UpdatePlayerStatus()
+{
+	std::shared_ptr<Player> player = m_player.lock();
+	if (!player)
+		return;
+	m_playerStatus = player->GetStatus();
+	m_objectName = player->GetName();
 }
 
 int PlayerUI::Update()
