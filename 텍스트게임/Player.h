@@ -24,14 +24,10 @@ private:
 	bool m_dir = true; //오른쪽이 트루임
 	bool attack;
 	
-	int m_jumpState = 0; // 0:착지, 1:상승, 2:하강
 	int m_jumpCount = 0;
-	int m_jumpPower = 12;
-	int m_gravitySpeed = 0;
+	int m_jumpPower = 6;
+	float m_gravitySpeed = 0;
 
 	wchar_t m_leftImg[6], m_rightImg[6], m_attackImg[6];
-	
-
-
 };
 
