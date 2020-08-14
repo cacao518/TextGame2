@@ -33,9 +33,6 @@
     <Filter Include="Manager\ScrollMgr">
       <UniqueIdentifier>{8846f97c-58bd-4d58-8118-fe5a88f15886}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Timer">
-      <UniqueIdentifier>{2f20b108-ae0f-4584-9511-209529bb8624}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Manager\GameMgr">
       <UniqueIdentifier>{4b039ddf-ea27-4dad-8ebc-63931be45af2}</UniqueIdentifier>
     </Filter>
@@ -47,6 +44,9 @@
     </Filter>
     <Filter Include="Object\10.UI\EnemyUI">
       <UniqueIdentifier>{de828365-75c5-4cf1-aa7a-f03fa390520d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\Timer">
+      <UniqueIdentifier>{2f20b108-ae0f-4584-9511-209529bb8624}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -72,7 +72,7 @@
       <Filter>Manager\ScrollMgr</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">
-      <Filter>Timer</Filter>
+      <Filter>리소스 파일\Timer</Filter>
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <Filter>Object\02.Terrain</Filter>
@@ -119,7 +119,7 @@
       <Filter>Manager\ScrollMgr</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
-      <Filter>Timer</Filter>
+      <Filter>리소스 파일\Timer</Filter>
     </ClInclude>
     <ClInclude Include="BackGround.h">
       <Filter>Object\02.Terrain</Filter>

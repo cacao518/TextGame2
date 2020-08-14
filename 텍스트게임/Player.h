@@ -9,9 +9,9 @@ public:
 	// GameObject을(를) 통해 상속됨
 	virtual int Update() override;
 	virtual int LateUpdate() override;
-	void SetHp(int damage);
+	void SetHp(float damage);
+	STATUS m_Status;
 	STATUS GetStatus();
-
 	
 
 private:
@@ -25,6 +25,6 @@ private:
 	bool attack;
 	wchar_t m_leftImg[6], m_rightImg[6], m_attackImg[6];
 
-	STATUS m_Status;
+
 };
 

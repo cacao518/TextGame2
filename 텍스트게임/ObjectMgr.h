@@ -1,7 +1,6 @@
 #pragma once
 #include "Header.h"
 class GameObject;
-class Player;
 
 class ObjectMgr
 {

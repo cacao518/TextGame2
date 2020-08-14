@@ -30,7 +30,6 @@ int main() {
 	wchar_t GroundBlockImg[5] = { 'm','U','U','U','U' };
 	wchar_t HighGroundBlockImg[10] = { 'm','U','U','U','U','U','U','U','U','U' };
 	wchar_t AirBlockImg[2] = { 'm','U' };
-
 	{
 		std::shared_ptr<Player> player = std::make_shared<Player>(POS(x, y));
 		objectMgr->InsertObject(ObjectMgr::PLAYER, std::dynamic_pointer_cast<GameObject>(player));
@@ -40,14 +39,12 @@ int main() {
 		objectMgr->InsertObject(ObjectMgr::UI, std::dynamic_pointer_cast<GameObject>(playerUI));
 	}
 
-	x = 20;
-	objectMgr->InsertObject(ObjectMgr::ENEMY, std::dynamic_pointer_cast<GameObject>(std::make_shared<Enemy>(POS(x, y + 1))));
+	for (int i = 0;i < 3;i++)
+	{
+		x += 20;
+		objectMgr->InsertObject(ObjectMgr::ENEMY, std::dynamic_pointer_cast<GameObject>(std::make_shared<Enemy>(POS(x, y + 1))));
+	}
 
-	x = 40;
-	objectMgr->InsertObject(ObjectMgr::ENEMY, std::dynamic_pointer_cast<GameObject>(std::make_shared<Enemy>(POS(x, y+1))));
-
-	x = 60;
-	objectMgr->InsertObject(ObjectMgr::ENEMY, std::dynamic_pointer_cast<GameObject>(std::make_shared<Enemy>(POS(x, y + 1))));
 	ifstream fp;
 	fp.open("map.txt");
 	for (int i = 0; i < MapHeight; i++) {

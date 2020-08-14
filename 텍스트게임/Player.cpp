@@ -2,7 +2,7 @@
 #include "Timer.h"
 #include "Bullet.h"
 Player::Player(POS position)
-	:GameObject(position),m_Status(STATUS(10.f,10.f,10.f))
+	:GameObject(position),m_Status(STATUS(100.f,100.f,3.f))
 {
 	KeyUpdate=std::thread([&] {
 		int c;
@@ -53,7 +53,7 @@ int Player::Update()
 	//isDone = keyPress[27];
 
 	if (keyPress[72] && GetIsLand()) {
-		m_pos.y-=Timer::DeltaTime()*30; //속도같은거 곱하면 됩니다
+		m_pos.y-=Timer::DeltaTime()*15; //속도같은거 곱하면 됩니다
 	}
 	if (keyPress[80]) {
 		//m_pos.y += Timer::DeltaTime() * 10;
@@ -77,7 +77,7 @@ int Player::Update()
 	}
 
 	if (!GetIsLand()) // 공중에 떠있는 상태
-		m_pos.y += Timer::DeltaTime() * 5.0f;
+		m_pos.y += Timer::DeltaTime() * 3.0f;
 	else // 충돌한 벽에 서있기
 		m_pos.y = GetCollisionObjPos().y;
 
@@ -87,7 +87,7 @@ int Player::Update()
 	if (attack)
 	{
 		attack = false;
-		objectMgr->InsertObject(ObjectMgr::BULLET, std::dynamic_pointer_cast<GameObject>(std::make_shared<Bullet>(m_dir, POS(m_pos.x, m_pos.y + 1))));
+		objectMgr->InsertObject(ObjectMgr::BULLET, std::dynamic_pointer_cast<GameObject>(std::make_shared<Bullet>(m_dir,m_Status.attackDamage ,POS(m_pos.x, m_pos.y + 1))));
 
 	}
 	if (m_dir)
@@ -106,17 +106,20 @@ int Player::LateUpdate()
 
 
 
-void Player::SetHp(int damage)
+void Player::SetHp(float damage)
 {
-	printf("공격당했다");
+	printf("%f", m_Status.hp);
 	m_Status.hp -= damage;
 }
-
-
 
 STATUS Player::GetStatus()
 {
 	return m_Status;
 }
+
+ 
+
+
+
 
 
