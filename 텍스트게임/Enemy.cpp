@@ -15,7 +15,8 @@ Enemy::Enemy(POS position)
 	m_sprite = new wchar_t[m_width * m_height];
 	memcpy(m_sprite, monsterImg, sizeof(wchar_t) * m_width * m_height);
 
-	m_name = L"Enemy";
+	m_name = "Enemy";
+	m_color = 2;
 }
 
 Enemy::~Enemy()

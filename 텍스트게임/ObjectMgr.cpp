@@ -13,12 +13,16 @@ ObjectMgr::ObjectMgr() :done(false), scBuff1(), scBuff2(), frontBuff(nullptr), b
 		for (y = 0; y < ScreenHeight; y++) {
 			scBuff1[y* ScreenWidth + x] = ' ';
 			scBuff2[y * ScreenWidth + x] = ' ';
+			scColorBuff1[y * ScreenWidth + x] = 0;
+			scColorBuff2[y * ScreenWidth + x] = 0;
 		}
 
 	}
 
 	frontBuff = scBuff1;
 	backBuff = scBuff2;
+	frontColorBuff = scColorBuff1;
+	backColorBuff = scColorBuff2;
 	done = false;
 }
 
@@ -49,6 +53,7 @@ void ObjectMgr::clearScreen()
 	for (x = 0; x < ScreenWidth; x++) {
 		for (y = 0; y < ScreenHeight; y++) {
 			backBuff[y * ScreenWidth + x] = ' ';
+			backColorBuff[y * ScreenWidth + x] = 0;
 		}
 	}
 }
@@ -66,10 +71,14 @@ void ObjectMgr::present()
 	if (frontBuff == scBuff1) {
 		frontBuff = scBuff2;
 		backBuff = scBuff1;
+		frontColorBuff = scColorBuff2;
+		backColorBuff = scColorBuff1;
 	}
 	else {
 		frontBuff = scBuff1;
 		backBuff = scBuff2;
+		frontColorBuff = scColorBuff1;
+		backColorBuff = scColorBuff2;
 	}
 
 	frontLock.unlock();
@@ -121,12 +130,9 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 	if (!wcscmp(obj1->GetName(), L"Bullet") && !wcscmp(obj2->GetName(), L"Enemy"))
 	{
 		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x )
-
-
 		{
 			obj2->SetIsAttacked(true);
 			obj1->SetIsAttacked(true);
-
 			printf("ÃÑ¾Ë ¸íÁß");
 		}
 		else
@@ -134,11 +140,10 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 			//obj1->SetIsAttacked(false);
 			obj2->SetIsAttacked(false);
 		}
-
 	}
 }
 
-void ObjectMgr::Draw(const wchar_t * img, int w, int h, int x, int y)
+void ObjectMgr::Draw(const wchar_t * img, int w, int h, int x, int y, int color)
 {
 	int i, j;
 	for (i = 0; i < w; i++) {
@@ -152,6 +157,7 @@ void ObjectMgr::Draw(const wchar_t * img, int w, int h, int x, int y)
 				continue;
 			}
 			backBuff[ty*ScreenWidth + tx] = img[j*w + i];
+			backColorBuff[ty * ScreenWidth + tx] = color;
 		}
 	}
 }
@@ -171,6 +177,7 @@ void ObjectMgr::Update()
 			pos.Y = y;
 			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 			for (x = 0; x < ScreenWidth; x++) {
+				SetColor(frontColorBuff[y * ScreenWidth + x], 0);
 				putwchar((int)frontBuff[y * ScreenWidth + x]);
 			}
 		}
@@ -225,6 +232,7 @@ void ObjectMgr::RenderObjects()
 
 	for (int i = 0; i < TYPE_END; ++i)
 	{
+		
 		for (auto& object : m_ObjectList[i])
 		{
 			object->Render();

@@ -5,7 +5,7 @@ Bullet::Bullet(bool dir, POS position)
 	:GameObject(position)
 {
 
-	wchar_t bulletImg[2] = { '0','0' };
+	char bulletImg[2] = { '-','-' };
 
 	m_width = 2;
 	m_height = 1;
@@ -15,6 +15,7 @@ Bullet::Bullet(bool dir, POS position)
 	m_dir = dir;
 	m_name = L"Bullet";
 
+	m_color = 12;
 }
 
 Bullet::~Bullet()

@@ -10,6 +10,8 @@
 #include <memory>
 #include <iostream>
 #include <fstream>
+#include <Windows.h>
+
 #include <locale>
 #define BLACK 0 
 #define BLUE 1 
