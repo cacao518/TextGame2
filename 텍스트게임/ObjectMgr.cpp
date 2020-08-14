@@ -3,7 +3,6 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Bullet.h"
-#include "GameMgr.h"
 ObjectMgr* ObjectMgr::instance = nullptr;
 
 ObjectMgr::ObjectMgr() :done(false), scBuff1(), scBuff2(), frontBuff(nullptr), backBuff(nullptr) {
@@ -88,7 +87,7 @@ void ObjectMgr::present()
 	backLock.unlock();
 }
 
-void ObjectMgr::CheckCollider(std::shared_ptr<GameObject>& obj1, std::shared_ptr<GameObject>& obj2)
+void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 {
 	if (!wcscmp(obj1->GetName(), L"Player") && !wcscmp(obj2->GetName(), L"Terrain"))
 	{
@@ -122,11 +121,10 @@ void ObjectMgr::CheckCollider(std::shared_ptr<GameObject>& obj1, std::shared_ptr
 			obj1->GetPos().y <= obj2->GetPos().y)
 		{
 			obj1->SetIsAttacked(true);
-			std::shared_ptr<Player> P = std::dynamic_pointer_cast<Player>(obj1);
-			std::shared_ptr<Enemy> E = std::dynamic_pointer_cast<Enemy>(obj2);
-			P->SetHp(E->GetStatus().attackDamage);
+			Player* P = static_cast<Player*>(obj1);
+			Enemy* E = static_cast<Enemy*>(obj2);
+			P->SetHp(E->m_Status.attackDamage);
 			printf("플레이어 공격 당함");
-
 		}
 		else
 			obj1->SetIsAttacked(false);
@@ -134,15 +132,29 @@ void ObjectMgr::CheckCollider(std::shared_ptr<GameObject>& obj1, std::shared_ptr
 
 	if (!wcscmp(obj1->GetName(), L"Bullet") && !wcscmp(obj2->GetName(), L"Enemy"))
 	{
-		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x )
+		Bullet* B = static_cast<Bullet*>(obj1);
+
+			// 높이 && (오른쪽 || 왼쪽)
+			if(
+				(obj2->GetPos().y + obj2->GetHeight() - 1 >= obj1->GetPos().y &&
+					obj2->GetPos().y <= obj1->GetPos().y) && 
+				(
+				(B->m_dir &&
+				obj1->GetPos().x + obj1->GetWidth()  >= obj2->GetPos().x  &&
+				obj1->GetPos().x <= obj2->GetPos().x ) ||
+				(!B->m_dir && 
+					obj2->GetPos().x + obj2->GetWidth() >= obj1->GetPos().x  &&
+					obj2->GetPos().x <= obj1->GetPos().x )
+				)
+
+			  )
 		{
 			//obj2->SetIsAttacked(true);
 			obj1->SetIsAttacked(true);
-			std::shared_ptr<Bullet> B = std::dynamic_pointer_cast<Bullet>(obj1);
-			std::shared_ptr<Enemy> E = std::dynamic_pointer_cast<Enemy>(obj2);
+			
+			Enemy* E = static_cast<Enemy*>(obj2);
 			E->SetHp(B->m_bulletDamage);
-			GameMgr::GetInstance()->SetEnemy(E);
-
+			
 		}
 		else
 		{
@@ -209,14 +221,14 @@ void ObjectMgr::UpdateObjects()
 		}
 	}
 	for (auto& object : m_ObjectList[TERRAIN])
-		CheckCollider(m_ObjectList[PLAYER].front(), object); // player, terrain
+		CheckCollider(m_ObjectList[PLAYER].front().get(), object.get()); // player, terrain
 
 	for (auto& object : m_ObjectList[ENEMY])
-		CheckCollider(m_ObjectList[PLAYER].front(), object); // pleyer, enemy
+		CheckCollider(m_ObjectList[PLAYER].front().get(), object.get()); // pleyer, enemy
 
 	for (auto& object1 : m_ObjectList[BULLET])
 		for (auto& object2 : m_ObjectList[ENEMY])
-			CheckCollider(object1, object2); // bullet, enemy
+			CheckCollider(object1.get(), object2.get()); // bullet, enemy
 }
 
 void ObjectMgr::LateUpdateObjects()
