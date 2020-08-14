@@ -53,7 +53,7 @@ int Player::Update()
 	//isDone = keyPress[27];
 
 	if (keyPress[72] && GetIsLand()) {
-		m_pos.y-=Timer::DeltaTime()*30; //속도같은거 곱하면 됩니다
+		m_pos.y-=Timer::DeltaTime()*15; //속도같은거 곱하면 됩니다
 	}
 	if (keyPress[80]) {
 		//m_pos.y += Timer::DeltaTime() * 10;

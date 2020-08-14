@@ -91,8 +91,8 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 	{
 		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x &&
 			obj1->GetPos().x <= obj2->GetPos().x &&
-			obj1->GetPos().y + obj1->GetHeight() - 1 >= obj2->GetPos().y - 1 &&
-			obj1->GetPos().y <= obj2->GetPos().y - 1)
+			obj1->GetPos().y + obj1->GetHeight() - 1 >= obj2->GetPos().y-1&&
+			obj1->GetPos().y <= obj2->GetPos().y-1)
 		{
 			if (!(obj1->GetIsLand()) && !(obj2->GetIsLand()))
 			{
