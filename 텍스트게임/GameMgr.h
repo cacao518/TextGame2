@@ -5,8 +5,8 @@ class PlayerUI;
 class GameMgr
 {
 public:
-	HRESULT SetPlayer(std::shared_ptr<Player> player);
-	HRESULT SetPlayerUI(std::shared_ptr<PlayerUI> playerUI);
+	
+	HRESULT SetPlayerUI(std::shared_ptr<PlayerUI> playerUI, std::shared_ptr<Player> player);
 
 	void Update();
 private:
@@ -33,7 +33,6 @@ private:
 	static GameMgr* instance;
 
 private:
-	std::weak_ptr<Player> m_player;
 	std::weak_ptr<PlayerUI> m_playerUI;
 
 
