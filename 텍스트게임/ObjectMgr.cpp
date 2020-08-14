@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Bullet.h"
+#include "GameMgr.h"
 ObjectMgr* ObjectMgr::instance = nullptr;
 
 ObjectMgr::ObjectMgr() :done(false), scBuff1(), scBuff2(), frontBuff(nullptr), backBuff(nullptr) {
@@ -87,7 +88,7 @@ void ObjectMgr::present()
 	backLock.unlock();
 }
 
-void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
+void ObjectMgr::CheckCollider(std::shared_ptr<GameObject>& obj1, std::shared_ptr<GameObject>& obj2)
 {
 	if (!wcscmp(obj1->GetName(), L"Player") && !wcscmp(obj2->GetName(), L"Terrain"))
 	{
@@ -121,10 +122,11 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 			obj1->GetPos().y <= obj2->GetPos().y)
 		{
 			obj1->SetIsAttacked(true);
-			Player* P = static_cast<Player*>(obj1);
-			Enemy* E = static_cast<Enemy*>(obj2);
-			P->SetHp(E->m_Status.attackDamage);
+			std::shared_ptr<Player> P = std::dynamic_pointer_cast<Player>(obj1);
+			std::shared_ptr<Enemy> E = std::dynamic_pointer_cast<Enemy>(obj2);
+			P->SetHp(E->GetStatus().attackDamage);
 			printf("플레이어 공격 당함");
+
 		}
 		else
 			obj1->SetIsAttacked(false);
@@ -136,10 +138,11 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 		{
 			//obj2->SetIsAttacked(true);
 			obj1->SetIsAttacked(true);
-			Bullet* B = static_cast<Bullet*>(obj1);
-			Enemy* E = static_cast<Enemy*>(obj2);
+			std::shared_ptr<Bullet> B = std::dynamic_pointer_cast<Bullet>(obj1);
+			std::shared_ptr<Enemy> E = std::dynamic_pointer_cast<Enemy>(obj2);
 			E->SetHp(B->m_bulletDamage);
-			
+			GameMgr::GetInstance()->SetEnemy(E);
+
 		}
 		else
 		{
@@ -206,14 +209,14 @@ void ObjectMgr::UpdateObjects()
 		}
 	}
 	for (auto& object : m_ObjectList[TERRAIN])
-		CheckCollider(m_ObjectList[PLAYER].front().get(), object.get()); // player, terrain
+		CheckCollider(m_ObjectList[PLAYER].front(), object); // player, terrain
 
 	for (auto& object : m_ObjectList[ENEMY])
-		CheckCollider(m_ObjectList[PLAYER].front().get(), object.get()); // pleyer, enemy
+		CheckCollider(m_ObjectList[PLAYER].front(), object); // pleyer, enemy
 
 	for (auto& object1 : m_ObjectList[BULLET])
 		for (auto& object2 : m_ObjectList[ENEMY])
-			CheckCollider(object1.get(), object2.get()); // bullet, enemy
+			CheckCollider(object1, object2); // bullet, enemy
 }
 
 void ObjectMgr::LateUpdateObjects()

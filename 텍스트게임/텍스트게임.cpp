@@ -9,6 +9,7 @@
 #include "Enemy.h"
 #include "BackGround.h"
 #include "PlayerUI.h"
+#include "EnemyUI.h"
 using namespace std;
 
 const int MapWidth = 160;
@@ -37,6 +38,11 @@ int main() {
 		std::shared_ptr<PlayerUI> playerUI = std::make_shared<PlayerUI>();
 		gameMgr->SetPlayerUI(playerUI,player);
 		objectMgr->InsertObject(ObjectMgr::UI, std::dynamic_pointer_cast<GameObject>(playerUI));
+	}
+	{
+		std::shared_ptr<EnemyUI> enemyUI = std::make_shared<EnemyUI>();
+		gameMgr->SetEnemyUI(enemyUI);
+		objectMgr->InsertObject(ObjectMgr::UI, std::dynamic_pointer_cast<GameObject>(enemyUI));
 	}
 
 	for (int i = 0;i < 3;i++)

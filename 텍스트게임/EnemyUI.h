@@ -17,12 +17,14 @@ public:
 	virtual int LateUpdate() override;
 	virtual void Render()override;
 private:
-	//void UpdateHpBar();
+	void UpdateHpBar();
 private:
 	STATUS m_enemyStatus;
 	const wchar_t* m_objectName;
 	wchar_t m_BaseImg[36];
 
-	std::weak_ptr<Enemy> m_player;
+	std::weak_ptr<Enemy> m_enemy;
+	float m_activeTimer;
+	const float m_expireTime;
 };
 
