@@ -102,6 +102,7 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 			obj1->GetPos().y <= obj2->GetPos().y)
 		{
 			obj1->SetIsAttacked(true);
+
 			printf("플레이어 공격 당함");
 		}
 		else

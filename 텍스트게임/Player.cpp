@@ -52,8 +52,8 @@ int Player::Update()
 
 	//isDone = keyPress[27];
 
-	if (keyPress[72] && isGround) {
-		m_pos.y-=Timer::DeltaTime()*10; //속도같은거 곱하면 됩니다
+	if (keyPress[72] && m_isLand) {
+		m_pos.y-=Timer::DeltaTime()*40; //속도같은거 곱하면 됩니다
 	
 	}
 	if (keyPress[80]) {
@@ -77,7 +77,7 @@ int Player::Update()
 	//	isGround = false;
 
 	if (!m_isLand)
-		m_pos.y += Timer::DeltaTime() * 0.7f;
+		m_pos.y += Timer::DeltaTime() * 2.5f;
 
 
 	if (attack)
@@ -103,3 +103,5 @@ int Player::LateUpdate()
 	ScrollMgr::GetInstance()->ScrollMap(m_pos);
 	return 1;
 }
+
+

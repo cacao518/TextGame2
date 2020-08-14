@@ -54,4 +54,6 @@ int GameObject::GetHeight()
 	return m_height;
 }
 
+
+
 ////////Å×½ºÆ®

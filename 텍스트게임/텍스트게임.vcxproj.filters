@@ -100,9 +100,6 @@
     <ClInclude Include="Terrain.h">
       <Filter>Object\02.Terrain</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Object\03.Bullet</Filter>
-    </ClInclude>
     <ClInclude Include="ScrollMgr.h">
       <Filter>Manager\ScrollMgr</Filter>
     </ClInclude>
@@ -122,6 +119,9 @@
       <Filter>Manager\GameMgr</Filter>
     </ClInclude>
     <ClInclude Include="BaseUI.h">
+      <Filter>Object\10.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
       <Filter>Object\10.UI</Filter>
     </ClInclude>
   </ItemGroup>

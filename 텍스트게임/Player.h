@@ -9,7 +9,7 @@ public:
 	// GameObject을(를) 통해 상속됨
 	virtual int Update() override;
 	virtual int LateUpdate() override;
-	bool attack;
+	
 
 private:
 	std::bitset<0xff> keyPress;
@@ -19,8 +19,7 @@ private:
 	ObjectMgr* objectMgr = ObjectMgr::GetInstance();
 	char bulletImg[2] = { '0','0' };
 	bool m_dir = true; //오른쪽이 트루임
-	bool isGround = true;
-
+	bool attack;
 	char m_leftImg[6], m_rightImg[6], m_attackImg[6];
 
 	STATUS m_Status;
