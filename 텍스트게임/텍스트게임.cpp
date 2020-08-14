@@ -29,14 +29,12 @@ int main() {
 
 	objectMgr->InsertObject(ObjectMgr::PLAYER, std::dynamic_pointer_cast<GameObject>(std::make_shared<Player>(POS(x, y))));
 
-	x = 20;
-	objectMgr->InsertObject(ObjectMgr::ENEMY, std::dynamic_pointer_cast<GameObject>(std::make_shared<Enemy>(POS(x, y + 1))));
+	for (int i = 0;i < 3;i++)
+	{
+		x += 20;
+		objectMgr->InsertObject(ObjectMgr::ENEMY, std::dynamic_pointer_cast<GameObject>(std::make_shared<Enemy>(POS(x, y + 1))));
+	}
 
-	x = 40;
-	objectMgr->InsertObject(ObjectMgr::ENEMY, std::dynamic_pointer_cast<GameObject>(std::make_shared<Enemy>(POS(x, y+1))));
-
-	x = 60;
-	objectMgr->InsertObject(ObjectMgr::ENEMY, std::dynamic_pointer_cast<GameObject>(std::make_shared<Enemy>(POS(x, y + 1))));
 	ifstream fp;
 	fp.open("map.txt");
 	for (int i = 0; i < MapHeight; i++) {
