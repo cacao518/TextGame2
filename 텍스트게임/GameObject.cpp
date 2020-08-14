@@ -18,7 +18,7 @@ void GameObject::Render()
 			(int)(m_pos.x - ScrollMgr::GetInstance()->GetScrollX()),
 			(int)(m_pos.y - ScrollMgr::GetInstance()->GetScrollY()));
 }
-const char* GameObject::GetName()
+const wchar_t* GameObject::GetName()
 {
 	return m_name;
 }

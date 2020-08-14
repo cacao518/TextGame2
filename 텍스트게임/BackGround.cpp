@@ -13,7 +13,7 @@ BackGround::BackGround(POS position)
 	m_sprite = new wchar_t[m_width * m_height];
 	memcpy(m_sprite, BackGroundImg, sizeof(wchar_t) * m_width * m_height);
 
-	m_name = "BackGround";
+	m_name = L"BackGround";
 }
 BackGround::~BackGround()
 {

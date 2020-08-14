@@ -13,7 +13,7 @@ Bullet::Bullet(bool dir, POS position)
 	memcpy(m_sprite, bulletImg, sizeof(wchar_t) * m_width * m_height);
 
 	m_dir = dir;
-	m_name = "Bullet";
+	m_name = L"Bullet";
 
 }
 

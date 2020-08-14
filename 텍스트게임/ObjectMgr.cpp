@@ -78,7 +78,7 @@ void ObjectMgr::present()
 
 void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 {
-	if (!strcmp(obj1->GetName(), "Player") && !strcmp(obj2->GetName(), "Terrain"))
+	if (!wcscmp(obj1->GetName(), L"Player") && !wcscmp(obj2->GetName(), L"Terrain"))
 	{
 		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x &&
 			obj1->GetPos().x <= obj2->GetPos().x &&
@@ -102,7 +102,7 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 			}
 		}
 	}
-	if (!strcmp(obj1->GetName(), "Player") && !strcmp(obj2->GetName(), "Enemy"))
+	if (!wcscmp(obj1->GetName(), L"Player") && !wcscmp(obj2->GetName(), L"Enemy"))
 	{
 		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x &&
 			obj1->GetPos().x <= obj2->GetPos().x &&
@@ -118,7 +118,7 @@ void ObjectMgr::CheckCollider(GameObject * obj1, GameObject * obj2)
 			obj1->SetIsAttacked(false);
 	}
 
-	if (!strcmp(obj1->GetName(), "Bullet") && !strcmp(obj2->GetName(), "Enemy"))
+	if (!wcscmp(obj1->GetName(), L"Bullet") && !wcscmp(obj2->GetName(), L"Enemy"))
 	{
 		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x )
 
