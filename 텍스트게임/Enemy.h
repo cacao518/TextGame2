@@ -10,7 +10,7 @@ public:
 	virtual int Update() override;
 	virtual int LateUpdate() override;
 	void SetHp(float damage);
-	STATUS m_Status;
+	const STATUS& GetStatus()const { return m_Status; }
 
 private:
 
@@ -20,6 +20,7 @@ private:
 	//bool isGround = true;
 	float m_MoveCount = 0;
 	float m_timer = 0.f;
-	
+	STATUS m_Status;
+
 };
 

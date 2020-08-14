@@ -9,6 +9,7 @@
 #include "Enemy.h"
 #include "BackGround.h"
 #include "PlayerUI.h"
+#include "EnemyUI.h"
 using namespace std;
 
 const int MapWidth = 160;
@@ -31,14 +32,17 @@ int main() {
 	wchar_t HighGroundBlockImg[10] = { 'm','U','U','U','U','U','U','U','U','U' };
 	wchar_t AirBlockImg[2] = { 'm','U' };
 	{
-		std::shared_ptr<Player> player = std::make_shared<Player>(POS(x,y));
-		gameMgr->SetPlayer(player);
+		std::shared_ptr<Player> player = std::make_shared<Player>(POS(x, y));
 		objectMgr->InsertObject(ObjectMgr::PLAYER, std::dynamic_pointer_cast<GameObject>(player));
+
+		std::shared_ptr<PlayerUI> playerUI = std::make_shared<PlayerUI>();
+		gameMgr->SetPlayerUI(playerUI,player);
+		objectMgr->InsertObject(ObjectMgr::UI, std::dynamic_pointer_cast<GameObject>(playerUI));
 	}
 	{
-		std::shared_ptr<PlayerUI> playerUI = std::make_shared<PlayerUI>();
-		gameMgr->SetPlayerUI(playerUI);
-		objectMgr->InsertObject(ObjectMgr::UI, std::dynamic_pointer_cast<GameObject>(playerUI));
+		std::shared_ptr<EnemyUI> enemyUI = std::make_shared<EnemyUI>();
+		gameMgr->SetEnemyUI(enemyUI);
+		objectMgr->InsertObject(ObjectMgr::UI, std::dynamic_pointer_cast<GameObject>(enemyUI));
 	}
 
 	for (int i = 0;i < 3;i++)

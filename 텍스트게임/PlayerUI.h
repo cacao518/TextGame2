@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseUI.h"
+class Player;
 class PlayerUI :
 	public BaseUI
 {
@@ -7,7 +8,8 @@ public:
 	PlayerUI();
 	virtual ~PlayerUI();
 public:
-	void UpdatePlayerStatus(const STATUS& status,const wchar_t* name);
+	void SetPlayer(std::shared_ptr<Player> player);
+	void UpdatePlayerStatus();
 
 public:
 	// BaseUI을(를) 통해 상속됨
@@ -20,5 +22,7 @@ private:
 	STATUS m_playerStatus;
 	const wchar_t* m_objectName;
 	wchar_t m_BaseImg[36];
+
+	std::weak_ptr<Player> m_player;
 };
 

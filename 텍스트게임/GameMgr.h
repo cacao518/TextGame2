@@ -2,11 +2,16 @@
 #include "Header.h"
 class Player;
 class PlayerUI;
+class Enemy;
+class EnemyUI;
 class GameMgr
 {
 public:
-	HRESULT SetPlayer(std::shared_ptr<Player> player);
-	HRESULT SetPlayerUI(std::shared_ptr<PlayerUI> playerUI);
+	
+	HRESULT SetPlayerUI(std::shared_ptr<PlayerUI> playerUI, std::shared_ptr<Player> player);
+	
+	HRESULT SetEnemyUI(std::shared_ptr<EnemyUI> enemyUI);
+	HRESULT SetEnemy(std::shared_ptr<Enemy> enemy);
 
 	void Update();
 private:
@@ -33,9 +38,8 @@ private:
 	static GameMgr* instance;
 
 private:
-	std::weak_ptr<Player> m_player;
 	std::weak_ptr<PlayerUI> m_playerUI;
-
+	std::weak_ptr<EnemyUI> m_enemyUI;
 
 };
 

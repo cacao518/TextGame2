@@ -26,7 +26,7 @@ private:
 	void end();
 	void present();
 
-	void CheckCollider(GameObject* obj1, GameObject* obj2);
+	void CheckCollider(std::shared_ptr<GameObject>& obj1, std::shared_ptr<GameObject>& obj2);
 private:
 	explicit ObjectMgr();
 	~ObjectMgr();
