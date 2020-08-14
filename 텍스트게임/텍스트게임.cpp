@@ -35,11 +35,7 @@ int main() {
 		gameMgr->SetPlayer(player);
 		objectMgr->InsertObject(ObjectMgr::PLAYER, std::dynamic_pointer_cast<GameObject>(player));
 	}
-	{
-		std::shared_ptr<Player> player = std::make_shared<Player>(POS(x,y));
-		gameMgr->SetPlayer(player);
-		objectMgr->InsertObject(ObjectMgr::PLAYER, std::dynamic_pointer_cast<GameObject>(player));
-	}
+	
 
 
 	{

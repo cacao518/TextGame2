@@ -11,7 +11,7 @@ public:
 	virtual int LateUpdate() override;
 	void SetHp(float damage);
 	STATUS m_Status;
-
+	STATUS GetStatus();
 	
 
 private:

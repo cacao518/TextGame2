@@ -112,6 +112,12 @@ void Player::SetHp(float damage)
 	m_Status.hp -= damage;
 }
 
+STATUS Player::GetStatus()
+{
+	return m_Status;
+}
+
+ 
 
 
 
