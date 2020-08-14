@@ -108,6 +108,7 @@ int Player::LateUpdate()
 
 void Player::SetHp(int damage)
 {
+	printf("공격당했다");
 	m_Status.hp -= damage;
 }
 
