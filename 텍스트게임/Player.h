@@ -12,7 +12,7 @@ public:
 	void SetHp(float damage);
 	STATUS m_Status;
 	STATUS GetStatus();
-	void Knockback();
+	void Knockback(POS otherObjPos);
 
 private:
 	std::bitset<0xff> keyPress;
@@ -26,7 +26,6 @@ private:
 	
 	int m_jumpCount = 0;
 	int m_jumpPower = 6;
-	float m_gravitySpeed = 0;
 
 	wchar_t m_leftImg[6], m_rightImg[6], m_attackImg[6];
 };

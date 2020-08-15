@@ -1,4 +1,6 @@
 #include "GameObject.h"
+#include "RigidBody.h"
+#include "BoxCollider.h"
 GameObject::GameObject(POS initPos)
 	:m_pos(initPos),m_sprite(nullptr),m_name(nullptr),m_width(0),m_height(0),m_color(15), m_collisionObjPos(initPos)
 {
@@ -11,6 +13,18 @@ GameObject::~GameObject()
 		delete[] m_sprite;
 }
 
+int GameObject::ComponentUpdate()
+{
+
+	if (GetComponet<RigidBody>() != nullptr)
+		GetComponet<RigidBody>()->Update(); 
+
+	if (GetComponet<BoxCollider>() != nullptr)
+		GetComponet<BoxCollider>()->Update();
+
+	return 1;
+}
+
 void GameObject::Render()
 {
 	if (nullptr != m_sprite)
@@ -18,6 +32,7 @@ void GameObject::Render()
 			(int)(m_pos.x - ScrollMgr::GetInstance()->GetScrollX()),
 			(int)(m_pos.y - ScrollMgr::GetInstance()->GetScrollY()),m_color);
 }
+
 const wchar_t* GameObject::GetName()
 {
 	return m_name;
@@ -26,6 +41,10 @@ const wchar_t* GameObject::GetName()
 POS GameObject::GetPos()
 {
 	return m_pos;
+}
+void GameObject::SetPos(POS pos)
+{
+	m_pos = pos;
 }
 bool GameObject::GetIsAttacked()
 {
@@ -63,6 +82,7 @@ void GameObject::SetCollisionObjPos(POS pos)
 {
 	m_collisionObjPos = pos;
 }
+/*
 int GameObject::GetCollisionCount()
 {
 	return m_collisionCount;
@@ -76,4 +96,12 @@ void GameObject::SubCollisionCount()
 	if(m_collisionCount != 0)
 		m_collisionCount--;
 }
-////////Å×½ºÆ®
+float GameObject::GetGravitiySpeed()
+{
+	return m_gravitySpeed;
+}
+void GameObject::SetGravitiySpeed(float gs)
+{
+	m_gravitySpeed = gs;
+}
+*/

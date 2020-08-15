@@ -1,6 +1,7 @@
 #pragma once
-#include<conio.h>
-#include<stdio.h>
+#include <conio.h>
+#include <stdio.h>
+#include <cstdio>
 #include <bitset>
 #include <thread>
 #include <Windows.h>
@@ -11,8 +12,12 @@
 #include <iostream>
 #include <fstream>
 #include <Windows.h>
-
+#include <unordered_map>
 #include <locale>
+#include <string>
+
+enum OBJTYPE { BACKGROUND, TERRAIN, PLAYER, ENEMY, BULLET, UI, TYPE_END };
+
 #define BLACK 0 
 #define BLUE 1 
 #define GREEN 2 

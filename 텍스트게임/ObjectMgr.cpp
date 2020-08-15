@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "Bullet.h"
 #include "GameMgr.h"
+#include "BoxCollider.h"
 ObjectMgr* ObjectMgr::instance = nullptr;
 
 ObjectMgr::ObjectMgr() :done(false), scBuff1(), scBuff2(), frontBuff(nullptr), backBuff(nullptr) {
@@ -87,9 +88,10 @@ void ObjectMgr::present()
 	frontLock.unlock();
 	backLock.unlock();
 }
-
+/*
 void ObjectMgr::CheckCollider(std::shared_ptr<GameObject>& obj1, std::shared_ptr<GameObject>& obj2)
 {
+	
 	if (!wcscmp(obj1->GetName(), L"Enemy") && !wcscmp(obj2->GetName(), L"Terrain"))
 	{
 		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x &&
@@ -192,8 +194,9 @@ void ObjectMgr::CheckCollider(std::shared_ptr<GameObject>& obj1, std::shared_ptr
 			obj2->SetIsAttacked(false);
 		}
 	}
+	
 }
-
+*/
 void ObjectMgr::Draw(const wchar_t * img, int w, int h, int x, int y, int color)
 {
 	int i, j;
@@ -240,12 +243,14 @@ void ObjectMgr::UpdateObjects()
 	{
 		for (auto iter = m_ObjectList[i].begin(); iter != m_ObjectList[i].end();)
 		{
+			(*iter).get()->ComponentUpdate();
 			if ((*iter).get()->Update() < 0)
 				m_ObjectList[i].erase(iter++);
 			else
 				++iter;
 		}
 	}
+	/*
 	for (auto& object : m_ObjectList[TERRAIN])
 		CheckCollider(m_ObjectList[PLAYER].front(), object); // player, terrain
 
@@ -255,6 +260,7 @@ void ObjectMgr::UpdateObjects()
 	for (auto& object1 : m_ObjectList[BULLET])
 		for (auto& object2 : m_ObjectList[ENEMY])
 			CheckCollider(object1, object2); // bullet, enemy
+	*/
 }
 
 void ObjectMgr::LateUpdateObjects()
@@ -279,13 +285,11 @@ void ObjectMgr::RenderObjects()
 
 	for (int i = 0; i < TYPE_END; ++i)
 	{
-		
 		for (auto& object : m_ObjectList[i])
 		{
 			object->Render();
 		}
 	}
-
 	end();
 	present();
 }
@@ -297,3 +301,5 @@ HRESULT ObjectMgr::InsertObject(OBJTYPE objType, std::shared_ptr<GameObject>& ob
 	m_ObjectList[objType].push_back(obj);
 	return S_OK;
 }
+
+

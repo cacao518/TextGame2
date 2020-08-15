@@ -5,8 +5,6 @@ class GameObject;
 class ObjectMgr
 {
 public:
-	enum OBJTYPE{BACKGROUND,TERRAIN,PLAYER,ENEMY,BULLET,UI,TYPE_END};
-public:
 	static const int GetScreenWidth() { return ScreenWidth; }
 	static const int GetScreenHeight() { return ScreenHeight; }
 public:
@@ -25,8 +23,7 @@ private:
 	void clearScreen();
 	void end();
 	void present();
-
-	void CheckCollider(std::shared_ptr<GameObject>& obj1, std::shared_ptr<GameObject>& obj2);
+	//void CheckCollider(std::shared_ptr<GameObject>& obj1, std::shared_ptr<GameObject>& obj2);
 private:
 	explicit ObjectMgr();
 	~ObjectMgr();
@@ -48,10 +45,9 @@ public:
 	}
 public:
 	bool done;
+	std::list<std::shared_ptr<GameObject>> m_ObjectList[TYPE_END];
 private:
 	static ObjectMgr* instance;
-	std::list<std::shared_ptr<GameObject>> m_ObjectList[TYPE_END];
-
 
 	static const int ScreenWidth = 80;
 	static const int ScreenHeight = 30;

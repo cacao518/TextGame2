@@ -1,14 +1,16 @@
 #include "Player.h"
 #include "Timer.h"
 #include "Bullet.h"
+#include "RigidBody.h"
+#include "BoxCollider.h"
+#include "Enemy.h"
+
 Player::Player(POS position)
 	:GameObject(position),m_Status(STATUS(100.f,100.f,3.f))
 {
 	KeyUpdate=std::thread([&] {
 		int c;
-
 		while (true) {
-
 			c = _getch();
 			if (c < 256) {
 				keyLock.lock();
@@ -48,11 +50,23 @@ Player::~Player()
 
 int Player::Update()
 {
+	auto otherObj = GetComponet<BoxCollider>()->OnTriggerEnter(L"Enemy");
+	if (otherObj != nullptr)
+	{
+		SetIsAttacked(true);
+		std::shared_ptr<Enemy> E = std::dynamic_pointer_cast<Enemy>(otherObj);
+		SetHp(E->GetStatus().attackDamage);
+		Knockback(E->GetPos());
+		printf("플레이어 공격 당함");
+	}
+	else
+		SetIsAttacked(false);
+
 	keyLock.lock();
 
 	//isDone = keyPress[27];
 	if (keyPress[72] && (GetIsLand() || m_jumpCount < 2)) {
-		m_gravitySpeed += m_jumpPower;
+		GetComponet<RigidBody>()->AddForce(0, m_jumpPower);
 		m_jumpCount++;
 	}
 	if (keyPress[80]) {
@@ -69,27 +83,8 @@ int Player::Update()
 	if (keyPress[VK_ESCAPE])
 		ObjectMgr::GetInstance()->done = true;
 
-	if (m_collisionCount == 0) // 충돌한 벽이 없으면 공중 상태
-	{
-		m_isLand = false;
-		SetCollisionObjPos(POS());
-	}
-	if (m_gravitySpeed > 0)
-	{
-		m_pos.y -= Timer::DeltaTime() * 4;
-		m_gravitySpeed -= Timer::DeltaTime() * 5.0f;
-	}
-
-	//printf("%d", m_gravitySpeed);
-	if (!GetIsLand() && m_gravitySpeed <= 0) // 하강
-		m_pos.y += Timer::DeltaTime() * 3.0f;
-	else if(m_gravitySpeed <= 0)// 충돌한 벽에 서있기
-	{
-		m_pos.y = GetCollisionObjPos().y;
+	if (GetIsLand() && GetComponet<RigidBody>()->gravitySpeed <= 0)
 		m_jumpCount = 0;
-		m_gravitySpeed = 0;
-	}
-
 
 	keyPress.reset();
 	keyLock.unlock();
@@ -97,7 +92,7 @@ int Player::Update()
 	if (attack)
 	{
 		attack = false;
-		objectMgr->InsertObject(ObjectMgr::BULLET, std::dynamic_pointer_cast<GameObject>(std::make_shared<Bullet>(m_dir,m_Status.attackDamage ,POS(m_pos.x, m_pos.y + 1))));
+		objectMgr->InsertObject(BULLET, std::dynamic_pointer_cast<GameObject>(std::make_shared<Bullet>(m_dir,m_Status.attackDamage ,POS(m_pos.x, m_pos.y + 1))));
 
 	}
 	if (m_dir)
@@ -127,18 +122,12 @@ STATUS Player::GetStatus()
 	return m_Status;
 }
 
-void Player::Knockback()
+void Player::Knockback(POS otherObjPos)
 {
 	if (m_dir)
-	{
-		m_pos.x -= Timer::DeltaTime() * 10;
-	}
+		GetComponet<RigidBody>()->AddForce(Timer::DeltaTime() * -12, 3);
 	else
-	{
-		m_pos.x += Timer::DeltaTime() * 10;
-	}
-	m_pos.y -= Timer::DeltaTime() * 10;
-
+		GetComponet<RigidBody>()->AddForce(Timer::DeltaTime() * 12, 3);
 }
 
  
