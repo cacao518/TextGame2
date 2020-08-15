@@ -125,9 +125,9 @@ STATUS Player::GetStatus()
 void Player::Knockback(POS otherObjPos)
 {
 	if (m_dir)
-		GetComponet<RigidBody>()->AddForce(Timer::DeltaTime() * -12, 3);
+		GetComponet<RigidBody>()->AddForce(Timer::DeltaTime() * -12, 0);
 	else
-		GetComponet<RigidBody>()->AddForce(Timer::DeltaTime() * 12, 3);
+		GetComponet<RigidBody>()->AddForce(Timer::DeltaTime() * 12, 0);
 }
 
  
