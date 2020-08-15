@@ -19,6 +19,7 @@ public:
 
 	void SetColor(int color, int bgcolor) { SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), ((bgcolor & 0xf) << 4) | (color & 0xf)); };
 	HRESULT InsertObject(OBJTYPE objType, std::shared_ptr<GameObject>& obj);
+	HRESULT EraseObjectS(OBJTYPE objType);
 private:
 	void ShowConsoleCursor(bool showFlag);
 	void begin();

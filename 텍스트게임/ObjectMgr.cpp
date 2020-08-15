@@ -272,3 +272,9 @@ HRESULT ObjectMgr::InsertObject(OBJTYPE objType, std::shared_ptr<GameObject>& ob
 	m_ObjectList[objType].push_back(obj);
 	return S_OK;
 }
+
+HRESULT ObjectMgr::EraseObjectS(OBJTYPE objType)
+{
+	m_ObjectList[objType].remove_if([](const std::shared_ptr<GameObject>& obj) {return true; });
+	return S_OK;
+}

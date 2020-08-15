@@ -45,7 +45,25 @@
     <Filter Include="Object\10.UI\EnemyUI">
       <UniqueIdentifier>{de828365-75c5-4cf1-aa7a-f03fa390520d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="리소스 파일\Timer">
+    <Filter Include="Manager\SceneMgr">
+      <UniqueIdentifier>{387d8e74-0a2c-4be5-922a-b6d8bd84401f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\SceneMgr\Scene">
+      <UniqueIdentifier>{371dd333-b8ed-47ae-81bc-b9e20061f15d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\SceneMgr\Scene\Logo">
+      <UniqueIdentifier>{27afcb44-9453-473d-a6df-d3cb9cb6028b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\SceneMgr\Scene\Stage1">
+      <UniqueIdentifier>{f2cfe7ac-0a0d-477b-af06-933270ca81c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\SceneMgr\Scene\BossStage">
+      <UniqueIdentifier>{eac034cd-351e-41c7-8e98-fa8154247561}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\99.LogoObj">
+      <UniqueIdentifier>{2b96402d-5a35-40f6-8491-a7ff2bf8dad9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Timer">
       <UniqueIdentifier>{2f20b108-ae0f-4584-9511-209529bb8624}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -72,7 +90,7 @@
       <Filter>Manager\ScrollMgr</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">
-      <Filter>리소스 파일\Timer</Filter>
+      <Filter>Timer</Filter>
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <Filter>Object\02.Terrain</Filter>
@@ -91,6 +109,21 @@
     </ClCompile>
     <ClCompile Include="EnemyUI.cpp">
       <Filter>Object\10.UI\EnemyUI</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMgr.cpp">
+      <Filter>Manager\SceneMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Manager\SceneMgr\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_Logo.cpp">
+      <Filter>Manager\SceneMgr\Scene\Logo</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_Stage_1.cpp">
+      <Filter>Manager\SceneMgr\Scene\Stage1</Filter>
+    </ClCompile>
+    <ClCompile Include="LogoObj.cpp">
+      <Filter>Object\99.LogoObj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,7 +152,7 @@
       <Filter>Manager\ScrollMgr</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
-      <Filter>리소스 파일\Timer</Filter>
+      <Filter>Timer</Filter>
     </ClInclude>
     <ClInclude Include="BackGround.h">
       <Filter>Object\02.Terrain</Filter>
@@ -142,6 +175,21 @@
     <ClInclude Include="EnemyUI.h">
       <Filter>Object\10.UI\EnemyUI</Filter>
     </ClInclude>
+    <ClInclude Include="SceneMgr.h">
+      <Filter>Manager\SceneMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Manager\SceneMgr\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_Logo.h">
+      <Filter>Manager\SceneMgr\Scene\Logo</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_Stage_1.h">
+      <Filter>Manager\SceneMgr\Scene\Stage1</Filter>
+    </ClInclude>
+    <ClInclude Include="LogoObj.h">
+      <Filter>Object\99.LogoObj</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="텍스트게임.rc">
@@ -153,6 +201,9 @@
       <Filter>리소스 파일</Filter>
     </Text>
     <Text Include="BackGround.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="Logo.txt">
       <Filter>리소스 파일</Filter>
     </Text>
   </ItemGroup>
