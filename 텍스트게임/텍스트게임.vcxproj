@@ -41,7 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="BaseUI.cpp" />
+    <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyUI.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="ObjectMgr.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerUI.cpp" />
+    <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneMgr.cpp" />
     <ClCompile Include="Scene_Logo.cpp" />
@@ -169,6 +171,7 @@
   <ItemGroup>
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="BaseUI.h" />
+    <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyUI.h" />
@@ -184,6 +187,7 @@
     <ClInclude Include="SceneMgr.h" />
     <ClInclude Include="Scene_Logo.h" />
     <ClInclude Include="Scene_Stage_1.h" />
+    <ClInclude Include="RigidBody.h" />
     <ClInclude Include="ScrollMgr.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="Terrain.h" />

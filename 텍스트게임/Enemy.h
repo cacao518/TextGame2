@@ -10,6 +10,8 @@ public:
 	virtual int Update() override;
 	virtual int LateUpdate() override;
 	void SetHp(float damage);
+
+	void Knockback();
 	const STATUS& GetStatus()const { return m_Status; }
 
 private:

@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "Bullet.h"
 #include "GameMgr.h"
+#include "BoxCollider.h"
 ObjectMgr* ObjectMgr::instance = nullptr;
 
 ObjectMgr::ObjectMgr() :done(false), scBuff1(), scBuff2(), frontBuff(nullptr), backBuff(nullptr) {
@@ -87,10 +88,11 @@ void ObjectMgr::present()
 	frontLock.unlock();
 	backLock.unlock();
 }
-
+/*
 void ObjectMgr::CheckCollider(std::shared_ptr<GameObject>& obj1, std::shared_ptr<GameObject>& obj2)
 {
-	if (!wcscmp(obj1->GetName(), L"Player") && !wcscmp(obj2->GetName(), L"Terrain"))
+	
+	if (!wcscmp(obj1->GetName(), L"Enemy") && !wcscmp(obj2->GetName(), L"Terrain"))
 	{
 		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x &&
 			obj1->GetPos().x <= obj2->GetPos().x &&
@@ -114,6 +116,32 @@ void ObjectMgr::CheckCollider(std::shared_ptr<GameObject>& obj1, std::shared_ptr
 			}
 		}
 	}
+
+	if (!wcscmp(obj1->GetName(), L"Player") && !wcscmp(obj2->GetName(), L"Terrain"))
+	{
+		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x &&
+			obj1->GetPos().x <= obj2->GetPos().x &&
+			obj1->GetPos().y + obj1->GetHeight() - 1 >= obj2->GetPos().y - 1 &&
+			obj1->GetPos().y <= obj2->GetPos().y - 1)
+		{
+			if (!(obj1->GetIsLand()) && !(obj2->GetIsLand()))
+			{
+				obj1->SetIsLand(true);
+				obj2->SetIsLand(true);
+				obj1->SetCollisionObjPos(obj2->GetPos());
+				obj1->AddCollisionCount();
+			}
+		}
+		else
+		{
+			if (obj2->GetIsLand())
+			{
+				obj2->SetIsLand(false);
+				obj1->SubCollisionCount();
+			}
+		}
+	}
+
 	if (!wcscmp(obj1->GetName(), L"Player") && !wcscmp(obj2->GetName(), L"Enemy"))
 	{
 		if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x &&
@@ -126,6 +154,7 @@ void ObjectMgr::CheckCollider(std::shared_ptr<GameObject>& obj1, std::shared_ptr
 			std::shared_ptr<Enemy> E = std::dynamic_pointer_cast<Enemy>(obj2);
 			P->SetHp(E->GetStatus().attackDamage);
 			printf("플레이어 공격 당함");
+			P->Knockback();
 		}
 		else
 			obj1->SetIsAttacked(false);
@@ -156,6 +185,8 @@ void ObjectMgr::CheckCollider(std::shared_ptr<GameObject>& obj1, std::shared_ptr
 			std::shared_ptr<Enemy> E = std::dynamic_pointer_cast<Enemy>(obj2);
 			E->SetHp(B->m_bulletDamage);
 			GameMgr::GetInstance()->SetEnemy(E);
+			//E->Knockback();
+			
 		}
 		else
 		{
@@ -163,8 +194,9 @@ void ObjectMgr::CheckCollider(std::shared_ptr<GameObject>& obj1, std::shared_ptr
 			obj2->SetIsAttacked(false);
 		}
 	}
+	
 }
-
+*/
 void ObjectMgr::Draw(const wchar_t * img, int w, int h, int x, int y, int color)
 {
 	int i, j;
@@ -188,11 +220,7 @@ void ObjectMgr::Update()
 {
 	COORD pos;
 	while (done == false) {
-
-
 		frontLock.lock();
-
-
 		int x, y;
 		for (y = 0; y < ScreenHeight; y++) {
 			pos.X = 0;
@@ -215,12 +243,14 @@ void ObjectMgr::UpdateObjects()
 	{
 		for (auto iter = m_ObjectList[i].begin(); iter != m_ObjectList[i].end();)
 		{
+			(*iter).get()->ComponentUpdate();
 			if ((*iter).get()->Update() < 0)
 				m_ObjectList[i].erase(iter++);
 			else
 				++iter;
 		}
 	}
+	/*
 	for (auto& object : m_ObjectList[TERRAIN])
 		CheckCollider(m_ObjectList[PLAYER].front(), object); // player, terrain
 
@@ -230,6 +260,7 @@ void ObjectMgr::UpdateObjects()
 	for (auto& object1 : m_ObjectList[BULLET])
 		for (auto& object2 : m_ObjectList[ENEMY])
 			CheckCollider(object1, object2); // bullet, enemy
+	*/
 }
 
 void ObjectMgr::LateUpdateObjects()
@@ -254,13 +285,11 @@ void ObjectMgr::RenderObjects()
 
 	for (int i = 0; i < TYPE_END; ++i)
 	{
-		
 		for (auto& object : m_ObjectList[i])
 		{
 			object->Render();
 		}
 	}
-
 	end();
 	present();
 }

@@ -66,6 +66,9 @@
     <Filter Include="Timer">
       <UniqueIdentifier>{2f20b108-ae0f-4584-9511-209529bb8624}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{be35d72f-5f52-4a2d-83a5-fa9b572435e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="텍스트게임.cpp">
@@ -124,6 +127,12 @@
     </ClCompile>
     <ClCompile Include="LogoObj.cpp">
       <Filter>Object\99.LogoObj</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollider.cpp">
+      <Filter>Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +198,12 @@
     </ClInclude>
     <ClInclude Include="LogoObj.h">
       <Filter>Object\99.LogoObj</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollider.h">
+      <Filter>Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
