@@ -101,7 +101,7 @@ int Bullet::Update()
 
 			std::shared_ptr<Enemy> enemy = std::dynamic_pointer_cast<Enemy>(otherObj);
 			enemy->SetHp(m_bulletDamage);
-			enemy->Knockback();
+			enemy->Knockback(enemy->GetPos());
 			GameMgr::GetInstance()->SetEnemy(enemy);
 			SetIsLife(false);
 
