@@ -2,12 +2,12 @@
 #include "LogoObj.h"
 Scene_Logo::Scene_Logo()
 {
-	m_objectMgr->InsertObject(ObjectMgr::UI, std::dynamic_pointer_cast<GameObject>(std::make_shared<LogoObj>()));
+	m_objectMgr->InsertObject(UI, std::dynamic_pointer_cast<GameObject>(std::make_shared<LogoObj>()));
 }
 
 Scene_Logo::~Scene_Logo()
 {
-	m_objectMgr->EraseObjectS(ObjectMgr::UI);
+	m_objectMgr->EraseObjectS(UI);
 }
 
 void Scene_Logo::Update()
