@@ -50,8 +50,8 @@ public:
 private:
 	static ObjectMgr* instance;
 
-	static const int ScreenWidth = 80;
-	static const int ScreenHeight = 30;
+	static const int ScreenWidth = 50;
+	static const int ScreenHeight = 26;
 
 	wchar_t scBuff1[ScreenWidth * ScreenHeight];
 	wchar_t scBuff2[ScreenWidth * ScreenHeight];

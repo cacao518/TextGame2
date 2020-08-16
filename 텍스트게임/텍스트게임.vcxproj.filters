@@ -72,6 +72,12 @@
     <Filter Include="Particle">
       <UniqueIdentifier>{85acd65e-df54-4a35-ba54-3678ed0707d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\04.Boss">
+      <UniqueIdentifier>{6bac74f3-7cee-405d-8d42-44f9e23d60a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\04.Boss\BossTank">
+      <UniqueIdentifier>{a94ba60b-42bc-4b6e-9755-dda9461f8e79}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="텍스트게임.cpp">
@@ -139,6 +145,12 @@
     </ClCompile>
     <ClCompile Include="ChargeParticle1.cpp">
       <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Object\04.Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="BossTank.cpp">
+      <Filter>Object\04.Boss\BossTank</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +226,12 @@
     <ClInclude Include="ChargeParticle1.h">
       <Filter>Particle</Filter>
     </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Object\04.Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="BossTank.h">
+      <Filter>Object\04.Boss\BossTank</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="텍스트게임.rc">
@@ -228,6 +246,9 @@
       <Filter>리소스 파일</Filter>
     </Text>
     <Text Include="Logo.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="Boss1.txt">
       <Filter>리소스 파일</Filter>
     </Text>
   </ItemGroup>
