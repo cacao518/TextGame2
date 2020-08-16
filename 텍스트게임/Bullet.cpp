@@ -89,6 +89,11 @@ int Bullet::Update()
 		//obj1->SetIsAttacked(true);
 
 		std::shared_ptr<Enemy> enemy = std::dynamic_pointer_cast<Enemy>(otherObj);
+		
+		//if (!wcscmp(enemy->GetName(), L"GuardEnemy")
+		//{
+		//	printf("sss");
+		//}
 		enemy->SetHp(m_bulletDamage);
 		enemy->Knockback(otherObj->GetPos());
 		GameMgr::GetInstance()->SetEnemy(enemy);

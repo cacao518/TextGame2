@@ -12,6 +12,7 @@
 #include "BossTank.h"
 #include "BossUI.h"
 #include "Vehicle.h"
+#include "GuardEnemy.h"
 Scene_Stage_1::Scene_Stage_1()
 {
 	const int MapWidth = 160;
@@ -52,6 +53,15 @@ Scene_Stage_1::Scene_Stage_1()
 	tank->AddComponent(rb4);
 	BoxCollider* bc4 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(tank));
 	tank->AddComponent(bc4);
+
+	x = 6;
+	std::shared_ptr<GuardEnemy> enemy9 = std::make_shared<GuardEnemy>(POS(x+3, y));
+	m_objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy9));
+
+	RigidBody* rb9 = new RigidBody(std::dynamic_pointer_cast<GameObject>(enemy9));
+	enemy9->AddComponent(rb9);
+	BoxCollider* bc9 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(enemy9));
+	enemy9->AddComponent(bc9);
 
 	std::ifstream fp;
 	fp.open("map.txt");

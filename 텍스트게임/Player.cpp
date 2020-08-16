@@ -71,7 +71,7 @@ int Player::Update()
 
 
 	//isDone = keyPress[27];
-	if (keyPress['s'] && (GetIsLand() || m_jumpCount < 2)) {
+	if (keyPress[72] && (GetIsLand() || m_jumpCount < 2)) {
 		GetComponent<RigidBody>()->AddForce(0, m_jumpPower);
 		m_jumpCount++;
 	}
@@ -83,7 +83,7 @@ int Player::Update()
 		printf("아래키누름");
 
 	}*/
-	if (keyPress['a']) {
+	if (keyPress[80]) {
 		if (!m_charging)
 			Attack(false);
 		else
