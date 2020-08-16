@@ -1,6 +1,8 @@
 #include "BossTank.h"
 #include "Part.h"
+#include "Timer.h"
 #include "BoxCollider.h"
+#include "Player.h"
 BossTank::BossTank(POS pos)
 	:Boss(pos),m_upPart(nullptr),m_downPart(nullptr)
 {
@@ -62,13 +64,42 @@ void BossTank::ProgressPattern()
 {
 	switch (m_curPattern)
 	{
+	case IDLE:
+		ProgressIdle();
+		break;
+	case MOVE:
+		ProgressMove();
+		break;
+	case SHOT:
+		ProgressShot();
+		break;
+	case RUSH:
+		ProgressRush();
+		break;
 	default:
 		break;
 	}
+	m_patternTimer += Timer::DeltaTime();
 }
 
 void BossTank::ProgressIdle()
 {
+	if (m_patternTimer >= 2.f)
+	{
+		std::shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(ObjectMgr::GetInstance()->GetFrontObject(PLAYER));
+
+		int lenToPlayer, xDist, yDist;
+		xDist = player->GetPos().x - GetPos().x;
+		yDist = player->GetPos().y - GetPos().y;
+		lenToPlayer = sqrtf(xDist * xDist + yDist * yDist);
+
+		if (lenToPlayer <= 3.f)
+			SetPattern(MOVE);
+		else if (lenToPlayer <= 8.f)
+			SetPattern(SHOT);
+		else
+			SetPattern(RUSH_READY);
+	}
 }
 
 void BossTank::ProgressMove()
@@ -80,5 +111,9 @@ void BossTank::ProgressShot()
 }
 
 void BossTank::ProgressRush()
+{
+}
+
+void BossTank::ProgressRushReady()
 {
 }
