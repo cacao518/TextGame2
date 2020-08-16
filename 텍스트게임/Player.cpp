@@ -53,14 +53,11 @@ int Player::Update()
 	auto otherObj = GetComponet<BoxCollider>()->OnTriggerEnter(L"Enemy");
 	if (otherObj != nullptr)
 	{
-		SetIsAttacked(true);
 		std::shared_ptr<Enemy> E = std::dynamic_pointer_cast<Enemy>(otherObj);
 		SetHp(E->GetStatus().attackDamage);
 		Knockback(E->GetPos());
 		printf("플레이어 공격 당함");
 	}
-	else
-		SetIsAttacked(false);
 
 	keyLock.lock();
 
@@ -106,6 +103,7 @@ int Player::Update()
 int Player::LateUpdate()
 {
 	ScrollMgr::GetInstance()->ScrollMap(m_pos);
+
 	return 1;
 }
 
