@@ -78,9 +78,10 @@ int GameObject::GetHeight()
 	return m_height;
 }
 
+
 POS GameObject::GetCollisionObjPos()
 {
-	return m_pos;
+	return m_collisionObjPos;
 }
 
 void GameObject::SetCollisionObjPos(POS pos)

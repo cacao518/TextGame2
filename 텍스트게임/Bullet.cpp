@@ -4,38 +4,75 @@
 #include "Enemy.h"
 #include "GameMgr.h"
 #include "Boss.h"
-Bullet::Bullet(bool charge, bool dir,float bulletDamage, POS position)
+
+Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir,  POS position)
 	:GameObject(position)
 {
 	m_chargeShoot = charge;
-	m_bulletDamage = bulletDamage;
 	printf("ÃÑ»ý¼ºµÊ");
 
-	wchar_t bulletImg[4]= { L'-', L'-', L' ', L' ' };
-	m_width = 2;
-	m_height = 1;
-
-	if (m_chargeShoot) {
-		bulletImg[0] = { L'=' }; //{ L'=', L'=', L')', L')' };
-		bulletImg[1] = { L'=' };
-		bulletImg[2] = { L')' };
-		bulletImg[3] = { L')' };
+	wchar_t Default[2]= { L'-', L'-'};
+	wchar_t ChargeDefault[4] = { L'=', L'=',L')',L')' };
+	wchar_t MachineGun[2] = { L'=', L'=' };
+	wchar_t ChargeMachineGun[5] = { L'=', L'=',L')',L')',L')' };
+	
+	if (BulletType == HANDGUN)
+	{
+		m_bulletDamage = 3;
+		m_width = 2;
+		m_height = 1;
+		m_sprite = new wchar_t[m_width * m_height];
+		memcpy(m_sprite, Default, sizeof(wchar_t) * m_width * m_height);
+		m_color = 12;
+	}
+	if (BulletType == HANDGUN && m_chargeShoot)
+	{
+		m_bulletDamage = 5;
 		m_width = 4;
 		m_height = 1;
+		m_sprite = new wchar_t[m_width * m_height];
+		memcpy(m_sprite, ChargeDefault, sizeof(wchar_t) * m_width * m_height);
+		m_color = 12;
 	}
-
-	m_sprite = new wchar_t[m_width * m_height];
-	memcpy(m_sprite, bulletImg, sizeof(wchar_t) * m_width * m_height);
-	
-
-
-	
-
-
+	if (BulletType == TANKGUN)
+	{
+		m_bulletDamage = 4;
+		m_width = 2;
+		m_height = 1;
+		m_sprite = new wchar_t[m_width * m_height];
+		memcpy(m_sprite, MachineGun, sizeof(wchar_t) * m_width * m_height);
+		m_color = LIGHTCYAN;
+	}
+	if (BulletType == TANKGUN && m_chargeShoot)
+	{
+		m_bulletDamage = 6;
+		m_width = 5;
+		m_height = 1;
+		m_sprite = new wchar_t[m_width * m_height];
+		memcpy(m_sprite, ChargeMachineGun, sizeof(wchar_t) * m_width * m_height);
+		m_color = LIGHTCYAN;
+	}
+	if (BulletType == HEABYGUN)
+	{
+		m_bulletDamage = 4;
+		m_width = 2;
+		m_height = 1;
+		m_sprite = new wchar_t[m_width * m_height];
+		memcpy(m_sprite, MachineGun, sizeof(wchar_t) * m_width * m_height);
+		m_color = YELLOW;
+	}
+	if (BulletType == HEABYGUN && m_chargeShoot)
+	{
+		m_bulletDamage = 6;
+		m_width = 5;
+		m_height = 1;
+		m_sprite = new wchar_t[m_width * m_height];
+		memcpy(m_sprite, ChargeMachineGun, sizeof(wchar_t) * m_width * m_height);
+		m_color = YELLOW;
+	}
 	m_dir = dir;
 	m_name = L"Bullet";
-
-	m_color = 12;
+	
 }
 
 Bullet::~Bullet()

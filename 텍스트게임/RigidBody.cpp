@@ -34,7 +34,7 @@ void RigidBody::Update()
 
 	else if (gravitySpeed <= 0)// 충돌한 벽에 서있기
 	{
-		parentobj->SetPos(POS(parentobj->GetPos().x, parentobj->GetCollisionObjPos().y));
+		parentobj->SetPos(POS(parentobj->GetPos().x, parentobj->GetPos().y)); // parentobj->GetCollisionObjPos().y - parentobj->GetHeight()
 		//m_jumpCount = 0;
 		gravitySpeed = 0;
 	}

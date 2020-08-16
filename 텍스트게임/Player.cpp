@@ -4,6 +4,7 @@
 #include "RigidBody.h"
 #include "BoxCollider.h"
 #include "Enemy.h"
+#include "Vehicle.h"
 #include "ChargeParticle1.h"
 
 Player::Player(POS position)
@@ -43,10 +44,11 @@ Player::Player(POS position)
 	wchar_t attackImg[6] = { '0', ' ', '[', 'r', 'L', ' ' };
 	memcpy(m_attackImg, attackImg, sizeof(wchar_t)*m_width*m_height);
 
+	wchar_t tankImg[14] = { L' ',L' ',L' ',L'm',L'=',L'=',L'>',L'(',L'(',L'(',L'-',L')',L')',L')' };
+	memcpy(m_tankImg, tankImg, sizeof(wchar_t) * 7 * 2);
+
 	m_sprite = new wchar_t[m_width * m_height];
 	memcpy(m_sprite, rightImg, sizeof(wchar_t) * m_width * m_height);
-
-	
 }
 
 Player::~Player()
@@ -69,28 +71,27 @@ int Player::Update()
 
 
 	//isDone = keyPress[27];
-	if (keyPress[72] && (GetIsLand() || m_jumpCount < 2)) {
-		GetComponent<RigidBody>()->AddForce(0, m_jumpPower);
+	if (keyPress['s'] && (GetIsLand() || m_jumpCount < 2)) {
+		GetComponet<RigidBody>()->AddForce(0, m_jumpPower);
 		m_jumpCount++;
 	}
-
+	/*
 	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
 
 	{
 
 		printf("아래키누름");
 
-	}
-	if (keyPress[80]) {
-		if(!m_charging)
-		m_attack = true;
+	}*/
+	if (keyPress['a']) {
+		if (!m_charging)
+			Attack(false);
 		else
-		m_colorCount = -100;
+			m_colorCount = -100;
 	}
-	
-
 	if (keyPress[75]) {
-		m_dir = false;
+		if(!m_isRide)
+			m_dir = false;
 		m_pos.x -= Timer::DeltaTime() * 10;
 	}
 	if (keyPress[77]) {
@@ -98,14 +99,28 @@ int Player::Update()
 		m_pos.x += Timer::DeltaTime() * 10;
 	}
 
-	/*if (keyPress[13]) {
+	if (keyPress['d']) {
 		m_charging = true; 
+	}
+	if (keyPress[VK_SPACE] && m_isRide) // 슬러그 내리기
+	{
+		GetComponet<RigidBody>()->AddForce(0, m_jumpPower);
+		m_isRide = false;
+		m_color = 8;
+		m_invincibility = true;
+		m_isAttacked = true;
+		m_width = 2;
+		m_height = 3;
+		memcpy(m_sprite, m_rightImg, sizeof(wchar_t) * m_width * m_height);
 
-		
-		
-		
-	}*/
+		std::shared_ptr<Vehicle> tank = std::make_shared<Vehicle>(POS(m_pos.x-2, m_pos.y-1));
+		objectMgr->InsertObject(VEHICLE, std::dynamic_pointer_cast<GameObject>(tank));
 
+		RigidBody* rb4 = new RigidBody(std::dynamic_pointer_cast<GameObject>(tank));
+		tank->AddComponent(rb4);
+		BoxCollider* bc4 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(tank));
+		tank->AddComponent(bc4);
+	}
 
 	//std::shared_ptr<ChargeParticle1>particle = std::make_shared<ChargeParticle1>(POS(m_pos.x, m_pos.y));
 	//objectMgr->InsertObject(PARTICLE, std::dynamic_pointer_cast<GameObject>(particle));
@@ -113,19 +128,14 @@ int Player::Update()
 	if (m_isAttacked) {
 		m_timer += Timer::DeltaTime();
 		//무적 종료 , 색 복귀, 타이머 초기화, 반복문종료
-		if (m_timer > 5) {
+		if (m_timer > 2) {
 			if (!m_charging) m_invincibility = false; m_color = 9;  m_timer = 0; m_isAttacked = false;
 		}
-
 	}
-
 	//차징샷
 	if (m_charging)
 	{
-		
-		
 		//particle->SetUpdatePos(m_pos.x, m_pos.y, m_color);
-		
 		m_colorCount += Timer::DeltaTime();
 		if ((int)m_colorCount % 2==0)
 		{
@@ -136,8 +146,8 @@ int Player::Update()
 
 		//차징샷발사 , 색 복귀, 타이머 초기화, 반복문종료
 		if (m_colorCount <0) {
-			objectMgr->InsertObject(BULLET, std::dynamic_pointer_cast<GameObject>(std::make_shared<Bullet>(true, m_dir, m_Status.attackDamage+5, POS(m_pos.x, m_pos.y + 1))));
-		    m_color = 9;  m_colorCount = 0;  m_charging = false;
+			Attack(true);
+			m_color = 9;  m_colorCount = 0;  m_charging = false;
 		//	particle->SetIsLife(false);
 		}
 	}
@@ -150,25 +160,19 @@ int Player::Update()
 	keyPress.reset();
 	keyLock.unlock();
 
-	if (m_attack)
-	{
-		m_attack = false;
-		//objectMgr->InsertObject(PARTICLE, std::dynamic_pointer_cast<GameObject>(std::make_shared<ChargeParticle1>(m_dir, m_Status.attackDamage, POS(m_pos.x, m_pos.y + 1))));
-		
-		//objectMgr->InsertObject(BULLET, std::dynamic_pointer_cast<GameObject>(std::make_shared<Bullet>(false,m_dir,m_Status.attackDamage ,POS(m_pos.x, m_pos.y + 1))));
-		
-		std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(false, m_dir, m_Status.attackDamage, POS(m_pos.x, m_pos.y + 1));
-		objectMgr->InsertObject(BULLET, std::dynamic_pointer_cast<GameObject>(bullet));
-		
-		BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(bullet));
-		bullet->AddComponent(bc);
-		bc->SetIsTrigger(true);
-
-	}
 	if (m_dir)
 		memcpy(m_sprite, m_rightImg, sizeof(wchar_t) * m_width * m_height);
 	else
 		memcpy(m_sprite, m_leftImg, sizeof(wchar_t) * m_width * m_height);
+
+	if (m_isRide) // 슬러그 탔을때 이미지 변화
+	{
+		m_width = 7;
+		m_height = 2;
+		m_dir = true;
+		m_color = CYAN;
+		memcpy(m_sprite, m_tankImg, sizeof(wchar_t) * m_width * m_height);
+	}
 
 	return 1;
 }
@@ -176,6 +180,7 @@ int Player::Update()
 int Player::LateUpdate()
 {
 	ScrollMgr::GetInstance()->ScrollMap(m_pos);
+
 	return 1;
 }
 
@@ -222,9 +227,47 @@ void Player::GetDamage(float damage, POS enemyPos)
 	}
 }
 
+void Player::SetIsRide(int flag)
+{
+	m_isRide = flag;
+}
+
+int Player::GetIsRide()
+{
+	return m_isRide;
+}
 
 
- 
+
+//true면 차지샷
+void Player::Attack(bool charge)
+{
+	int x, y;
+	x = m_pos.x;
+	y = m_pos.y + 1;
+	if (m_isRide) // 슬러그는 앞면만 바라보게 한다.
+	{
+		x = m_pos.x + 6;
+		y = m_pos.y;
+	}
+	std::shared_ptr<Bullet> bullet = nullptr;
+	
+	if(!charge)
+		bullet=std::make_shared<Bullet>(false, false, Bullet::HANDGUN, m_dir, POS(x, y));
+	else
+		bullet = std::make_shared<Bullet>(false, true, Bullet::HANDGUN, m_dir, POS(x, y));
+	
+	if (!charge && m_isRide)
+		bullet = std::make_shared<Bullet>(false, false, Bullet::TANKGUN, m_dir, POS(x, y));
+	else if(m_isRide)
+		bullet = std::make_shared<Bullet>(false, true, Bullet::TANKGUN, m_dir, POS(x, y));
+
+	objectMgr->InsertObject(BULLET, std::dynamic_pointer_cast<GameObject>(bullet));
+	BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(bullet));
+	bullet->AddComponent(bc);
+	bc->SetIsTrigger(true);
+
+ }
 
 
 

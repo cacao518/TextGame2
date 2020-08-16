@@ -32,7 +32,6 @@ std::shared_ptr<GameObject> BoxCollider::OnTriggerEnter(wchar_t* otherObjName)
 std::shared_ptr<GameObject> BoxCollider::TriggerCheck(wchar_t* otherObjName)
 {
     int Type = 0;
-    bool comp = true;
     if (!wcscmp(otherObjName, L"Player")) Type = PLAYER;
     else if (!wcscmp(otherObjName, L"Enemy")) Type = ENEMY;
     else if (!wcscmp(otherObjName, L"Bullet")) Type = BULLET;
@@ -44,33 +43,31 @@ std::shared_ptr<GameObject> BoxCollider::TriggerCheck(wchar_t* otherObjName)
         if (!parentobj)
             break;
 
-        if (parentobj->GetPos().x< otherObj->GetPos().x + otherObj->GetWidth() &&
-            parentobj->GetPos().x + parentobj->GetWidth() > otherObj->GetPos().x &&
-            parentobj->GetPos().y< otherObj->GetPos().y + otherObj->GetHeight() &&
-            parentobj->GetPos().y + parentobj->GetHeight() >otherObj->GetPos().y)
-        {
-            if (otherObj->GetComponent<BoxCollider>() != nullptr)
-                if (isTrigger || otherObj->GetComponent<BoxCollider>()->GetIsTrigger()) // 두 객체중 한 객체라도 isTrigger가 on 이면 충돌 가능.
-                    return otherObj;
-        }
-
-
-    }
-    return nullptr;
+		if (parentobj->GetPos().x< otherObj->GetPos().x + otherObj->GetWidth() &&
+			parentobj->GetPos().x + parentobj->GetWidth() > otherObj->GetPos().x &&
+			parentobj->GetPos().y< otherObj->GetPos().y + otherObj->GetHeight() &&
+			parentobj->GetPos().y + parentobj->GetHeight() >otherObj->GetPos().y)
+            {
+                if (otherObj->GetComponet<BoxCollider>() != nullptr)
+                    if (isTrigger || otherObj->GetComponet<BoxCollider>()->GetIsTrigger()) // 두 객체중 한 객체라도 isTrigger가 on 이면 충돌 가능.
+                        return otherObj;
+            }
+	}
+	return nullptr;
 }
 int BoxCollider::TerrainCheck(std::shared_ptr<GameObject>& obj1, std::shared_ptr<GameObject>& obj2)
 {
-    if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x &&
-        obj1->GetPos().x <= obj2->GetPos().x && !(obj1->GetIsLand()))
-    {
-        if (obj1->GetPos().y + obj1->GetHeight() - 1 >= obj2->GetPos().y - 1 && obj1->GetPos().y <= obj2->GetPos().y - 1)
-        {
-            obj1->SetIsLand(true);
-            obj1->SetCollisionObjPos(obj2->GetPos());
-            return 1;
-        }
-    }
-    return 0;
+	if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x &&
+		obj1->GetPos().x <= obj2->GetPos().x && !(obj1->GetIsLand()))
+	{
+		if (obj1->GetPos().y + obj1->GetHeight() - 1 >= obj2->GetPos().y - 1 && obj1->GetPos().y <= obj2->GetPos().y - 1)
+		{
+			obj1->SetIsLand(true);
+			obj1->SetCollisionObjPos(obj2->GetPos());
+			return 1;
+		}
+	}
+	return 0;
 }
 
 

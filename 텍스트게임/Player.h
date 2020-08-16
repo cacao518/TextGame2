@@ -16,16 +16,18 @@ public:
 	void Knockback(POS otherObjPos);
 
 	void GetDamage(float damage, POS enemyPos);
+	void SetIsRide(int flag);
+	int GetIsRide();
+
 private:
 	std::bitset<0xff> keyPress;
 	std::mutex keyLock;
 	std::thread KeyUpdate;
 
-	
+	void Attack(bool charge);
 	ObjectMgr* objectMgr = ObjectMgr::GetInstance();
 	wchar_t bulletImg[2] = { '0','0' };
 	bool m_dir = true; //오른쪽이 트루임
-	bool m_attack = false;
 	float m_attackCount = 0;
 	float m_colorCount = 0;
 	bool m_charging = false;
@@ -34,8 +36,8 @@ private:
 	bool m_invincibility = false;
 	float m_timer = 0.f;
 	
-
-	wchar_t m_leftImg[6], m_rightImg[6], m_attackImg[6];
+	bool m_isRide = false;
+	wchar_t m_leftImg[6], m_rightImg[6], m_attackImg[6], m_tankImg[14];
 	
 };
 

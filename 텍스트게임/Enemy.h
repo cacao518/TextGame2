@@ -15,10 +15,8 @@ public:
 	const STATUS& GetStatus()const { return m_Status; }
 
 private:
-
 	ObjectMgr* objectMgr = ObjectMgr::GetInstance();
-
-	bool m_dir = true; //오른쪽이 트루임
+	
 	//bool isGround = true;
 	float m_MoveCount = 0;
 	float m_timer = 0.f;

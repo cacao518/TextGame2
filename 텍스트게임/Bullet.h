@@ -3,7 +3,9 @@
 class Bullet :public GameObject
 {
 public:
-	Bullet(bool charge, bool dir,float bulletDamage,POS position);
+	enum OBJTYPE { HANDGUN, TANKGUN, HEABYGUN, SHOTGUN };
+
+	Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position);
 	~Bullet();
 
 	// GameObject을(를) 통해 상속됨
@@ -12,7 +14,7 @@ public:
 	
 	const float GetBulletDamage()const { return m_bulletDamage; }
 	float m_bulletDamage;
-	bool m_dir;
+	
 
 	
 private:
