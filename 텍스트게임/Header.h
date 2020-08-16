@@ -1,4 +1,6 @@
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <conio.h>
 #include <stdio.h>
 #include <cstdio>
@@ -19,7 +21,8 @@
 #include <locale>
 #include <string>
 
-enum OBJTYPE { BACKGROUND, TERRAIN, ITEMBOX, VEHICLE, PLAYER, ENEMY, BULLET, PARTICLE, UI, TYPE_END };
+
+enum OBJTYPE { BACKGROUND, TERRAIN, ITEMBOX, VEHICLE, PLAYER, ENEMY, BOSS, BULLET, PARTICLE, UI, TYPE_END };
 
 #define BLACK 0 
 #define BLUE 1 

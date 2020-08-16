@@ -40,7 +40,7 @@ public:
 	}
 
 	template<typename T>
-	T* GetComponet()
+	T* GetComponent()
 	{
 		auto typeName = typeid(T).name();
 		if (componets.find(typeName) != componets.end())

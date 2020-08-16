@@ -4,6 +4,8 @@ class Player;
 class PlayerUI;
 class Enemy;
 class EnemyUI;
+class Boss;
+class BossUI;
 class GameMgr
 {
 public:
@@ -13,6 +15,9 @@ public:
 	HRESULT SetEnemyUI(std::shared_ptr<EnemyUI> enemyUI);
 	HRESULT SetEnemy(std::shared_ptr<Enemy> enemy);
 
+	HRESULT SetBossUI(std::shared_ptr<BossUI> bossUI);
+	HRESULT SetBoss(std::shared_ptr<Boss> boss);
+	
 	void Update();
 private:
 	explicit GameMgr();
@@ -40,6 +45,7 @@ private:
 private:
 	std::weak_ptr<PlayerUI> m_playerUI;
 	std::weak_ptr<EnemyUI> m_enemyUI;
+	std::weak_ptr<BossUI> m_bossUI;
 
 };
 

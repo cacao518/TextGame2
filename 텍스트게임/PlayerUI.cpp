@@ -15,7 +15,7 @@ PlayerUI::PlayerUI()
 	m_sprite = new wchar_t[m_width * m_height];
 	memcpy(m_sprite, m_BaseImg, sizeof(wchar_t) * m_width * m_height);
 
-	m_pos = POS(2, 1);
+	m_pos = POS(2, 23);
 	m_name = L"PlayerUI";
 
 	m_objectName = nullptr;
@@ -54,9 +54,9 @@ int PlayerUI::LateUpdate()
 void PlayerUI::Render()
 {
 	if (nullptr != m_objectName)
-		ObjectMgr::GetInstance()->Draw(m_objectName, (int)wcslen(m_objectName), 1, (int)m_pos.x, (int)m_pos.y - 1,7);
+		ObjectMgr::GetInstance()->Draw(m_objectName, (int)wcslen(m_objectName), 1, (int)m_pos.x, (int)m_pos.y - 1,LIGHTBLUE);
 	if (nullptr != m_sprite)
-		ObjectMgr::GetInstance()->Draw(m_sprite, m_width, m_height, (int)m_pos.x, (int)m_pos.y,7);
+		ObjectMgr::GetInstance()->Draw(m_sprite, m_width, m_height, (int)m_pos.x, (int)m_pos.y,BLUE);
 }
 
 void PlayerUI::UpdateHpBar()

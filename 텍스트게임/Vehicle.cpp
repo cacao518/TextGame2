@@ -20,7 +20,7 @@ Vehicle::~Vehicle()
 
 int Vehicle::Update()
 {
-	auto p = GetComponet<BoxCollider>()->OnTriggerEnter(L"Player");
+	auto p = GetComponent<BoxCollider>()->OnTriggerEnter(L"Player");
 	if (!m_isRide && p != nullptr)
 	{
 		if (!p->GetIsAttacked())

@@ -12,7 +12,11 @@ public:
 	virtual int Update() override;
 	virtual int LateUpdate() override;
 	
+	const float GetBulletDamage()const { return m_bulletDamage; }
+	float m_bulletDamage;
+	
 
+	
 private:
 	float m_timer = 0.f;
 	float m_damage;

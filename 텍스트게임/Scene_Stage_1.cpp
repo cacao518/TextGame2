@@ -9,6 +9,8 @@
 #include "RigidBody.h"
 #include "ItemBox.h"
 #include "Bullet.h"
+#include "BossTank.h"
+#include "BossUI.h"
 #include "Vehicle.h"
 Scene_Stage_1::Scene_Stage_1()
 {
@@ -36,6 +38,10 @@ Scene_Stage_1::Scene_Stage_1()
 		std::shared_ptr<EnemyUI> enemyUI = std::make_shared<EnemyUI>();
 		m_gameMgr->SetEnemyUI(enemyUI);
 		m_objectMgr->InsertObject(UI, std::dynamic_pointer_cast<GameObject>(enemyUI));
+
+		std::shared_ptr<BossUI> bossUI = std::make_shared<BossUI>();
+		m_gameMgr->SetBossUI(bossUI);
+		m_objectMgr->InsertObject(UI, std::dynamic_pointer_cast<GameObject>(bossUI));
 	}
 
 	x = 8;
@@ -81,6 +87,16 @@ Scene_Stage_1::Scene_Stage_1()
 				item->AddComponent(rb3);
 				BoxCollider* bc3 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(item));
 				item->AddComponent(bc3);
+			}
+			if (map[j][i] == 9)
+			{
+				std::shared_ptr<BossTank> boss = std::make_shared<BossTank>(POS(j, i));
+				m_objectMgr->InsertObject(BOSS, std::dynamic_pointer_cast<GameObject>(boss));
+
+				RigidBody* rb = new RigidBody(std::dynamic_pointer_cast<GameObject>(boss));
+				boss->AddComponent(rb);
+				BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(boss));
+				boss->AddComponent(bc);
 			}
 		}
 	}

@@ -1,8 +1,8 @@
-#include "EnemyUI.h"
-#include "Enemy.h"
+#include "BossUI.h"
+#include "Boss.h"
 #include "Timer.h"
-EnemyUI::EnemyUI()
-	:BaseUI(), m_enemyStatus(STATUS(0.f, 0.f, 0.f)),m_expireTime(5.f), m_activeTimer(0.f)
+BossUI::BossUI()
+	:BaseUI(), m_bossStatus(STATUS(0.f, 0.f, 0.f)), m_expireTime(5.f),m_activeTimer(0.f)
 {
 	wchar_t baseImg[36] = {
 						 L'旨' ,L'天' ,L'天' ,L'天' ,L'天' ,L'天' ,L'天' ,L'天' ,L'天' ,L'天' ,L'天' ,L'旬',
@@ -17,25 +17,26 @@ EnemyUI::EnemyUI()
 	memcpy(m_sprite, m_BaseImg, sizeof(wchar_t) * m_width * m_height);
 
 	m_pos = POS(20, 23);
-	m_name = L"EnemyUI";
+	m_name = L"BossUI";
 
 	m_objectName = nullptr;
+	m_color = MAGENTA;
 }
 
-EnemyUI::~EnemyUI()
+BossUI::~BossUI()
 {
 }
 
-void EnemyUI::SetEnemy(std::shared_ptr<Enemy> enemy)
+void BossUI::SetBoss(std::shared_ptr<Boss> boss)
 {
-	std::shared_ptr<Enemy> curEnemy = m_enemy.lock();
-	if(nullptr == curEnemy || curEnemy.get() != enemy.get())
-		m_enemy = enemy;
-	
+	std::shared_ptr<Boss> curBoss = m_boss.lock();
+	if (nullptr == curBoss || curBoss.get() != boss.get())
+		m_boss = boss;
+
 	m_activeTimer = 0.f;
 }
 
-void EnemyUI::UpdateEnemyStatus()
+void BossUI::UpdateBossStatus()
 {
 	if (m_activeTimer >= m_expireTime)
 	{
@@ -43,40 +44,40 @@ void EnemyUI::UpdateEnemyStatus()
 	}
 	m_activeTimer += Timer::DeltaTime();
 
-	std::shared_ptr<Enemy> enemy = m_enemy.lock();
-	if (!enemy)
+	std::shared_ptr<Boss> boss = m_boss.lock();
+	if (!boss)
 		return;
-	m_enemyStatus = enemy->GetStatus();
-	m_objectName = enemy->GetName();
+	m_bossStatus = boss->GetStatus();
+	m_objectName = boss->GetName();
 }
 
-int EnemyUI::Update()
+int BossUI::Update()
 {
 	return 0;
 }
 
-int EnemyUI::LateUpdate()
+int BossUI::LateUpdate()
 {
 	UpdateHpBar();
 
 	return 0;
 }
 
-void EnemyUI::Render()
+void BossUI::Render()
 {
-	if (m_activeTimer >= m_expireTime||m_enemy.expired())
+	if (m_activeTimer >= m_expireTime || m_boss.expired())
 		return;
 
 	if (nullptr != m_objectName)
-		ObjectMgr::GetInstance()->Draw(m_objectName, (int)wcslen(m_objectName), 1, (int)m_pos.x+10, (int)m_pos.y - 1, LIGHTCYAN);
+		ObjectMgr::GetInstance()->Draw(m_objectName, (int)wcslen(m_objectName), 1, (int)m_pos.x + 10, (int)m_pos.y - 1, LIGHTMAGENTA);
 	if (nullptr != m_sprite)
-		ObjectMgr::GetInstance()->Draw(m_sprite, m_width, m_height, (int)m_pos.x, (int)m_pos.y, CYAN);
+		ObjectMgr::GetInstance()->Draw(m_sprite, m_width, m_height, (int)m_pos.x, (int)m_pos.y, m_color);
 }
 
-void EnemyUI::UpdateHpBar()
+void BossUI::UpdateHpBar()
 {
 	memcpy(m_sprite, m_BaseImg, sizeof(wchar_t) * m_width * m_height);
-	float hpPercent = (m_enemyStatus.hp / m_enemyStatus.maxHp) * 100.f;
+	float hpPercent = (m_bossStatus.hp / m_bossStatus.maxHp) * 100.f;
 	int hpGauge = (int)(hpPercent / 10.f);
 
 	for (int i = 0; i < hpGauge; ++i)

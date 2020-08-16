@@ -17,6 +17,7 @@ public:
 	STATUS GetStatus();
 	void Knockback(POS otherObjPos);
 
+	void GetDamage(float damage, POS enemyPos);
 	void SetIsRide(int flag);
 	int GetIsRide();
 
