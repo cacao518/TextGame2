@@ -84,6 +84,14 @@ int Player::Update()
 		GetComponet<RigidBody>()->AddForce(0, m_jumpPower);
 		m_jumpCount++;
 	}
+
+	//if (GetAsyncKeyState(VK_DOWN) & 0x0001)
+
+	//{
+
+		//printf("아래키누름");
+
+	//}
 	if (keyPress[80]) {
 		if(!m_charging)
 		m_attack = true;
