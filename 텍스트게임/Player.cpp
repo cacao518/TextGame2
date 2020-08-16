@@ -218,9 +218,9 @@ STATUS Player::GetStatus()
 void Player::Knockback(POS otherObjPos)
 {
 	if (otherObjPos.x <= m_pos.x)
-		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * 12, Timer::DeltaTime() * 5);
+		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * 12, Timer::DeltaTime() * 15);
 	else
-		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * -12, Timer::DeltaTime() * 5);
+		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * -12, Timer::DeltaTime() * 15);
 }
 
 void Player::GetDamage(float damage, POS enemyPos)

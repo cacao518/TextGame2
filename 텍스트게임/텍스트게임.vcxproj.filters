@@ -281,10 +281,10 @@
     <Text Include="Logo.txt">
       <Filter>리소스 파일</Filter>
     </Text>
-    <Text Include="Boss1_UpPart.txt">
+    <Text Include="Boss1_DownPart.txt">
       <Filter>리소스 파일</Filter>
     </Text>
-    <Text Include="Boss1_DownPart.txt">
+    <Text Include="Boss1_UpPart.txt">
       <Filter>리소스 파일</Filter>
     </Text>
   </ItemGroup>
