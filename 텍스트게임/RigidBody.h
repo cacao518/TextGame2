@@ -6,7 +6,7 @@
 class RigidBody {
 
 private:
-	std::shared_ptr<GameObject> parentObject;
+	std::weak_ptr<GameObject> parentObject;
 
 public:
 	int mass;

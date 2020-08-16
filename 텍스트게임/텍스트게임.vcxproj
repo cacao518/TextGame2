@@ -155,10 +155,15 @@
     <ClCompile Include="EnemyUI.cpp" />
     <ClCompile Include="GameMgr.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="LogoObj.cpp" />
     <ClCompile Include="ObjectMgr.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerUI.cpp" />
     <ClCompile Include="RigidBody.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneMgr.cpp" />
+    <ClCompile Include="Scene_Logo.cpp" />
+    <ClCompile Include="Scene_Stage_1.cpp" />
     <ClCompile Include="ScrollMgr.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -175,10 +180,15 @@
     <ClInclude Include="GameMgr.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Header.h" />
+    <ClInclude Include="LogoObj.h" />
     <ClInclude Include="ObjectMgr.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerUI.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneMgr.h" />
+    <ClInclude Include="Scene_Logo.h" />
+    <ClInclude Include="Scene_Stage_1.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="ScrollMgr.h" />
     <ClInclude Include="Struct.h" />
@@ -190,6 +200,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="BackGround.txt" />
+    <Text Include="Logo.txt" />
     <Text Include="map.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

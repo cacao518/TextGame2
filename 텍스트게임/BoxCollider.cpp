@@ -14,10 +14,14 @@ void BoxCollider::Update()
 {
 	for (auto& object : ObjectMgr::GetInstance()->m_ObjectList[TERRAIN])
 	{
-		if (TerrainCheck(parentObject, object) == 1)
+		std::shared_ptr<GameObject> parentobj = parentObject.lock();
+		if (!parentobj)
 			break;
 
-		parentObject->SetIsLand(false);
+		if (TerrainCheck(parentobj, object) == 1)
+			break;
+
+		parentobj->SetIsLand(false);
 	}
 }
 std::shared_ptr<GameObject> BoxCollider::OnTriggerEnter(wchar_t* otherObjName)
@@ -33,10 +37,13 @@ std::shared_ptr<GameObject> BoxCollider::TriggerCheck(wchar_t* otherObjName)
 
 	for (auto& otherObj : ObjectMgr::GetInstance()->m_ObjectList[Type])
 	{
-		if (parentObject->GetPos().x + parentObject->GetWidth() - 1 >= otherObj->GetPos().x &&
-			parentObject->GetPos().x <= otherObj->GetPos().x &&
-			parentObject->GetPos().y + parentObject->GetHeight() - 1 >= otherObj->GetPos().y &&
-			parentObject->GetPos().y <= otherObj->GetPos().y)
+		std::shared_ptr<GameObject> parentobj = parentObject.lock();
+		if (!parentobj)
+			break;
+		if (parentobj->GetPos().x + parentobj->GetWidth() - 1 >= otherObj->GetPos().x &&
+			parentobj->GetPos().x <= otherObj->GetPos().x &&
+			parentobj->GetPos().y + parentobj->GetHeight() - 1 >= otherObj->GetPos().y &&
+			parentobj->GetPos().y <= otherObj->GetPos().y)
 		{
 			if(otherObj->GetComponet<BoxCollider>() != nullptr)
 				if(isTrigger || otherObj->GetComponet<BoxCollider>()->GetIsTrigger()) // 두 객체중 한 객체라도 isTrigger가 on 이면 충돌 가능.

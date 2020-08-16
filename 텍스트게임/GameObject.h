@@ -32,10 +32,10 @@ public:
 	//float GetGravitiySpeed();
 	//void SetGravitiySpeed(float gs);
 	template<typename T>
-	void AddComponent(T& t)
+	void AddComponent(T* t)
 	{
 		auto typeName = typeid(T).name();
-		componets[typeName] = &t;
+		componets[typeName] = t;
 	}
 
 	template<typename T>

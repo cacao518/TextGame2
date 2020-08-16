@@ -14,14 +14,18 @@ RigidBody::~RigidBody()
 
 void RigidBody::Update()
 {
-	if (parentObject->GetIsLand() == false) // 공중 상태
+	std::shared_ptr<GameObject> parentobj = parentObject.lock();
+	if (!parentobj)
+		return;
+
+	if (parentobj->GetIsLand() == false) // 공중 상태
 	{
 		//parentObject->SetIsLand(false);
-		parentObject->SetCollisionObjPos(POS());
+		parentobj->SetCollisionObjPos(POS());
 	}
 	if (gravitySpeed > 0) // 상승
 	{
-		parentObject->SetPos(POS(parentObject->GetPos().x, parentObject->GetPos().y - Timer::DeltaTime() * 4));
+		parentobj->SetPos(POS(parentobj->GetPos().x, parentobj->GetPos().y - Timer::DeltaTime() * 4));
 		gravitySpeed -= Timer::DeltaTime() * 5.0f;
 	}
 
@@ -29,7 +33,7 @@ void RigidBody::Update()
 	//	parentObject->SetPos(POS(parentObject->GetPos().x, parentObject->GetPos().y + Timer::DeltaTime() * mass));
 	else if (gravitySpeed <= 0)// 충돌한 벽에 서있기
 	{
-		parentObject->SetPos(POS(parentObject->GetPos().x, parentObject->GetCollisionObjPos().y));
+		parentobj->SetPos(POS(parentobj->GetPos().x, parentobj->GetCollisionObjPos().y));
 		//m_jumpCount = 0;
 		gravitySpeed = 0;
 	}
@@ -38,6 +42,9 @@ void RigidBody::Update()
 
 void RigidBody::AddForce(int powerX, int powerY)
 {
-	parentObject->SetPos(POS(parentObject->GetPos().x + powerX, parentObject->GetPos().y));
+	std::shared_ptr<GameObject> parentobj = parentObject.lock();
+	if (!parentobj)
+		return;
+	parentobj->SetPos(POS(parentobj->GetPos().x + powerX, parentobj->GetPos().y));
 	gravitySpeed += powerY;
 }
