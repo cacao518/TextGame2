@@ -3,6 +3,8 @@
 #include "PlayerUI.h"
 #include "Enemy.h"
 #include "EnemyUI.h"
+#include "Boss.h"
+#include "BossUI.h"
 GameMgr* GameMgr::instance = nullptr;
 
 
@@ -36,6 +38,23 @@ HRESULT GameMgr::SetEnemy(std::shared_ptr<Enemy> enemy)
 	return S_OK;
 }
 
+HRESULT GameMgr::SetBossUI(std::shared_ptr<BossUI> bossUI)
+{
+	if (nullptr == bossUI)
+		return E_FAIL;
+	m_bossUI = bossUI;
+	return S_OK;
+}
+
+HRESULT GameMgr::SetBoss(std::shared_ptr<Boss> boss)
+{
+	std::shared_ptr<BossUI> bossUI = m_bossUI.lock();
+	if (nullptr == bossUI)
+		return E_FAIL;
+	bossUI->SetBoss(boss);
+	return S_OK;
+}
+
 void GameMgr::Update()
 {
 	{
@@ -52,6 +71,13 @@ void GameMgr::Update()
 			return;
 
 		enemyUI->UpdateEnemyStatus();
+	}
+	{
+		std::shared_ptr<BossUI> bossUI = m_bossUI.lock();
+		if (!bossUI)
+			return;
+
+		bossUI->UpdateBossStatus();
 	}
 }
 

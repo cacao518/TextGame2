@@ -78,6 +78,12 @@
     <Filter Include="Object\04.Boss\BossTank">
       <UniqueIdentifier>{a94ba60b-42bc-4b6e-9755-dda9461f8e79}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\04.Boss\Part">
+      <UniqueIdentifier>{737fa524-4487-4527-846b-9322854afaae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\10.UI\BossUI">
+      <UniqueIdentifier>{97932054-176e-4c91-aa97-76c9b78912b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="텍스트게임.cpp">
@@ -151,6 +157,12 @@
     </ClCompile>
     <ClCompile Include="BossTank.cpp">
       <Filter>Object\04.Boss\BossTank</Filter>
+    </ClCompile>
+    <ClCompile Include="Part.cpp">
+      <Filter>Object\04.Boss\Part</Filter>
+    </ClCompile>
+    <ClCompile Include="BossUI.cpp">
+      <Filter>Object\10.UI\BossUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -232,6 +244,12 @@
     <ClInclude Include="BossTank.h">
       <Filter>Object\04.Boss\BossTank</Filter>
     </ClInclude>
+    <ClInclude Include="Part.h">
+      <Filter>Object\04.Boss\Part</Filter>
+    </ClInclude>
+    <ClInclude Include="BossUI.h">
+      <Filter>Object\10.UI\BossUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="텍스트게임.rc">
@@ -248,7 +266,10 @@
     <Text Include="Logo.txt">
       <Filter>리소스 파일</Filter>
     </Text>
-    <Text Include="Boss1.txt">
+    <Text Include="Boss1_DownPart.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="Boss1_UpPart.txt">
       <Filter>리소스 파일</Filter>
     </Text>
   </ItemGroup>

@@ -15,6 +15,7 @@ public:
 	STATUS GetStatus();
 	void Knockback(POS otherObjPos);
 
+	void GetDamage(float damage, POS enemyPos);
 private:
 	std::bitset<0xff> keyPress;
 	std::mutex keyLock;

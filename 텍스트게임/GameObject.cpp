@@ -16,11 +16,11 @@ GameObject::~GameObject()
 int GameObject::ComponentUpdate()
 {
 
-	if (GetComponet<RigidBody>() != nullptr)
-		GetComponet<RigidBody>()->Update(); 
+	if (GetComponent<RigidBody>() != nullptr)
+		GetComponent<RigidBody>()->Update(); 
 
-	if (GetComponet<BoxCollider>() != nullptr)
-		GetComponet<BoxCollider>()->Update();
+	if (GetComponent<BoxCollider>() != nullptr)
+		GetComponent<BoxCollider>()->Update();
 
 	return 1;
 }

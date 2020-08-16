@@ -12,11 +12,10 @@ public:
 	virtual int LateUpdate() = 0;
 
 	STATUS& GetStatus() { return m_status; }
-	void SetHp(float damage);
-private:
+	void GetDamage(float damage);
+protected:
 
 
-	float m_timer = 0.f;
 	STATUS m_status;
 	
 };

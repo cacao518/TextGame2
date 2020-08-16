@@ -150,6 +150,7 @@
     <ClCompile Include="BaseUI.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossTank.cpp" />
+    <ClCompile Include="BossUI.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="ChargeParticle1.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="LogoObj.cpp" />
     <ClCompile Include="ObjectMgr.cpp" />
+    <ClCompile Include="Part.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerUI.cpp" />
     <ClCompile Include="RigidBody.cpp" />
@@ -176,6 +178,7 @@
     <ClInclude Include="BaseUI.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossTank.h" />
+    <ClInclude Include="BossUI.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="ChargeParticle1.h" />
@@ -186,6 +189,7 @@
     <ClInclude Include="Header.h" />
     <ClInclude Include="LogoObj.h" />
     <ClInclude Include="ObjectMgr.h" />
+    <ClInclude Include="Part.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerUI.h" />
     <ClInclude Include="resource.h" />
@@ -204,7 +208,8 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="BackGround.txt" />
-    <Text Include="Boss1.txt" />
+    <Text Include="Boss1_DownPart.txt" />
+    <Text Include="Boss1_UpPart.txt" />
     <Text Include="Logo.txt" />
     <Text Include="map.txt" />
   </ItemGroup>

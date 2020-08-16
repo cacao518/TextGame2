@@ -56,22 +56,11 @@ Player::~Player()
 
 int Player::Update()
 {
-	auto otherObj = GetComponet<BoxCollider>()->OnTriggerEnter(L"Enemy");
-	if (otherObj != nullptr && !m_invincibility)
+	auto otherObj = GetComponent<BoxCollider>()->OnTriggerEnter(L"Enemy");
+	if (otherObj != nullptr)
 	{
-		//색변하고 무적
-		m_color = 8;
-		m_invincibility = true;
-		//차징끊김
-		m_charging = false;
-		m_colorCount = 0;
-		//particle->SetIsLife(false);
-
-		SetIsAttacked(true);
 		std::shared_ptr<Enemy> E = std::dynamic_pointer_cast<Enemy>(otherObj);
-		SetHp(E->GetStatus().attackDamage);
-		Knockback(E->GetPos());
-		printf("플레이어 공격 당함");
+		GetDamage(E->GetStatus().attackDamage, E->GetPos());
 	}
 	//else
 		//SetIsAttacked(false);
@@ -81,7 +70,7 @@ int Player::Update()
 
 	//isDone = keyPress[27];
 	if (keyPress[72] && (GetIsLand() || m_jumpCount < 2)) {
-		GetComponet<RigidBody>()->AddForce(0, m_jumpPower);
+		GetComponent<RigidBody>()->AddForce(0, m_jumpPower);
 		m_jumpCount++;
 	}
 
@@ -109,13 +98,13 @@ int Player::Update()
 		m_pos.x += Timer::DeltaTime() * 10;
 	}
 
-	if (keyPress[13]) {
+	/*if (keyPress[13]) {
 		m_charging = true; 
 
 		
 		
 		
-	}
+	}*/
 
 
 	//std::shared_ptr<ChargeParticle1>particle = std::make_shared<ChargeParticle1>(POS(m_pos.x, m_pos.y));
@@ -155,7 +144,7 @@ int Player::Update()
 	if (keyPress[VK_ESCAPE])
 		ObjectMgr::GetInstance()->done = true;
 
-	if (GetIsLand() && GetComponet<RigidBody>()->gravitySpeed <= 0)
+	if (GetIsLand() && GetComponent<RigidBody>()->gravitySpeed <= 0)
 		m_jumpCount = 0;
 
 	keyPress.reset();
@@ -208,9 +197,29 @@ STATUS Player::GetStatus()
 void Player::Knockback(POS otherObjPos)
 {
 	if (m_dir)
-		GetComponet<RigidBody>()->AddForce(Timer::DeltaTime() * -12, 0);
+		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * -12, 0);
 	else
-		GetComponet<RigidBody>()->AddForce(Timer::DeltaTime() * 12, 0);
+		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * 12, 0);
+}
+
+void Player::GetDamage(float damage, POS enemyPos)
+{
+	if (!m_invincibility)
+	{
+		//색변하고 무적
+		m_color = 8;
+		m_invincibility = true;
+		//차징끊김
+		m_charging = false;
+		m_colorCount = 0;
+		//particle->SetIsLife(false);
+
+		SetIsAttacked(true);
+		
+		SetHp(damage);
+		Knockback(enemyPos);
+		printf("플레이어 공격 당함");
+	}
 }
 
 

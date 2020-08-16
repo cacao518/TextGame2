@@ -1,7 +1,7 @@
 #include "Enemy.h"
 #include "Timer.h"
 #include "Bullet.h"
-
+#include "GameMgr.h"
 
 Enemy::Enemy(POS position)
 	:GameObject(position), m_Status(STATUS(10.f, 10.f, 0.1f))
@@ -59,8 +59,10 @@ int Enemy::LateUpdate()
 
 void Enemy::SetHp(float damage)
 {
+
 	printf("ÀûÃ¼·Â %f ", m_Status.hp);
 	m_Status.hp -= damage;
+
 	if (m_Status.hp <= 0) m_Life = false;
 }
 

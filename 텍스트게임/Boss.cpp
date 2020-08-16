@@ -9,7 +9,9 @@ Boss::~Boss()
 {
 }
 
-void Boss::SetHp(float damage)
+void Boss::GetDamage(float damage)
 {
-
+	m_status.hp -= damage;
+	if (m_status.hp < 0)
+		m_status.hp = 0;
 }
