@@ -28,6 +28,8 @@ ItemBox::~ItemBox()
 
 int ItemBox::Update()
 {
+
+
 	return 1;
 }
 

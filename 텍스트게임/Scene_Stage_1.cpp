@@ -90,7 +90,7 @@ Scene_Stage_1::Scene_Stage_1()
 				enemy->AddComponent(bc);
 			}
 			if (map[j][i] == 8) { // 헤비머신건
-				std::shared_ptr<ItemBox> item = std::make_shared<ItemBox>(0, POS(j, i));
+				std::shared_ptr<ItemBox> item = std::make_shared<ItemBox>(Bullet::HANDGUN, POS(j, i));
 				m_objectMgr->InsertObject(ITEMBOX, std::dynamic_pointer_cast<GameObject>(item));
 
 				RigidBody* rb3 = new RigidBody(std::dynamic_pointer_cast<GameObject>(item));

@@ -8,7 +8,7 @@
 #include "ChargeParticle1.h"
 
 Player::Player(POS position)
-	:GameObject(position),m_Status(STATUS(100.f,100.f,3.f))
+	:m_weaponSpeed(0), m_weaponType(Bullet::HANDGUN), GameObject(position), m_Status(STATUS(100.f,100.f,3.f))
 {
 	KeyUpdate=std::thread([&] {
 		int c;
@@ -218,9 +218,9 @@ STATUS Player::GetStatus()
 void Player::Knockback(POS otherObjPos)
 {
 	if (otherObjPos.x <= m_pos.x)
-		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * 12, Timer::DeltaTime() * 5);
+		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * 12, Timer::DeltaTime() * 15);
 	else
-		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * -12, Timer::DeltaTime() * 5);
+		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * -12, Timer::DeltaTime() * 15);
 }
 
 void Player::GetDamage(float damage, POS enemyPos)
