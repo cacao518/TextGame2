@@ -1,6 +1,7 @@
 #include "Bullet.h"
 #include"Timer.h"
-
+#include"BoxCollider.h"
+#include "Enemy.h"
 Bullet::Bullet(bool charge, bool dir,float bulletDamage, POS position)
 	:GameObject(position)
 {
@@ -41,6 +42,25 @@ Bullet::~Bullet()
 
 int Bullet::Update()
 {
+
+	auto otherObj = GetComponet<BoxCollider>()->OnTriggerEnter(L"Enemy");
+	if (otherObj != nullptr )
+	{
+		//obj2->SetIsAttacked(true);
+		//obj1->SetIsAttacked(true);
+
+		//std::shared_ptr<Enemy> E = std::dynamic_pointer_cast<Enemy>(otherObj);
+		//E->SetHp(m_bulletDamage);
+		//E->Knockback();
+		SetIsLife(false);
+
+	}
+	else {}
+	//else
+	//{
+		//obj1->SetIsAttacked(false);
+		//obj2->SetIsAttacked(false);
+	//}
 
 	if (m_dir)
 		m_pos.x += Timer::DeltaTime() * 10;

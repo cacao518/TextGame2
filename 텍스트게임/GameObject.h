@@ -29,6 +29,7 @@ public:
 	int GetCollisionCount();
 	void AddCollisionCount();
 	void SubCollisionCount();
+	bool m_dir = true; //오른쪽이 트루임
 	//float GetGravitiySpeed();
 	//void SetGravitiySpeed(float gs);
 	template<typename T>
@@ -63,6 +64,7 @@ protected:
 	bool m_isLand = false; // 지형에 서있음
 	POS m_collisionObjPos; // 충돌 당한 오브젝트 pos
 	bool m_Life = true;
+	
 
 	//int m_collisionCount = 0; // 충돌 카운트
 	//float m_gravitySpeed = 0;

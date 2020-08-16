@@ -7,6 +7,7 @@
 #include "BackGround.h"
 #include "BoxCollider.h"
 #include "RigidBody.h"
+#include "Bullet.h"
 Scene_Stage_1::Scene_Stage_1()
 {
 	const int MapWidth = 160;
@@ -26,6 +27,13 @@ Scene_Stage_1::Scene_Stage_1()
 		player->AddComponent(bc);
 		bc->SetIsTrigger(true);
 
+
+	/*	std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(false, true, 5.f, POS(x, y));
+		m_objectMgr->InsertObject(BULLET, std::dynamic_pointer_cast<GameObject>(bullet));
+		BoxCollider* bc9 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(bullet));
+		bullet->AddComponent(bc9);
+		bc9->SetIsTrigger(true);*/
+
 		std::shared_ptr<PlayerUI> playerUI = std::make_shared<PlayerUI>();
 		m_gameMgr->SetPlayerUI(playerUI, player);
 		m_objectMgr->InsertObject(UI, std::dynamic_pointer_cast<GameObject>(playerUI));
@@ -35,7 +43,7 @@ Scene_Stage_1::Scene_Stage_1()
 		m_objectMgr->InsertObject(UI, std::dynamic_pointer_cast<GameObject>(enemyUI));
 	}
 	x += 11;
-	std::shared_ptr<Enemy> enemy = std::make_shared<Enemy>(POS(x, y - 4));
+	std::shared_ptr<Enemy> enemy = std::make_shared<Enemy>(POS(x, y+1 ));
 	m_objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy));
 
 	RigidBody* rb = new RigidBody(std::dynamic_pointer_cast<GameObject>(enemy));
