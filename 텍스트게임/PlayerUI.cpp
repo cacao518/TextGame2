@@ -15,7 +15,7 @@ PlayerUI::PlayerUI()
 	m_sprite = new wchar_t[m_width * m_height];
 	memcpy(m_sprite, m_BaseImg, sizeof(wchar_t) * m_width * m_height);
 
-	m_pos = POS(2, 27);
+	m_pos = POS(2, 1);
 	m_name = L"PlayerUI";
 
 	m_objectName = nullptr;

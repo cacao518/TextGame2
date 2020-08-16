@@ -21,7 +21,7 @@ private:
 
 	ObjectMgr* objectMgr = ObjectMgr::GetInstance();
 	wchar_t bulletImg[2] = { '0','0' };
-	bool m_dir = true; //오른쪽이 트루임
+	
 	bool attack;
 	
 	int m_jumpCount = 0;

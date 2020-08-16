@@ -7,6 +7,8 @@
 #include "BackGround.h"
 #include "BoxCollider.h"
 #include "RigidBody.h"
+#include "ItemBox.h"
+
 Scene_Stage_1::Scene_Stage_1()
 {
 	const int MapWidth = 160;
@@ -51,6 +53,15 @@ Scene_Stage_1::Scene_Stage_1()
 	enemy2->AddComponent(rb2);
 	BoxCollider* bc2 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(enemy2));
 	enemy2->AddComponent(bc2);
+
+	x = 10;
+	std::shared_ptr<ItemBox> item = std::make_shared<ItemBox>(0, POS(x, y - 6));
+	m_objectMgr->InsertObject(ITEMBOX, std::dynamic_pointer_cast<GameObject>(item));
+
+	RigidBody* rb3 = new RigidBody(std::dynamic_pointer_cast<GameObject>(item));
+	item->AddComponent(rb3);
+	BoxCollider* bc3 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(item));
+	item->AddComponent(bc3);
 
 	
 	std::ifstream fp;

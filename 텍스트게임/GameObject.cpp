@@ -73,6 +73,11 @@ int GameObject::GetHeight()
 	return m_height;
 }
 
+bool GameObject::GetIsDir()
+{
+	return m_dir;
+}
+
 POS GameObject::GetCollisionObjPos()
 {
 	return m_collisionObjPos;

@@ -24,9 +24,6 @@
     <Filter Include="Object\01.Enemy">
       <UniqueIdentifier>{0a0c78e7-edbe-4c05-8f0f-bc38d407d865}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\02.Terrain">
-      <UniqueIdentifier>{5ca38bdf-cd32-46ce-a135-7d5e5e819ea7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\03.Bullet">
       <UniqueIdentifier>{7c7174f0-18b5-4b65-b60d-8cda028e0951}</UniqueIdentifier>
     </Filter>
@@ -68,6 +65,12 @@
     </Filter>
     <Filter Include="Component">
       <UniqueIdentifier>{be35d72f-5f52-4a2d-83a5-fa9b572435e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\02.Terrain">
+      <UniqueIdentifier>{5ca38bdf-cd32-46ce-a135-7d5e5e819ea7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\ItemBox">
+      <UniqueIdentifier>{6110516b-db32-4376-9995-1e3d68a17333}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="BoxCollider.cpp">
       <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBox.cpp">
+      <Filter>Object\ItemBox</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +210,9 @@
     </ClInclude>
     <ClInclude Include="BoxCollider.h">
       <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBox.h">
+      <Filter>Object\ItemBox</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

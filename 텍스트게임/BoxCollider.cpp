@@ -40,10 +40,17 @@ std::shared_ptr<GameObject> BoxCollider::TriggerCheck(wchar_t* otherObjName)
 		std::shared_ptr<GameObject> parentobj = parentObject.lock();
 		if (!parentobj)
 			break;
-		if (parentobj->GetPos().x + parentobj->GetWidth() - 1 >= otherObj->GetPos().x &&
-			parentobj->GetPos().x <= otherObj->GetPos().x &&
-			parentobj->GetPos().y + parentobj->GetHeight() - 1 >= otherObj->GetPos().y &&
-			parentobj->GetPos().y <= otherObj->GetPos().y)
+		if ((otherObj->GetPos().y + otherObj->GetHeight() - 1 >= parentobj->GetPos().y &&
+				otherObj->GetPos().y <= parentobj->GetPos().y) &&
+			(
+				(parentobj->GetIsDir() &&
+					parentobj->GetPos().x + parentobj->GetWidth() >= otherObj->GetPos().x &&
+					parentobj->GetPos().x <= otherObj->GetPos().x) ||
+				(!parentobj->GetIsDir() &&
+					otherObj->GetPos().x + otherObj->GetWidth() >= parentobj->GetPos().x &&
+					otherObj->GetPos().x <= parentobj->GetPos().x)
+				)
+			)
 		{
 			if(otherObj->GetComponet<BoxCollider>() != nullptr)
 				if(isTrigger || otherObj->GetComponet<BoxCollider>()->GetIsTrigger()) // 두 객체중 한 객체라도 isTrigger가 on 이면 충돌 가능.
