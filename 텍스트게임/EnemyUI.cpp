@@ -68,7 +68,7 @@ void EnemyUI::Render()
 		return;
 
 	if (nullptr != m_objectName)
-		ObjectMgr::GetInstance()->Draw(m_objectName, (int)wcslen(m_objectName), 1, (int)m_pos.x+10.f, (int)m_pos.y - 1, 7);
+		ObjectMgr::GetInstance()->Draw(m_objectName, (int)wcslen(m_objectName), 1, (int)m_pos.x+10, (int)m_pos.y - 1, 7);
 	if (nullptr != m_sprite)
 		ObjectMgr::GetInstance()->Draw(m_sprite, m_width, m_height, (int)m_pos.x, (int)m_pos.y, 7);
 }

@@ -11,6 +11,9 @@
 #include <memory>
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <string.h>
+#include <cstring>
 #include <Windows.h>
 #include <unordered_map>
 #include <locale>
@@ -34,3 +37,7 @@ enum OBJTYPE { BACKGROUND, TERRAIN, PLAYER, ENEMY, BULLET, UI, TYPE_END };
 #define LIGHTMAGENTA 13 
 #define YELLOW 14 
 #define WHITE 15 
+
+
+extern const int MapWidth;
+extern const int MapHeight;
