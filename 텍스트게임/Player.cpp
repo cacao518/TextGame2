@@ -84,17 +84,17 @@ int Player::Update()
 		GetComponet<RigidBody>()->AddForce(0, m_jumpPower);
 		m_jumpCount++;
 	}
-
+	/*
 	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
 
 	{
 
 		printf("아래키누름");
 
-	}
+	}*/
 	if (keyPress[80]) {
-		if(!m_charging)
-		m_attack = true;
+		if (!m_charging)
+			Attack(false); 
 		else
 		m_colorCount = -100;
 	}
@@ -147,8 +147,8 @@ int Player::Update()
 
 		//차징샷발사 , 색 복귀, 타이머 초기화, 반복문종료
 		if (m_colorCount <0) {
-			objectMgr->InsertObject(BULLET, std::dynamic_pointer_cast<GameObject>(std::make_shared<Bullet>(true, m_dir, m_Status.attackDamage+5, POS(m_pos.x, m_pos.y + 1))));
-		    m_color = 9;  m_colorCount = 0;  m_charging = false;
+			Attack(true);
+			m_color = 9;  m_colorCount = 0;  m_charging = false;
 		//	particle->SetIsLife(false);
 		}
 	}
@@ -161,21 +161,6 @@ int Player::Update()
 	keyPress.reset();
 	keyLock.unlock();
 
-	if (m_attack)
-	{
-		m_attack = false;
-		//objectMgr->InsertObject(PARTICLE, std::dynamic_pointer_cast<GameObject>(std::make_shared<ChargeParticle1>(m_dir, m_Status.attackDamage, POS(m_pos.x, m_pos.y + 1))));
-		
-		//objectMgr->InsertObject(BULLET, std::dynamic_pointer_cast<GameObject>(std::make_shared<Bullet>(false,m_dir,m_Status.attackDamage ,POS(m_pos.x, m_pos.y + 1))));
-		
-		std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(false, m_dir, m_Status.attackDamage, POS(m_pos.x, m_pos.y + 1));
-		objectMgr->InsertObject(BULLET, std::dynamic_pointer_cast<GameObject>(bullet));
-		
-		BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(bullet));
-		bullet->AddComponent(bc);
-		bc->SetIsTrigger(true);
-
-	}
 	if (m_dir)
 		memcpy(m_sprite, m_rightImg, sizeof(wchar_t) * m_width * m_height);
 	else
@@ -215,7 +200,25 @@ void Player::Knockback(POS otherObjPos)
 
 
 
- 
+//true면 차지샷
+void Player::Attack(bool charge)
+{
+
+	std::shared_ptr<Bullet> bullet = nullptr;
+	
+	if(!charge)
+		bullet=std::make_shared<Bullet>(false, m_dir, m_Status.attackDamage, POS(m_pos.x, m_pos.y + 1));
+	else
+		bullet = std::make_shared<Bullet>(true, m_dir, m_Status.attackDamage + 5, POS(m_pos.x, m_pos.y + 1));
+	
+	objectMgr->InsertObject(BULLET, std::dynamic_pointer_cast<GameObject>(bullet));
+	BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(bullet));
+	bullet->AddComponent(bc);
+	bc->SetIsTrigger(true);
+
+
+
+ }
 
 
 

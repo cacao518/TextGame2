@@ -49,9 +49,10 @@ int Bullet::Update()
 		//obj2->SetIsAttacked(true);
 		//obj1->SetIsAttacked(true);
 
-		//std::shared_ptr<Enemy> E = std::dynamic_pointer_cast<Enemy>(otherObj);
-		//E->SetHp(m_bulletDamage);
+		std::shared_ptr<Enemy> E = std::dynamic_pointer_cast<Enemy>(otherObj);
+		E->SetHp(m_bulletDamage);
 		//E->Knockback();
+		printf("ИэСп");
 		SetIsLife(false);
 
 	}

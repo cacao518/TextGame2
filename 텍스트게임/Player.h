@@ -20,11 +20,10 @@ private:
 	std::mutex keyLock;
 	std::thread KeyUpdate;
 
-	
+	void Attack(bool charge);
 	ObjectMgr* objectMgr = ObjectMgr::GetInstance();
 	wchar_t bulletImg[2] = { '0','0' };
 	bool m_dir = true; //오른쪽이 트루임
-	bool m_attack = false;
 	float m_attackCount = 0;
 	float m_colorCount = 0;
 	bool m_charging = false;
