@@ -48,8 +48,8 @@ std::shared_ptr<GameObject> BoxCollider::TriggerCheck(wchar_t* otherObjName)
 			parentobj->GetPos().y< otherObj->GetPos().y + otherObj->GetHeight() &&
 			parentobj->GetPos().y + parentobj->GetHeight() >otherObj->GetPos().y)
             {
-                if (otherObj->GetComponet<BoxCollider>() != nullptr)
-                    if (isTrigger || otherObj->GetComponet<BoxCollider>()->GetIsTrigger()) // 두 객체중 한 객체라도 isTrigger가 on 이면 충돌 가능.
+                if (otherObj->GetComponent<BoxCollider>() != nullptr)
+                    if (isTrigger || otherObj->GetComponent<BoxCollider>()->GetIsTrigger()) // 두 객체중 한 객체라도 isTrigger가 on 이면 충돌 가능.
                         return otherObj;
             }
 	}

@@ -72,17 +72,11 @@
     <Filter Include="Particle">
       <UniqueIdentifier>{85acd65e-df54-4a35-ba54-3678ed0707d3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\04.Boss">
-      <UniqueIdentifier>{6bac74f3-7cee-405d-8d42-44f9e23d60a4}</UniqueIdentifier>
+    <Filter Include="Object\04.Item">
+      <UniqueIdentifier>{0900b8a3-3288-4246-8720-349aed33fc9d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\04.Boss\BossTank">
-      <UniqueIdentifier>{a94ba60b-42bc-4b6e-9755-dda9461f8e79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\04.Boss\Part">
-      <UniqueIdentifier>{737fa524-4487-4527-846b-9322854afaae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\10.UI\BossUI">
-      <UniqueIdentifier>{97932054-176e-4c91-aa97-76c9b78912b2}</UniqueIdentifier>
+    <Filter Include="Object\05.Vehicle">
+      <UniqueIdentifier>{ebef8255-4869-44ba-9bab-b1dd4016b81d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -152,17 +146,11 @@
     <ClCompile Include="ChargeParticle1.cpp">
       <Filter>Particle</Filter>
     </ClCompile>
-    <ClCompile Include="Boss.cpp">
-      <Filter>Object\04.Boss</Filter>
+    <ClCompile Include="ItemBox.cpp">
+      <Filter>Object\04.Item</Filter>
     </ClCompile>
-    <ClCompile Include="BossTank.cpp">
-      <Filter>Object\04.Boss\BossTank</Filter>
-    </ClCompile>
-    <ClCompile Include="Part.cpp">
-      <Filter>Object\04.Boss\Part</Filter>
-    </ClCompile>
-    <ClCompile Include="BossUI.cpp">
-      <Filter>Object\10.UI\BossUI</Filter>
+    <ClCompile Include="Vehicle.cpp">
+      <Filter>Object\05.Vehicle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -238,17 +226,11 @@
     <ClInclude Include="ChargeParticle1.h">
       <Filter>Particle</Filter>
     </ClInclude>
-    <ClInclude Include="Boss.h">
-      <Filter>Object\04.Boss</Filter>
+    <ClInclude Include="ItemBox.h">
+      <Filter>Object\04.Item</Filter>
     </ClInclude>
-    <ClInclude Include="BossTank.h">
-      <Filter>Object\04.Boss\BossTank</Filter>
-    </ClInclude>
-    <ClInclude Include="Part.h">
-      <Filter>Object\04.Boss\Part</Filter>
-    </ClInclude>
-    <ClInclude Include="BossUI.h">
-      <Filter>Object\10.UI\BossUI</Filter>
+    <ClInclude Include="Vehicle.h">
+      <Filter>Object\05.Vehicle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -264,12 +246,6 @@
       <Filter>리소스 파일</Filter>
     </Text>
     <Text Include="Logo.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
-    <Text Include="Boss1_DownPart.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
-    <Text Include="Boss1_UpPart.txt">
       <Filter>리소스 파일</Filter>
     </Text>
   </ItemGroup>

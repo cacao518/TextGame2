@@ -19,7 +19,6 @@ Part::Part(const char* fileName, int width, int height, int baseColor, GameObjec
 	while (!fp.eof())
 	{
 		std::getline(fp, readTxt);
-		int len = wcslen(readTxt.c_str());
 		wcscat(baseImg, readTxt.c_str());
 	}
 

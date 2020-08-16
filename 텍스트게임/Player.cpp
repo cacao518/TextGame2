@@ -72,7 +72,7 @@ int Player::Update()
 
 	//isDone = keyPress[27];
 	if (keyPress['s'] && (GetIsLand() || m_jumpCount < 2)) {
-		GetComponet<RigidBody>()->AddForce(0, m_jumpPower);
+		GetComponent<RigidBody>()->AddForce(0, m_jumpPower);
 		m_jumpCount++;
 	}
 	/*
@@ -104,7 +104,7 @@ int Player::Update()
 	}
 	if (keyPress[VK_SPACE] && m_isRide) // 슬러그 내리기
 	{
-		GetComponet<RigidBody>()->AddForce(0, m_jumpPower);
+		GetComponent<RigidBody>()->AddForce(0, m_jumpPower);
 		m_isRide = false;
 		m_color = 8;
 		m_invincibility = true;

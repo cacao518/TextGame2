@@ -88,6 +88,16 @@ Scene_Stage_1::Scene_Stage_1()
 				BoxCollider* bc3 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(item));
 				item->AddComponent(bc3);
 			}
+			if (map[j][i] == 9)
+			{
+				std::shared_ptr<BossTank> boss = std::make_shared<BossTank>(POS(j, i));
+				m_objectMgr->InsertObject(BOSS, std::dynamic_pointer_cast<GameObject>(boss));
+
+				RigidBody* rb = new RigidBody(std::dynamic_pointer_cast<GameObject>(boss));
+				boss->AddComponent(rb);
+				BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(boss));
+				boss->AddComponent(bc);
+			}
 		}
 	}
 	fp.close();
