@@ -2,6 +2,7 @@
 #include "Timer.h"
 #include "Bullet.h"
 #include "GameMgr.h"
+#include "RigidBody.h"
 
 Enemy::Enemy(POS position)
 	:GameObject(position), m_Status(STATUS(10.f, 10.f, 0.1f))
@@ -66,17 +67,12 @@ void Enemy::SetHp(float damage)
 	if (m_Status.hp <= 0) m_Life = false;
 }
 
-void Enemy::Knockback()
+void Enemy::Knockback(POS otherObjPos)
 {
-	if (m_dir)
-	{
-		m_pos.x -= Timer::DeltaTime() * 10;
-	}
+	if (otherObjPos.x <= m_pos.x)
+		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * 12, Timer::DeltaTime() * 5);
 	else
-	{
-		m_pos.x += Timer::DeltaTime() * 10;
-	}
-	m_pos.y -= Timer::DeltaTime() * 10;
+		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * -12, Timer::DeltaTime() * 5);
 }
 
 

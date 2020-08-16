@@ -8,7 +8,7 @@
 #include "ChargeParticle1.h"
 
 Player::Player(POS position)
-	:GameObject(position),m_Status(STATUS(100.f,100.f,3.f))
+	:m_weaponSpeed(0), m_weaponType(Bullet::HANDGUN), GameObject(position), m_Status(STATUS(100.f,100.f,3.f))
 {
 	KeyUpdate=std::thread([&] {
 		int c;
@@ -160,18 +160,20 @@ int Player::Update()
 	keyPress.reset();
 	keyLock.unlock();
 
-	if (m_dir)
-		memcpy(m_sprite, m_rightImg, sizeof(wchar_t) * m_width * m_height);
-	else
-		memcpy(m_sprite, m_leftImg, sizeof(wchar_t) * m_width * m_height);
-
+	if (!m_isRide)
+	{
+		if (m_dir)
+			memcpy(m_sprite, m_rightImg, sizeof(wchar_t) * m_width * m_height);
+		else
+			memcpy(m_sprite, m_leftImg, sizeof(wchar_t) * m_width * m_height);
+	}
 	if (m_isRide) // 슬러그 탔을때 이미지 변화
 	{
 		m_width = 7;
 		m_height = 2;
 		m_dir = true;
 		m_color = CYAN;
-		memcpy(m_sprite, m_tankImg, sizeof(wchar_t) * m_width * m_height);
+		//memcpy(m_sprite, m_tankImg, sizeof(wchar_t) * 7 * 2);
 	}
 
 	return 1;
@@ -184,8 +186,22 @@ int Player::LateUpdate()
 	return 1;
 }
 
-
-
+void Player::Render()
+{
+	if (m_isRide)
+	{
+		ObjectMgr::GetInstance()->Draw(m_tankImg, 7, 2,
+			(int)(m_pos.x - ScrollMgr::GetInstance()->GetScrollX()),
+			(int)(m_pos.y - ScrollMgr::GetInstance()->GetScrollY()), m_color);
+	}
+	else
+	{
+		if(nullptr!=m_sprite)
+			ObjectMgr::GetInstance()->Draw(m_sprite, m_width, m_height,
+			(int)(m_pos.x - ScrollMgr::GetInstance()->GetScrollX()),
+			(int)(m_pos.y - ScrollMgr::GetInstance()->GetScrollY()), m_color);
+	}
+}
 
 
 void Player::SetHp(float damage)
@@ -201,10 +217,10 @@ STATUS Player::GetStatus()
 
 void Player::Knockback(POS otherObjPos)
 {
-	if (m_dir)
-		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * -12, 0);
+	if (otherObjPos.x <= m_pos.x)
+		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * 12, Timer::DeltaTime() * 5);
 	else
-		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * 12, 0);
+		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * -12, Timer::DeltaTime() * 5);
 }
 
 void Player::GetDamage(float damage, POS enemyPos)
