@@ -66,6 +66,9 @@
     <Filter Include="Component">
       <UniqueIdentifier>{be35d72f-5f52-4a2d-83a5-fa9b572435e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Particle">
+      <UniqueIdentifier>{85acd65e-df54-4a35-ba54-3678ed0707d3}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Object\02.Terrain">
       <UniqueIdentifier>{5ca38bdf-cd32-46ce-a135-7d5e5e819ea7}</UniqueIdentifier>
     </Filter>
@@ -140,6 +143,9 @@
     <ClCompile Include="ItemBox.cpp">
       <Filter>Object\ItemBox</Filter>
     </ClCompile>
+    <ClCompile Include="ChargeParticle1.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectMgr.h">
@@ -213,6 +219,9 @@
     </ClInclude>
     <ClInclude Include="ItemBox.h">
       <Filter>Object\ItemBox</Filter>
+    </ClInclude>
+    <ClInclude Include="ChargeParticle1.h">
+      <Filter>Particle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

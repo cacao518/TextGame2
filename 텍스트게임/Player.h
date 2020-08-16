@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "ChargeParticle1.h"
 class Player :public GameObject
 {
 public:
@@ -19,14 +20,20 @@ private:
 	std::mutex keyLock;
 	std::thread KeyUpdate;
 
+	void Attack(bool charge);
 	ObjectMgr* objectMgr = ObjectMgr::GetInstance();
 	wchar_t bulletImg[2] = { '0','0' };
-	
-	bool attack;
-	
+	bool m_dir = true; //오른쪽이 트루임
+	float m_attackCount = 0;
+	float m_colorCount = 0;
+	bool m_charging = false;
 	int m_jumpCount = 0;
 	int m_jumpPower = 6;
+	bool m_invincibility = false;
+	float m_timer = 0.f;
+	
 
 	wchar_t m_leftImg[6], m_rightImg[6], m_attackImg[6];
+	
 };
 

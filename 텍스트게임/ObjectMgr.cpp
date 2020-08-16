@@ -5,6 +5,7 @@
 #include "Bullet.h"
 #include "GameMgr.h"
 #include "BoxCollider.h"
+//#include<ChargeParticle1.h>
 ObjectMgr* ObjectMgr::instance = nullptr;
 
 ObjectMgr::ObjectMgr() :done(false), scBuff1(), scBuff2(), frontBuff(nullptr), backBuff(nullptr) {
@@ -180,7 +181,7 @@ void ObjectMgr::CheckCollider(std::shared_ptr<GameObject>& obj1, std::shared_ptr
 			  )
 		{
 			//obj2->SetIsAttacked(true);
-			obj1->SetIsAttacked(true);
+			obj1->SetIsLife9(false);//obj1->SetIsAttacked(true);
 			
 			std::shared_ptr<Enemy> E = std::dynamic_pointer_cast<Enemy>(obj2);
 			E->SetHp(B->m_bulletDamage);
