@@ -24,6 +24,9 @@
     <Filter Include="Object\01.Enemy">
       <UniqueIdentifier>{0a0c78e7-edbe-4c05-8f0f-bc38d407d865}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\02.Terrain">
+      <UniqueIdentifier>{5ca38bdf-cd32-46ce-a135-7d5e5e819ea7}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Object\03.Bullet">
       <UniqueIdentifier>{7c7174f0-18b5-4b65-b60d-8cda028e0951}</UniqueIdentifier>
     </Filter>
@@ -69,11 +72,11 @@
     <Filter Include="Particle">
       <UniqueIdentifier>{85acd65e-df54-4a35-ba54-3678ed0707d3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\02.Terrain">
-      <UniqueIdentifier>{5ca38bdf-cd32-46ce-a135-7d5e5e819ea7}</UniqueIdentifier>
+    <Filter Include="Object\04.Item">
+      <UniqueIdentifier>{0900b8a3-3288-4246-8720-349aed33fc9d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\ItemBox">
-      <UniqueIdentifier>{6110516b-db32-4376-9995-1e3d68a17333}</UniqueIdentifier>
+    <Filter Include="Object\05.Vehicle">
+      <UniqueIdentifier>{ebef8255-4869-44ba-9bab-b1dd4016b81d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -140,11 +143,14 @@
     <ClCompile Include="BoxCollider.cpp">
       <Filter>Component</Filter>
     </ClCompile>
-    <ClCompile Include="ItemBox.cpp">
-      <Filter>Object\ItemBox</Filter>
-    </ClCompile>
     <ClCompile Include="ChargeParticle1.cpp">
       <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBox.cpp">
+      <Filter>Object\04.Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Vehicle.cpp">
+      <Filter>Object\05.Vehicle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,11 +223,14 @@
     <ClInclude Include="BoxCollider.h">
       <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="ItemBox.h">
-      <Filter>Object\ItemBox</Filter>
-    </ClInclude>
     <ClInclude Include="ChargeParticle1.h">
       <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBox.h">
+      <Filter>Object\04.Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Vehicle.h">
+      <Filter>Object\05.Vehicle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

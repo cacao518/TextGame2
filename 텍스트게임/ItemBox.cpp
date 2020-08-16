@@ -4,10 +4,10 @@ ItemBox::ItemBox(int type, POS position)
 	:GameObject(position)
 {
 	m_type = type;
-	wchar_t img1[3] = { L'[',L'H', L']'};
-	wchar_t img2[3] = { L'[',L'S', L']' };
+	wchar_t img1[6] = { L' ', L' ',L' ',L'[', L'H',L']'};
+	wchar_t img2[3] = { L'[', L'S', L']' };
 	m_width = 3;
-	m_height = 1;
+	m_height = 2;
 	m_sprite = new wchar_t[m_width * m_height];
 	if (m_type == 0)
 	{
@@ -28,12 +28,12 @@ ItemBox::~ItemBox()
 
 int ItemBox::Update()
 {
-	return 0;
+	return 1;
 }
 
 int ItemBox::LateUpdate()
 {
-	return 0;
+	return 1;
 }
 
 void ItemBox::SetType(int type)

@@ -15,6 +15,9 @@ public:
 	STATUS GetStatus();
 	void Knockback(POS otherObjPos);
 
+	void SetIsRide(int flag);
+	int GetIsRide();
+
 private:
 	std::bitset<0xff> keyPress;
 	std::mutex keyLock;
@@ -32,8 +35,8 @@ private:
 	bool m_invincibility = false;
 	float m_timer = 0.f;
 	
-
-	wchar_t m_leftImg[6], m_rightImg[6], m_attackImg[6];
+	bool m_isRide = false;
+	wchar_t m_leftImg[6], m_rightImg[6], m_attackImg[6], m_tankImg[14];
 	
 };
 
