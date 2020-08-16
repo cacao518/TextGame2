@@ -8,7 +8,7 @@
 #include "ChargeParticle1.h"
 
 Player::Player(POS position)
-	:GameObject(position),m_Status(STATUS(100.f,100.f,3.f))
+	:m_weaponSpeed(0), m_weaponType(Bullet::HANDGUN), GameObject(position), m_Status(STATUS(100.f,100.f,3.f))
 {
 	KeyUpdate=std::thread([&] {
 		int c;
