@@ -85,13 +85,13 @@ int Player::Update()
 		m_jumpCount++;
 	}
 
-	//if (GetAsyncKeyState(VK_DOWN) & 0x0001)
+	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
 
-	//{
+	{
 
-		//printf("아래키누름");
+		printf("아래키누름");
 
-	//}
+	}
 	if (keyPress[80]) {
 		if(!m_charging)
 		m_attack = true;
@@ -165,8 +165,15 @@ int Player::Update()
 	{
 		m_attack = false;
 		//objectMgr->InsertObject(PARTICLE, std::dynamic_pointer_cast<GameObject>(std::make_shared<ChargeParticle1>(m_dir, m_Status.attackDamage, POS(m_pos.x, m_pos.y + 1))));
-		objectMgr->InsertObject(BULLET, std::dynamic_pointer_cast<GameObject>(std::make_shared<Bullet>(false,m_dir,m_Status.attackDamage ,POS(m_pos.x, m_pos.y + 1))));
 		
+		//objectMgr->InsertObject(BULLET, std::dynamic_pointer_cast<GameObject>(std::make_shared<Bullet>(false,m_dir,m_Status.attackDamage ,POS(m_pos.x, m_pos.y + 1))));
+		
+		std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(false, m_dir, m_Status.attackDamage, POS(m_pos.x, m_pos.y + 1));
+		objectMgr->InsertObject(BULLET, std::dynamic_pointer_cast<GameObject>(bullet));
+		
+		BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(bullet));
+		bullet->AddComponent(bc);
+		bc->SetIsTrigger(true);
 
 	}
 	if (m_dir)
