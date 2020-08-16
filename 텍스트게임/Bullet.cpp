@@ -1,16 +1,33 @@
 #include "Bullet.h"
 #include"Timer.h"
 
-Bullet::Bullet(bool dir,float bulletDamage, POS position)
+Bullet::Bullet(bool charge, bool dir,float bulletDamage, POS position)
 	:GameObject(position)
 {
+	m_chargeShoot = charge;
 	m_bulletDamage = bulletDamage;
-	wchar_t bulletImg[2] = { L'-',L'-' };
+	printf("ÃÑ»ı¼ºµÊ");
 
+	wchar_t bulletImg[4]= { L'-', L'-', L' ', L' ' };
 	m_width = 2;
 	m_height = 1;
+
+	if (m_chargeShoot) {
+		bulletImg[0] = { L'=' }; //{ L'=', L'=', L')', L')' };
+		bulletImg[1] = { L'=' };
+		bulletImg[2] = { L')' };
+		bulletImg[3] = { L')' };
+		m_width = 4;
+		m_height = 1;
+	}
+
 	m_sprite = new wchar_t[m_width * m_height];
 	memcpy(m_sprite, bulletImg, sizeof(wchar_t) * m_width * m_height);
+	
+
+
+	
+
 
 	m_dir = dir;
 	m_name = L"Bullet";
@@ -34,9 +51,9 @@ int Bullet::Update()
 	m_timer += Timer::DeltaTime();
 
 	if (m_timer >= 4.f)
-		m_isAttacked = true;
+		m_Life = false;
 
-	if (!m_isAttacked)
+	if (m_Life)
 		return 1;
 	else
 		return -1;

@@ -25,8 +25,8 @@ void RigidBody::Update()
 		gravitySpeed -= Timer::DeltaTime() * 5.0f;
 	}
 
-	if (!parentObject->GetIsLand() && gravitySpeed <= 0) // 하강
-		parentObject->SetPos(POS(parentObject->GetPos().x, parentObject->GetPos().y + Timer::DeltaTime() * mass));
+//	if (!parentObject->GetIsLand() && gravitySpeed <= 0) // 하강
+	//	parentObject->SetPos(POS(parentObject->GetPos().x, parentObject->GetPos().y + Timer::DeltaTime() * mass));
 	else if (gravitySpeed <= 0)// 충돌한 벽에 서있기
 	{
 		parentObject->SetPos(POS(parentObject->GetPos().x, parentObject->GetCollisionObjPos().y));

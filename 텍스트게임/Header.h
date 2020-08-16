@@ -16,7 +16,7 @@
 #include <locale>
 #include <string>
 
-enum OBJTYPE { BACKGROUND, TERRAIN, PLAYER, ENEMY, BULLET, UI, TYPE_END };
+enum OBJTYPE { BACKGROUND, TERRAIN, PLAYER, ENEMY, BULLET, UI, TYPE_END ,PARTICLE };
 
 #define BLACK 0 
 #define BLUE 1 

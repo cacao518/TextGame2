@@ -3,7 +3,7 @@
 class Bullet :public GameObject
 {
 public:
-	Bullet(bool dir,float bulletDamage,POS position);
+	Bullet(bool charge, bool dir,float bulletDamage,POS position);
 	~Bullet();
 
 	// GameObject을(를) 통해 상속됨
@@ -14,6 +14,7 @@ public:
 
 private:
 	float m_timer = 0.f;
+	bool m_chargeShoot = false;
 
 };
 

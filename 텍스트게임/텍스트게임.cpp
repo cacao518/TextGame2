@@ -51,7 +51,7 @@ int main() {
 		objectMgr->InsertObject(UI, std::dynamic_pointer_cast<GameObject>(enemyUI));
 	}
 	x += 11;
-	std::shared_ptr<Enemy> enemy = std::make_shared<Enemy>(POS(x, y - 4));
+	std::shared_ptr<Enemy> enemy = std::make_shared<Enemy>(POS(x, y+1 ));
 	objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy));
 
 	RigidBody rb = RigidBody(std::dynamic_pointer_cast<GameObject>(enemy));
@@ -60,7 +60,7 @@ int main() {
 	enemy->AddComponent(bc);
 
 	x += 43;
-	std::shared_ptr<Enemy> enemy2= std::make_shared<Enemy>(POS(x, y - 6));
+	std::shared_ptr<Enemy> enemy2= std::make_shared<Enemy>(POS(x, y +1));
 	objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy2));
 
 	RigidBody rb2 = RigidBody(std::dynamic_pointer_cast<GameObject>(enemy2));

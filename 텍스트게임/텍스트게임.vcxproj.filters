@@ -51,6 +51,9 @@
     <Filter Include="Component">
       <UniqueIdentifier>{be35d72f-5f52-4a2d-83a5-fa9b572435e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Particle">
+      <UniqueIdentifier>{85acd65e-df54-4a35-ba54-3678ed0707d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="텍스트게임.cpp">
@@ -100,6 +103,9 @@
     </ClCompile>
     <ClCompile Include="BoxCollider.cpp">
       <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="ChargeParticle1.cpp">
+      <Filter>Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +162,9 @@
     </ClInclude>
     <ClInclude Include="BoxCollider.h">
       <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="ChargeParticle1.h">
+      <Filter>Particle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

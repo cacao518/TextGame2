@@ -63,6 +63,11 @@ void GameObject::SetIsLand(bool flag)
 	m_isLand = flag;
 }
 
+void GameObject::SetIsLife(bool flag)
+{
+	m_Life = flag;
+}
+
 int GameObject::GetWidth()
 {
 	return m_width;
