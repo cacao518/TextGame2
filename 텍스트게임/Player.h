@@ -10,6 +10,8 @@ public:
 	// GameObject을(를) 통해 상속됨
 	virtual int Update() override;
 	virtual int LateUpdate() override;
+	virtual void Render() override;
+
 	void SetHp(float damage);
 	STATUS m_Status;
 	STATUS GetStatus();
@@ -35,6 +37,7 @@ private:
 	bool m_invincibility = false;
 	float m_timer = 0.f;
 	
+	int m_weaponSpeed = 0;
 	bool m_isRide = false;
 	wchar_t m_leftImg[6], m_rightImg[6], m_attackImg[6], m_tankImg[14];
 	

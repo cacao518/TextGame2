@@ -30,9 +30,7 @@ int Vehicle::Update()
 			m_isRide = true;
 			return -1;
 		}
-		
 	}
-
 	return 1;
 }
 
