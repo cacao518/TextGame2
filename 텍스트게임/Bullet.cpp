@@ -18,7 +18,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir,  POS positio
 	
 	if (BulletType == HANDGUN)
 	{
-		m_damage = 3;
+		m_bulletDamage = 3;
 		m_width = 2;
 		m_height = 1;
 		m_sprite = new wchar_t[m_width * m_height];
@@ -27,7 +27,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir,  POS positio
 	}
 	if (BulletType == HANDGUN && m_chargeShoot)
 	{
-		m_damage = 5;
+		m_bulletDamage = 5;
 		m_width = 4;
 		m_height = 1;
 		m_sprite = new wchar_t[m_width * m_height];
@@ -36,7 +36,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir,  POS positio
 	}
 	if (BulletType == TANKGUN)
 	{
-		m_damage = 4;
+		m_bulletDamage = 4;
 		m_width = 2;
 		m_height = 1;
 		m_sprite = new wchar_t[m_width * m_height];
@@ -45,7 +45,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir,  POS positio
 	}
 	if (BulletType == TANKGUN && m_chargeShoot)
 	{
-		m_damage = 6;
+		m_bulletDamage = 6;
 		m_width = 5;
 		m_height = 1;
 		m_sprite = new wchar_t[m_width * m_height];
@@ -54,7 +54,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir,  POS positio
 	}
 	if (BulletType == HEABYGUN)
 	{
-		m_damage = 4;
+		m_bulletDamage = 4;
 		m_width = 2;
 		m_height = 1;
 		m_sprite = new wchar_t[m_width * m_height];
@@ -63,7 +63,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir,  POS positio
 	}
 	if (BulletType == HEABYGUN && m_chargeShoot)
 	{
-		m_damage = 6;
+		m_bulletDamage = 6;
 		m_width = 5;
 		m_height = 1;
 		m_sprite = new wchar_t[m_width * m_height];
@@ -90,7 +90,7 @@ int Bullet::Update()
 
 		std::shared_ptr<Enemy> enemy = std::dynamic_pointer_cast<Enemy>(otherObj);
 		enemy->SetHp(m_bulletDamage);
-		enemy->Knockback();
+		enemy->Knockback(otherObj->GetPos());
 		GameMgr::GetInstance()->SetEnemy(enemy);
 		SetIsLife(false);
 		

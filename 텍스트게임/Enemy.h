@@ -11,7 +11,7 @@ public:
 	virtual int LateUpdate() override;
 	void SetHp(float damage);
 
-	void Knockback();
+	void Knockback(POS otherObjPos);
 	const STATUS& GetStatus()const { return m_Status; }
 
 private:
