@@ -22,6 +22,7 @@ PlayerUI::PlayerUI()
 
 	m_objectName = nullptr;
 	m_bulletNumImg = nullptr;
+	m_BombNumImg = nullptr;
 }
 
 PlayerUI::~PlayerUI()
@@ -48,6 +49,14 @@ void PlayerUI::UpdatePlayerStatus()
 		wsprintf(img, L"%d", player->GetBulletNum());
 	m_bulletNumImg = new wchar_t[3];
 	memcpy(m_bulletNumImg, img, sizeof(wchar_t) * 3);
+
+	wchar_t img2[3];
+	if (player->GetBombNum() < 10)
+		wsprintf(img2, L"0%d", player->GetBombNum());
+	else
+		wsprintf(img2, L"%d", player->GetBombNum());
+	m_BombNumImg = new wchar_t[3];
+	memcpy(m_BombNumImg, img2, sizeof(wchar_t) * 3);
 }
 	
 int PlayerUI::Update()
@@ -70,6 +79,8 @@ void PlayerUI::Render()
 		ObjectMgr::GetInstance()->Draw(m_sprite, m_width, m_height, (int)m_pos.x, (int)m_pos.y,BLUE);
 	if (nullptr != m_bulletNumImg)
 		ObjectMgr::GetInstance()->Draw(m_bulletNumImg, 3, 1, (int)m_pos.x+7, (int)m_pos.y-1, YELLOW);
+	if (nullptr != m_BombNumImg)
+		ObjectMgr::GetInstance()->Draw(m_BombNumImg, 3, 1, (int)m_pos.x + 11, (int)m_pos.y - 1, LIGHTRED);
 }
 
 void PlayerUI::UpdateHpBar()

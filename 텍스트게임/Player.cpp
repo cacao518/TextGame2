@@ -76,10 +76,6 @@ int Player::Update()
 		m_jumpCount++;
 	}
 
-
-		printf("아래키누름");
-
-	}*/
 	if (keyPress['a'] && m_attackDelay <= 0)
 	{
 		if ((((m_weaponType != Bullet::HANDGUN) || (m_weaponType != Bullet::TANKGUN) && m_bulletNum > 0)) ||
@@ -89,7 +85,6 @@ int Player::Update()
 				Attack(false);
 			else
 				m_colorCount = -100;
-
 		}
 	}
 	if (keyPress[75]) {
@@ -264,7 +259,7 @@ void Player::GetDamage(float damage, POS enemyPos)
 		
 		SetHp(damage);
 		Knockback(enemyPos);
-		printf("플레이어 공격 당함");
+		//printf("플레이어 공격 당함");
 	}
 }
 
@@ -286,14 +281,14 @@ void Player::Attack(bool charge)
 	int x, y;
 	x = m_pos.x;
 	y = m_pos.y + 1;
+	if (m_weaponType == Bullet::SHOTGUN)
+	{
+		if (m_dir) x = m_pos.x + 3; else x = m_pos.x - 32;
+		y = m_pos.y;
+	}
 	if (m_isRide) // 슬러그는 앞면만 바라보게 한다.
 	{
 		x = m_pos.x + 6;
-		y = m_pos.y;
-	}
-	if (m_weaponType == Bullet::SHOTGUN)
-	{
-		if (m_dir) x = m_pos.x+2; else x = m_pos.x - 32;
 		y = m_pos.y;
 	}
 	std::shared_ptr<Bullet> bullet = nullptr;
