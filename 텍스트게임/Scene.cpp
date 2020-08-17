@@ -14,6 +14,7 @@
 #include "Vehicle.h"
 #include "GuardEnemy.h"
 #include "GunEnemy.h"
+#include "BossWizard.h"
 
 Scene::Scene()
 	:m_objectMgr(ObjectMgr::GetInstance()),m_sceneMgr(SceneMgr::GetInstance()),m_gameMgr(GameMgr::GetInstance())
@@ -95,6 +96,16 @@ void Scene::ParsingMap(char* mapName, int mapWidth, int mapHeight)
 				tank->AddComponent(rb);
 				BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(tank));
 				tank->AddComponent(bc);
+			}
+			if (map[index] == 5)
+			{
+				std::shared_ptr<BossWizard> boss = std::make_shared<BossWizard>(POS(j, i));
+				m_objectMgr->InsertObject(BOSS, std::dynamic_pointer_cast<GameObject>(boss));
+
+				RigidBody* rb = new RigidBody(std::dynamic_pointer_cast<GameObject>(boss));
+				boss->AddComponent(rb);
+				BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(boss));
+				boss->AddComponent(bc);
 			}
 			if (map[index] == 9)
 			{
