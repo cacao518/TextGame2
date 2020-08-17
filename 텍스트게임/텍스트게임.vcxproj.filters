@@ -87,9 +87,6 @@
     <Filter Include="Object\10.UI\BossUI">
       <UniqueIdentifier>{f85f8c12-9f98-482a-bb3e-494f98a40ebf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\06.Boss\BossWizard">
-      <UniqueIdentifier>{7fd1e53e-22d8-4f3e-acdd-c9a5e2b89dd1}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="텍스트게임.cpp">
@@ -182,20 +179,20 @@
     <ClCompile Include="Guard.cpp">
       <Filter>Object\01.Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="BossTank.cpp">
-      <Filter>Object\06.Boss\BossTank</Filter>
-    </ClCompile>
-    <ClCompile Include="Part.cpp">
-      <Filter>Object\06.Boss</Filter>
+    <ClCompile Include="GunEnemy.cpp">
+      <Filter>Object\01.Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Boss.cpp">
       <Filter>Object\06.Boss</Filter>
     </ClCompile>
+    <ClCompile Include="Part.cpp">
+      <Filter>Object\06.Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="BossTank.cpp">
+      <Filter>Object\06.Boss\BossTank</Filter>
+    </ClCompile>
     <ClCompile Include="BossUI.cpp">
       <Filter>Object\10.UI\BossUI</Filter>
-    </ClCompile>
-    <ClCompile Include="GunEnemy.cpp">
-      <Filter>Object\01.Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -314,7 +311,11 @@
     <Text Include="Logo.txt">
       <Filter>리소스 파일</Filter>
     </Text>
-    <Text Include="Boss1_DownPart.txt" />
-    <Text Include="Boss1_UpPart.txt" />
+    <Text Include="Boss1_DownPart.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="Boss1_UpPart.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
   </ItemGroup>
 </Project>
