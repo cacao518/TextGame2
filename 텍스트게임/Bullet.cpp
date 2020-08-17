@@ -191,7 +191,18 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 		m_color = LIGHTRED;
 	}
 
-	if (m_bulletType == EARTHQUAKE)
+	if (BulletType == ENEMYBULLET)
+	{
+		m_bulletSpeed = 5.f;
+		m_bulletDamage = 10.f;
+		m_width = 2;
+		m_height = 1;
+		m_sprite = new wchar_t[m_width * m_height];
+		memcpy(m_sprite, boombImg, sizeof(wchar_t) * m_width * m_height);
+		m_color = 2;
+	}
+
+	if (BulletType == EARTHQUAKE)
 	{
 		wchar_t earthquakeImg[24] = { L'^',L'^',L'^',L'^',L'^',L'^',L'^',L'^',
 									L'^',L'^',L'^',L'^',L'^',L'^',L'^',L'^',
@@ -225,24 +236,22 @@ int Bullet::Update()
 		{
 			//obj2->SetIsAttacked(true);
 			//obj1->SetIsAttacked(true);
-			if (EnemyObj->GetName() == L"Guard")
-			{
-				printf("가드맞음");
-				if (m_bulletType != SHOTGUN) SetIsLife(false);
-			}
+			EnemyObj->SetIsAttacked(true);
 
-		 else
-			{
 				std::shared_ptr<Enemy> enemy = std::dynamic_pointer_cast<Enemy>(EnemyObj);
 
-				if (EnemyObj->GetName() == L"GuardEnemy")
-				enemy->GetDamage(m_bulletDamage, GetPos(),false);
+				if (EnemyObj->GetName() == L"GuardEnemy" &&m_bulletType!=BOOMB)
+				enemy->GetDamage(m_bulletDamage, m_dir);
 				else
-				enemy->GetDamage(m_bulletDamage, GetPos(), true);
-
+				enemy->GetDamage(m_bulletDamage, GetPos());
+				
 				GameMgr::GetInstance()->SetEnemy(enemy);
-				if (m_bulletType != SHOTGUN) SetIsLife(false);
-			}
+				SetIsLife(false);
+			
+		if (m_bulletType != SHOTGUN) SetIsLife(false);
+				
+			
+		
 		}
 
 

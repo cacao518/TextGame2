@@ -5,21 +5,27 @@ class GuardEnemy : public Enemy
 {
 public:
 	GuardEnemy(POS position);
-	//void GetDamage(float damage, bool dir) ;
+
 	int Update();
 	
 
 
 private:
 	STATUS m_Status;
-	wchar_t monsterImg2_RIGHT[6] =
-		 { '0', ' ', '[', 'r', 'L', ' ' };
+	wchar_t monsterImg2_LEFT[9] =
+	{ 
+		 '[',' ','0',
+		 '[','-','I',
+		 '[',' ','L' };
+	
 
-	wchar_t monsterImg2_LEFT[6] =
-		{ ' ', '0', '<', ']', ' ', 'L' };
+	wchar_t monsterImg2_RIGHT[9] =
+	{ 
+			 '0',' ',']',
+			 'I','-',']',
+			 'L',' ',']' };
+	int baseColor;
 
-	ObjectMgr* objectMgr = ObjectMgr::GetInstance();
-	bool m_first = true;
 };
 
 

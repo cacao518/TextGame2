@@ -14,6 +14,7 @@
 #include "Vehicle.h"
 #include "GuardEnemy.h"
 #include "Guard.h"
+#include "GunEnemy.h"
 #include "BossWizard.h"
 Scene_Stage_1::Scene_Stage_1()
 {

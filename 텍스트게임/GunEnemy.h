@@ -5,18 +5,24 @@ class GunEnemy : public Enemy
 {
 public:
 	GunEnemy(POS position);
-	void GetDamage(float damage, bool dir);
 	int Update();
 
 
 
 private:
 	STATUS m_Status;
+	
+
+	ObjectMgr* objectMgr = ObjectMgr::GetInstance();
+	
+	void DistanceCheck();
+	void Attack();
+	bool m_bulletDir = false;
 	wchar_t monsterImg2_RIGHT[6] =
-	{ '0', ' ', '[', 'r', 'L', ' ' };
+	{ L'0', L' ', L'[', L'r', L'L', L' ' };
 
 	wchar_t monsterImg2_LEFT[6] =
-	{ ' ', '0', '<', ']', ' ', 'L' };
+	{ L' ', L'0', L'<', L']', L' ', L'L' };
 };
 
 
