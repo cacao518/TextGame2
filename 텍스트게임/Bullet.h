@@ -30,7 +30,7 @@ private:
 	float m_gravitySpeed = 0.f;
 	bool m_isEnemy;
 
-	OBJTYPE m_type = TYPE_END;
+	OBJTYPE m_bulletType = TYPE_END;
 	int boombStep=0;
 };
 

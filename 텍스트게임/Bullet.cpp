@@ -11,7 +11,7 @@
 #include "Guard.h"
 
 Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position)
-	:GameObject(position), m_isEnemy(isEnemy), m_bulletDamage(0.f), m_timer(0.f),m_type((OBJTYPE)BulletType)
+	:GameObject(position), m_isEnemy(isEnemy), m_bulletDamage(0.f), m_timer(0.f),m_bulletType((OBJTYPE)BulletType)
 {
 	m_chargeShoot = charge;
 	if (m_bulletType != SHOTGUN)
@@ -177,7 +177,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 
 	}
 
-	if (m_type == METEOR)
+	if (m_bulletType == METEOR)
 	{
 		wchar_t meteorImg[16] = { L' ',L'@',L'@',L' ',L'@',L'@',L'@',L'@',L'@',L'@',L'@',L'@',L' ',L'@',L'@',L' ' };
 
@@ -191,7 +191,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 		m_color = LIGHTRED;
 	}
 
-	if (m_type == EARTHQUAKE)
+	if (m_bulletType == EARTHQUAKE)
 	{
 		wchar_t earthquakeImg[24] = { L'^',L'^',L'^',L'^',L'^',L'^',L'^',L'^',
 									L'^',L'^',L'^',L'^',L'^',L'^',L'^',L'^',
@@ -285,6 +285,8 @@ int Bullet::Update()
 
 	if (!m_Life)
 		return -1;
+
+	return 0;
 }
 
 int Bullet::LateUpdate()
@@ -294,7 +296,7 @@ int Bullet::LateUpdate()
 
 void Bullet::BulletMove()
 {
-	switch (m_type)
+	switch (m_bulletType)
 	{
 	case BOSS_CANNON:
 		BossCannonMove();
