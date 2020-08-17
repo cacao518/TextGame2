@@ -24,6 +24,7 @@ GuardEnemy::GuardEnemy(POS position)
 int GuardEnemy::Update()
 {
 
+	/*
 	if (m_dir) m_pos.x += Timer::DeltaTime() * 5;
 	else  m_pos.x -= Timer::DeltaTime() * 5;
 
@@ -34,7 +35,7 @@ int GuardEnemy::Update()
 		m_dir = !m_dir;
 
 	}
-
+	*/
 
 	if (m_Life)
 		return 1;
