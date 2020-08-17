@@ -21,5 +21,7 @@ protected:
 	SceneMgr* m_sceneMgr;
 	ObjectMgr* m_objectMgr;
 	GameMgr* m_gameMgr;
+
+	void ParsingMap(char* mapName);
 };
 

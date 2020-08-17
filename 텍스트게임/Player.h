@@ -24,6 +24,7 @@ public:
 		m_weaponType = weaponType; m_weaponSpeed = weaponSpeed; m_bulletNum = bulletNum;
 	}
 	int GetBulletNum() { return m_bulletNum; };
+	int GetBombNum() { return boombAmount; };
 private:
 	std::bitset<0xff> keyPress;
 	std::mutex keyLock;
@@ -44,7 +45,7 @@ private:
 	
 	const int ATTACK_DELAY_MAX = 10;
 	const int DEFAULT_WEAPON_SPEED = 20;
-	int boombAmount=10;
+	int boombAmount = 10;
 
 	int m_weaponType;
 	int m_weaponSpeed;

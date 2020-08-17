@@ -20,6 +20,7 @@ private:
 	void MeteorMove();
 	void EarthquakeMove();
 	void DefaultBulletMove();
+	void reverseChar(wchar_t* w, int size);
 private:
 	float m_MaxTimer;
 	float m_timer = 0.f;

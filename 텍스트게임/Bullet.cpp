@@ -14,9 +14,9 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 	:GameObject(position), m_isEnemy(isEnemy), m_bulletDamage(0.f), m_timer(0.f),m_type((OBJTYPE)BulletType)
 {
 	m_chargeShoot = charge;
-	if (m_type != SHOTGUN)
+	if (m_bulletType != SHOTGUN)
 	{
-		m_bulletSpeed = 10;
+		m_bulletSpeed = 10.f;
 		m_MaxTimer = 4.f;
 	}
 	else
@@ -25,7 +25,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 		m_MaxTimer = 0.7f;
 	}
 
-	printf("ÃÑ»ý¼ºµÊ");
+	//printf("ÃÑ»ý¼ºµÊ");
 
 	wchar_t Default[2]= { L'-', L'-'};
 	wchar_t ChargeDefault[4] = { L'=', L'=',L')',L')' };
@@ -37,98 +37,102 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 
 	wchar_t ShotGun[60] = { L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#' };
 	wchar_t ChargeShotGun[60] = { L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#' };
+
 	wchar_t boombImg[2] = { L'0',L'0' };
+	wchar_t cannonImg[9] = { L'o',L'O',L'o',L'O',L'O',L'O',L'o',L'O',L'o' };
 
-
-	if (m_type == HANDGUN)
+	if (m_bulletType == HANDGUN)
 	{
-		m_bulletDamage = 1;
+		m_bulletDamage = 3;
 		m_width = 2;
 		m_height = 1;
+		if (!dir) reverseChar(Default, m_width * m_height);
 		m_sprite = new wchar_t[m_width * m_height];
 		ZeroMemory(m_sprite, sizeof(wchar_t) * m_width * m_height);
 
 		memcpy(m_sprite, Default, sizeof(wchar_t) * m_width * m_height);
 		m_color = 12;
-
-		
-		
-		
 	}
-	if (m_type == HANDGUN && m_chargeShoot)
+	if (m_bulletType == HANDGUN && m_chargeShoot)
 	{
-		m_bulletDamage = 3;
+		m_bulletDamage = 5;
 		m_width = 4;
 		m_height = 1;
+		if (!dir) reverseChar(ChargeDefault, m_width * m_height);
 		m_sprite = new wchar_t[m_width * m_height];
 		ZeroMemory(m_sprite, sizeof(wchar_t) * m_width * m_height);
 
 		memcpy(m_sprite, ChargeDefault, sizeof(wchar_t) * m_width * m_height);
 		m_color = 12;
 	}
-	if (m_type == TANKGUN)
+	if (m_bulletType == TANKGUN)
 	{
-		m_bulletDamage = 2;
+		m_bulletDamage = 3;
 		m_width = 2;
 		m_height = 1;
+		if (!dir) reverseChar(MachineGun, m_width * m_height);
 		m_sprite = new wchar_t[m_width * m_height];
 		ZeroMemory(m_sprite, sizeof(wchar_t) * m_width * m_height);
 
 		memcpy(m_sprite, MachineGun, sizeof(wchar_t) * m_width * m_height);
 		m_color = LIGHTCYAN;
 	}
-	if (m_type == TANKGUN && m_chargeShoot)
+	if (m_bulletType == TANKGUN && m_chargeShoot)
 	{
 		m_bulletDamage = 5;
 		m_width = 5;
 		m_height = 1;
+		if (!dir) reverseChar(ChargeMachineGun, m_width * m_height);
 		m_sprite = new wchar_t[m_width * m_height];
 		ZeroMemory(m_sprite, sizeof(wchar_t) * m_width * m_height);
 
 		memcpy(m_sprite, ChargeMachineGun, sizeof(wchar_t) * m_width * m_height);
 		m_color = LIGHTCYAN;
 	}
-	if (m_type == HEABYGUN)
-	{
-		m_bulletDamage = 2;
-		m_width = 2;
-		m_height = 1;
-		m_sprite = new wchar_t[m_width * m_height];
-		ZeroMemory(m_sprite, sizeof(wchar_t) * m_width * m_height);
-
-		memcpy(m_sprite, MachineGun, sizeof(wchar_t) * m_width * m_height);
-		m_color = YELLOW;
-	}
-	if (m_type == HEABYGUN && m_chargeShoot)
+	if (m_bulletType == HEABYGUN)
 	{
 		m_bulletDamage = 4;
+		m_width = 2;
+		m_height = 1;
+		m_sprite = new wchar_t[m_width * m_height];
+		ZeroMemory(m_sprite, sizeof(wchar_t) * m_width * m_height);
+
+		memcpy(m_sprite, MachineGun, sizeof(wchar_t) * m_width * m_height);
+		m_color = YELLOW;
+	}
+	if (m_bulletType == HEABYGUN && m_chargeShoot)
+	{
+		m_bulletDamage = 5;
 		m_width = 5;
 		m_height = 1;
+		if (!dir) reverseChar(ChargeMachineGun, m_width * m_height);
 		m_sprite = new wchar_t[m_width * m_height];
 		ZeroMemory(m_sprite, sizeof(wchar_t) * m_width * m_height);
 
 		memcpy(m_sprite, ChargeMachineGun, sizeof(wchar_t) * m_width * m_height);
 		m_color = YELLOW;
 	}
-	if (m_type == MISSILE )
+	if (m_bulletType == MISSILE )
 	{
 		m_bulletDamage = 5;
 		m_width = 5;
 		m_height = 1;
+		if (!dir) reverseChar(Missile, m_width * m_height);
 		m_sprite = new wchar_t[m_width * m_height];
 		memcpy(m_sprite, Missile, sizeof(wchar_t) * m_width * m_height);
 		m_color = LIGHTMAGENTA;
 	}
-	if (m_type == MISSILE && m_chargeShoot)
+	if (m_bulletType == MISSILE && m_chargeShoot)
 	{
 		m_bulletDamage = 8;
 		m_width = 7;
 		m_height = 1;
+		if (!dir) reverseChar(ChargeMissile, m_width * m_height);
 		m_sprite = new wchar_t[m_width * m_height];
 		memcpy(m_sprite, ChargeMissile, sizeof(wchar_t) * m_width * m_height);
 		m_color = LIGHTMAGENTA;
 	}
-	if (m_type == SHOTGUN)
+	if (m_bulletType == SHOTGUN)
 	{
 		m_bulletDamage = 10;
 		m_width = 30;
@@ -137,7 +141,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 		memcpy(m_sprite, ShotGun, sizeof(wchar_t) * m_width * m_height);
 		m_color = RED;
 	}
-	if (m_type == SHOTGUN && m_chargeShoot)
+	if (m_bulletType == SHOTGUN && m_chargeShoot)
 	{
 		m_bulletDamage = 15;
 		m_width = 30;
@@ -146,7 +150,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 		memcpy(m_sprite, ChargeShotGun, sizeof(wchar_t) * m_width * m_height);
 		m_color = LIGHTRED;
 	}
-	if (m_type == BOSS_CANNON)
+	if (m_bulletType == BOSS_CANNON)
 	{
 		wchar_t cannonImg[9] = { L'o',L'O',L'o',L'O',L'O',L'O',L'o',L'O',L'o' };
 
@@ -160,7 +164,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 		m_color = LIGHTRED;
 	}
 
-	if (m_type == BOOMB)
+	if (m_bulletType == BOOMB)
 	{
 		m_bulletSpeed = 4.f;
 		boombStep = 1;
@@ -214,8 +218,6 @@ Bullet::~Bullet()
 
 int Bullet::Update()
 {
-	
-
 	if (!m_isEnemy)
 	{
 		auto EnemyObj = GetComponent<BoxCollider>()->OnTriggerEnter(L"Enemy");
@@ -223,14 +225,10 @@ int Bullet::Update()
 		{
 			//obj2->SetIsAttacked(true);
 			//obj1->SetIsAttacked(true);
-			
-
-
 			if (EnemyObj->GetName() == L"Guard")
 			{
-
 				printf("°¡µå¸ÂÀ½");
-				SetIsLife(false);
+				if (m_bulletType != SHOTGUN) SetIsLife(false);
 			}
 
 		 else
@@ -243,12 +241,8 @@ int Bullet::Update()
 				enemy->GetDamage(m_bulletDamage, GetPos(), true);
 
 				GameMgr::GetInstance()->SetEnemy(enemy);
-				SetIsLife(false);
+				if (m_bulletType != SHOTGUN) SetIsLife(false);
 			}
-			
-		
-		
-			
 		}
 
 
@@ -257,8 +251,7 @@ int Bullet::Update()
 		{
 			std::shared_ptr<Boss> boss = std::dynamic_pointer_cast<Boss>(bossObj);
 			GameMgr::GetInstance()->SetBoss(boss);
-			if (m_type != SHOTGUN)
-				SetIsLife(false);
+			if (m_bulletType != SHOTGUN) SetIsLife(false);
 		}
 	}
 	else
@@ -283,24 +276,15 @@ int Bullet::Update()
 	}
 
 
-
-
 	BulletMove();
-	
 
-
-
+	m_timer += Timer::DeltaTime();
 
 	if (m_timer >= m_MaxTimer)
 		m_Life = false;
 
 	if (!m_Life)
 		return -1;
-
-	m_timer += Timer::DeltaTime();
-
-	return 0;
-
 }
 
 int Bullet::LateUpdate()
@@ -362,3 +346,12 @@ void Bullet::DefaultBulletMove()
 		m_pos.x -= Timer::DeltaTime() * m_bulletSpeed;
 }
 
+void Bullet::reverseChar(wchar_t* w, int size)
+{
+	for (int i = 0; i < size - 1 - i; ++i)
+	{
+		wchar_t temp = w[i];
+		w[i] = w[size - 1 - i];
+		w[size - 1 - i] = temp;
+	}
+}
