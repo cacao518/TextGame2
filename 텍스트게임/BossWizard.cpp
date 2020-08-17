@@ -38,7 +38,7 @@ BossWizard::BossWizard(POS pos)
 	m_centerPart->SetIsDamagingPart(true);
 
 	m_name = L"Boss";
-	m_status = STATUS(100.f, 8.f, 10.f);
+	m_status = STATUS(150.f, 8.f, 10.f);
 	m_curPattern = NOT_RECOGNIZE;
 	m_dir = false;
 	UpdateCenterPos();
