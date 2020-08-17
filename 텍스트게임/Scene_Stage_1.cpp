@@ -71,7 +71,7 @@ Scene_Stage_1::Scene_Stage_1()
 	////////////////////////////////////////////////////////////////////
 /*	std::shared_ptr<Guard> enemy10 = std::make_shared<Guard>(POS(x + 1, y - 5));
 	m_objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy10));
-
+	*/
 	std::ifstream fp;
 	fp.open("map.txt");
 	for (int i = 0; i < MapHeight; i++) {
