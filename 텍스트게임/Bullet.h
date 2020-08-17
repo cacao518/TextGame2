@@ -3,7 +3,7 @@
 class Bullet :public GameObject
 {
 public:
-	enum OBJTYPE { HANDGUN, TANKGUN, HEABYGUN, MISSILE, SHOTGUN, BOSS_CANNON, TYPE_END};
+	enum OBJTYPE { HANDGUN, TANKGUN, HEABYGUN, MISSILE, SHOTGUN, BOSS_CANNON, BOOMB TYPE_END};
 
 	Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position);
 	~Bullet();
@@ -14,15 +14,21 @@ public:
 	
 	const float GetBulletDamage()const { return m_bulletDamage; }
 	const bool GetIsEnemy()const { return m_isEnemy; }
-
+private:
+	void BulletMove();
+	void BossCannonMove();
+	void DefaultBulletMove();
 private:
 	float m_MaxTimer;
 	int m_bulletSpeed;
 	float m_timer = 0.f;
 	bool m_chargeShoot = false;
 	float m_bulletDamage;
+	float m_bulletSpeed=10.f;
+	float m_gravitySpeed = 0.f;
 	bool m_isEnemy;
-	int m_type;
 
+	OBJTYPE m_bulletType = TYPE_END;
+	int boombStep=0;
 };
 

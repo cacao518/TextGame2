@@ -161,6 +161,27 @@
     <ClCompile Include="Vehicle.cpp">
       <Filter>Object\05.Vehicle</Filter>
     </ClCompile>
+    <ClCompile Include="GuardEnemy.cpp">
+      <Filter>Object\01.Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Object\06.Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Part.cpp">
+      <Filter>Object\06.Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="BossTank.cpp">
+      <Filter>Object\06.Boss\BossTank</Filter>
+    </ClCompile>
+    <ClCompile Include="BossUI.cpp">
+      <Filter>Object\10.UI\BossUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Guard.cpp">
+      <Filter>Object\01.Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="GunEnemy.cpp">
+      <Filter>Object\01.Enemy</Filter>
+    </ClCompile>
     <ClCompile Include="Boss.cpp">
       <Filter>Object\06.Boss</Filter>
     </ClCompile>
@@ -264,6 +285,15 @@
     </ClInclude>
     <ClInclude Include="BossUI.h">
       <Filter>Object\10.UI\BossUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GuardEnemy.h">
+      <Filter>Object\01.Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Guard.h">
+      <Filter>Object\01.Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="GunEnemy.h">
+      <Filter>Object\01.Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -22,6 +22,7 @@ public:
 	bool GetIsLand();
 	void SetIsLand(bool flag);
 	void SetIsLife(bool flag);
+	void SetColor(int color);
 	int GetWidth();
 	int GetHeight();
 	POS GetCollisionObjPos();

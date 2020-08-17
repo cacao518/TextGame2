@@ -30,6 +30,7 @@ private:
 	std::thread KeyUpdate;
 
 	void Attack(bool charge);
+	void boombAttack();
 	ObjectMgr* objectMgr = ObjectMgr::GetInstance();
 	wchar_t bulletImg[2] = { '0','0' };
 	bool m_dir = true; //오른쪽이 트루임
@@ -43,6 +44,8 @@ private:
 	
 	const int ATTACK_DELAY_MAX = 10;
 	const int DEFAULT_WEAPON_SPEED = 20;
+	int boombAmount=10;
+
 	int m_weaponType;
 	int m_weaponSpeed;
 	int m_attackDelay; // 0이 되어야 공격 가능하다.

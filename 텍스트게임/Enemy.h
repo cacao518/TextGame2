@@ -13,8 +13,9 @@ public:
 
 	void Knockback(POS otherObjPos);
 	const STATUS& GetStatus()const { return m_Status; }
+	void GetDamage(float damage, POS bulletPos,bool isKnockback);
 
-private:
+protected:
 	ObjectMgr* objectMgr = ObjectMgr::GetInstance();
 	
 	//bool isGround = true;

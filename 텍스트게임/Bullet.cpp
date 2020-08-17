@@ -2,11 +2,16 @@
 #include"Timer.h"
 #include"BoxCollider.h"
 #include "Enemy.h"
+#include "GuardEnemy.h"
 #include "GameMgr.h"
 #include "Boss.h"
 #include "Player.h"
-Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir,  POS position)
-	:GameObject(position),m_isEnemy(isEnemy)
+#include "Bullet.h"
+#include "RigidBody.h"
+#include "Guard.h"
+
+Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position)
+	:GameObject(position), m_isEnemy(isEnemy), m_bulletDamage(0.f), m_timer(0.f),m_bulletType((OBJTYPE)BulletType)
 {
 	m_type = BulletType;
 	m_chargeShoot = charge;
@@ -34,13 +39,24 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir,  POS positio
 	wchar_t ShotGun[60] = { L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#' };
 	wchar_t ChargeShotGun[60] = { L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#' };
 	if (m_type == HANDGUN)
+	wchar_t boombImg[2] = { L'0',L'0' };
+
+	wchar_t cannonImg[9] = { L'o',L'O',L'o',L'O',L'O',L'O',L'o',L'O',L'o' };
+
+	if (BulletType == HANDGUN)
 	{
 		m_bulletDamage = 1;
 		m_width = 2;
 		m_height = 1;
 		m_sprite = new wchar_t[m_width * m_height];
+		ZeroMemory(m_sprite, sizeof(wchar_t) * m_width * m_height);
+
 		memcpy(m_sprite, Default, sizeof(wchar_t) * m_width * m_height);
 		m_color = 12;
+
+		
+		
+		
 	}
 	if (m_type == HANDGUN && m_chargeShoot)
 	{
@@ -48,6 +64,8 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir,  POS positio
 		m_width = 4;
 		m_height = 1;
 		m_sprite = new wchar_t[m_width * m_height];
+		ZeroMemory(m_sprite, sizeof(wchar_t) * m_width * m_height);
+
 		memcpy(m_sprite, ChargeDefault, sizeof(wchar_t) * m_width * m_height);
 		m_color = 12;
 	}
@@ -57,6 +75,8 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir,  POS positio
 		m_width = 2;
 		m_height = 1;
 		m_sprite = new wchar_t[m_width * m_height];
+		ZeroMemory(m_sprite, sizeof(wchar_t) * m_width * m_height);
+
 		memcpy(m_sprite, MachineGun, sizeof(wchar_t) * m_width * m_height);
 		m_color = LIGHTCYAN;
 	}
@@ -66,6 +86,8 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir,  POS positio
 		m_width = 5;
 		m_height = 1;
 		m_sprite = new wchar_t[m_width * m_height];
+		ZeroMemory(m_sprite, sizeof(wchar_t) * m_width * m_height);
+
 		memcpy(m_sprite, ChargeMachineGun, sizeof(wchar_t) * m_width * m_height);
 		m_color = LIGHTCYAN;
 	}
@@ -75,6 +97,8 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir,  POS positio
 		m_width = 2;
 		m_height = 1;
 		m_sprite = new wchar_t[m_width * m_height];
+		ZeroMemory(m_sprite, sizeof(wchar_t) * m_width * m_height);
+
 		memcpy(m_sprite, MachineGun, sizeof(wchar_t) * m_width * m_height);
 		m_color = YELLOW;
 	}
@@ -84,6 +108,8 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir,  POS positio
 		m_width = 5;
 		m_height = 1;
 		m_sprite = new wchar_t[m_width * m_height];
+		ZeroMemory(m_sprite, sizeof(wchar_t) * m_width * m_height);
+
 		memcpy(m_sprite, ChargeMachineGun, sizeof(wchar_t) * m_width * m_height);
 		m_color = YELLOW;
 	}
@@ -125,15 +151,30 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir,  POS positio
 	}
 	if (m_type == BOSS_CANNON)
 	{
-		wchar_t cannonImg[9] = { L'o',L'@',L'o',L'@',L'@',L'@',L'o',L'@',L'o' };
+		m_bulletSpeed = 10.f;
 		m_bulletDamage = 40.f;
 		m_width = 3;
 		m_height = 3;
-		m_sprite = new wchar_t[m_width, m_height];
+		m_sprite = new wchar_t[m_width * m_height];
+		ZeroMemory(m_sprite, sizeof(wchar_t) * m_width * m_height);
 		memcpy(m_sprite, cannonImg, sizeof(wchar_t) * m_width * m_height);
 		m_color = LIGHTRED;
 	}
+
+	if (BulletType == BOOMB)
+	{
+		m_bulletSpeed = 4.f;
+		boombStep = 1;
+		m_bulletDamage = 10.f;
+		m_width = 2;
+		m_height = 1;
+		m_sprite = new wchar_t[m_width* m_height];
+		memcpy(m_sprite, boombImg, sizeof(wchar_t) * m_width * m_height);
+		m_color = 12;
+
+	}
 	m_dir = dir;
+	m_gravitySpeed = 0.f;
 	m_name = L"Bullet";
 }
 
@@ -143,21 +184,43 @@ Bullet::~Bullet()
 
 int Bullet::Update()
 {
+	
+
 	if (!m_isEnemy)
 	{
-		auto otherObj = GetComponent<BoxCollider>()->OnTriggerEnter(L"Enemy");
-		if (otherObj != nullptr)
+		auto EnemyObj = GetComponent<BoxCollider>()->OnTriggerEnter(L"Enemy");
+		if (EnemyObj != nullptr)
 		{
 			//obj2->SetIsAttacked(true);
 			//obj1->SetIsAttacked(true);
+			
 
-			std::shared_ptr<Enemy> enemy = std::dynamic_pointer_cast<Enemy>(otherObj);
-			enemy->SetHp(m_bulletDamage);
-			enemy->Knockback(enemy->GetPos());
-			GameMgr::GetInstance()->SetEnemy(enemy);
-			if(m_type != SHOTGUN)
+
+			if (EnemyObj->GetName() == L"Guard")
+			{
+
+				printf("가드맞음");
 				SetIsLife(false);
+			}
+
+		 else
+			{
+				std::shared_ptr<Enemy> enemy = std::dynamic_pointer_cast<Enemy>(EnemyObj);
+
+				if (EnemyObj->GetName() == L"GuardEnemy")
+				enemy->GetDamage(m_bulletDamage, GetPos(),false);
+				else
+				enemy->GetDamage(m_bulletDamage, GetPos(), true);
+
+				GameMgr::GetInstance()->SetEnemy(enemy);
+				SetIsLife(false);
+			}
+			
+		
+		
+			
 		}
+
 
 		auto bossObj = GetComponent<BoxCollider>()->OnTriggerEnter(L"Boss");
 		if (bossObj != nullptr)
@@ -175,17 +238,28 @@ int Bullet::Update()
 		{
 			std::shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(playerObj);
 			player->GetDamage(m_bulletDamage, m_pos);
+			SetIsLife(false);
 		}
 	}
 	
+	if (boombStep == 1) {
 
-	if (m_dir)
-		m_pos.x += Timer::DeltaTime() * m_bulletSpeed;
-	else
-		m_pos.x -= Timer::DeltaTime() * m_bulletSpeed;
+		GetComponent<RigidBody>()->AddForce(0, 3);
+		boombStep = 2;
+	}
+	if (boombStep == 2 && (GetIsLand() && GetComponent<RigidBody>()->gravitySpeed <= 0))
+	{
+		return -1;
+	}
 
 
-	m_timer += Timer::DeltaTime();
+
+
+	BulletMove();
+	
+
+
+
 
 	if (m_timer >= m_MaxTimer)
 		m_Life = false;
@@ -195,10 +269,47 @@ int Bullet::Update()
 	else
 		return -1;
 
+
+	m_timer += Timer::DeltaTime();
+
+
+
 }
 
 int Bullet::LateUpdate()
 {
 	return 1;
+}
+
+void Bullet::BulletMove()
+{
+	switch (m_bulletType)
+	{
+	case BOSS_CANNON:
+		BossCannonMove();
+		break;
+	default:
+		DefaultBulletMove();
+		break;
+	}
+}
+
+void Bullet::BossCannonMove()
+{
+	if (m_dir)
+		m_pos.x += Timer::DeltaTime() * m_bulletSpeed;
+	else
+		m_pos.x -= Timer::DeltaTime() * m_bulletSpeed;
+
+	m_pos.y += m_gravitySpeed * Timer::DeltaTime();
+	m_gravitySpeed += Timer::DeltaTime() * 4.f;
+}
+
+void Bullet::DefaultBulletMove()
+{
+	if (m_dir)
+		m_pos.x += Timer::DeltaTime() * 10;
+	else
+		m_pos.x -= Timer::DeltaTime() * 10;
 }
 

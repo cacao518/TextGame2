@@ -5,7 +5,7 @@
 #include "RigidBody.h"
 
 Enemy::Enemy(POS position)
-	:GameObject(position), m_Status(STATUS(10.f, 10.f, 0.1f))
+	:GameObject(position), m_Status(STATUS(10.f, 10.f, 5.f))
 {
 	wchar_t monsterImg[4] = { '*', '*', 'M', 'M' };
 
@@ -75,4 +75,13 @@ void Enemy::Knockback(POS otherObjPos)
 		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * -12, Timer::DeltaTime() * 8);
 }
 
-
+void Enemy::GetDamage(float damage, POS bulletPos , bool isKnockback)
+{
+	if(isKnockback) Knockback(bulletPos);
+	printf("ÀûÃ¼·Â %f ", m_Status.hp);
+	m_Status.hp -= damage;
+	if (m_Status.hp <= 0) m_Life = false;
+		
+		
+	
+}

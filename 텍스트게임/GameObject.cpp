@@ -2,7 +2,7 @@
 #include "RigidBody.h"
 #include "BoxCollider.h"
 GameObject::GameObject(POS initPos)
-	:m_pos(initPos),m_sprite(nullptr),m_name(nullptr),m_width(0),m_height(0),m_color(15), m_collisionObjPos(initPos)
+	:m_pos(initPos),m_sprite(nullptr),m_name(nullptr),m_width(0),m_height(0),m_color(15), m_collisionObjPos(initPos),m_Life(true)
 {
 	
 }
@@ -66,6 +66,11 @@ void GameObject::SetIsLand(bool flag)
 void GameObject::SetIsLife(bool flag)
 {
 	m_Life = flag;
+}
+
+void GameObject::SetColor(int color)
+{
+	m_color = color;
 }
 
 int GameObject::GetWidth()

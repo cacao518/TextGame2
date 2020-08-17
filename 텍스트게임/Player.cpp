@@ -75,10 +75,7 @@ int Player::Update()
 		GetComponent<RigidBody>()->AddForce(0, m_jumpPower);
 		m_jumpCount++;
 	}
-	/*
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
 
-	{
 
 		printf("아래키누름");
 
@@ -108,6 +105,13 @@ int Player::Update()
 	if (keyPress['d']) {
 		m_charging = true; 
 	}
+
+	if (keyPress['e'] && boombAmount>0) 
+	{
+		boombAmount -= 1;
+		boombAttack();
+	}
+
 	if (keyPress[VK_SPACE] && m_isRide) // 슬러그 내리기
 	{
 		GetComponent<RigidBody>()->AddForce(0, m_jumpPower);
@@ -128,8 +132,7 @@ int Player::Update()
 		tank->AddComponent(bc4);
 	}
 
-	//std::shared_ptr<ChargeParticle1>particle = std::make_shared<ChargeParticle1>(POS(m_pos.x, m_pos.y));
-	//objectMgr->InsertObject(PARTICLE, std::dynamic_pointer_cast<GameObject>(particle));
+
 	//피격
 	if (m_isAttacked) {
 		m_timer += Timer::DeltaTime();
@@ -141,7 +144,6 @@ int Player::Update()
 	//차징샷
 	if (m_charging)
 	{
-		//particle->SetUpdatePos(m_pos.x, m_pos.y, m_color);
 		m_colorCount += Timer::DeltaTime();
 		if ((int)m_colorCount % 2==0)
 		{
@@ -154,7 +156,6 @@ int Player::Update()
 		if (m_colorCount <0) {
 			Attack(true);
 			m_color = 9;  m_colorCount = 0;  m_charging = false;
-		//	particle->SetIsLife(false);
 		}
 	}
 
@@ -307,6 +308,8 @@ void Player::Attack(bool charge)
 	else if(m_isRide)
 		bullet = std::make_shared<Bullet>(false, true, Bullet::TANKGUN, m_dir, POS(x, y));
 
+
+
 	objectMgr->InsertObject(BULLET, std::dynamic_pointer_cast<GameObject>(bullet));
 	BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(bullet));
 	bullet->AddComponent(bc);
@@ -318,6 +321,16 @@ void Player::Attack(bool charge)
 	m_attackDelay = ATTACK_DELAY_MAX;
  }
 
+void Player::boombAttack()
+{
+	std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(false, false, Bullet::BOOMB, m_dir, POS(m_pos.x + 1, m_pos.y - 2));
+	objectMgr->InsertObject(BULLET, std::dynamic_pointer_cast<GameObject>(bullet));
+	BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(bullet));
+	RigidBody* rb = new RigidBody(std::dynamic_pointer_cast<GameObject>(bullet));
+	bullet->AddComponent(rb);
+	bullet->AddComponent(bc);
+	bc->SetIsTrigger(true);
+}
 
 
 
