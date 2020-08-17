@@ -246,12 +246,10 @@ int Bullet::Update()
 				enemy->GetDamage(m_bulletDamage, GetPos());
 				
 				GameMgr::GetInstance()->SetEnemy(enemy);
-				SetIsLife(false);
 			
-		if (m_bulletType != SHOTGUN) SetIsLife(false);
+			if (m_bulletType != SHOTGUN) SetIsLife(false);
 				
-			
-		
+
 		}
 
 
