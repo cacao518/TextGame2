@@ -75,10 +75,9 @@ void Enemy::Knockback(POS otherObjPos)
 		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * -12, Timer::DeltaTime() * 15);
 }
 
-void Enemy::GetDamage(float damage, POS bulletPos)
+void Enemy::GetDamage(float damage, POS bulletPos , bool isKnockback)
 {
-	
-	Knockback(bulletPos);
+	if(isKnockback) Knockback(bulletPos);
 	printf("ÀûÃ¼·Â %f ", m_Status.hp);
 	m_Status.hp -= damage;
 	if (m_Status.hp <= 0) m_Life = false;

@@ -132,21 +132,20 @@ int Bullet::Update()
 			SetIsLife(false);
 		}
 
-		 else if (EnemyObj->GetName() == L"Enemy")
+		 else
 			{
 				std::shared_ptr<Enemy> enemy = std::dynamic_pointer_cast<Enemy>(EnemyObj);
-				enemy->GetDamage(m_bulletDamage, GetPos());
+
+				if (EnemyObj->GetName() == L"GuardEnemy")
+				enemy->GetDamage(m_bulletDamage, GetPos(),false);
+				else
+				enemy->GetDamage(m_bulletDamage, GetPos(), true);
+
 				GameMgr::GetInstance()->SetEnemy(enemy);
 				SetIsLife(false);
 			}
 			
-		    else if (EnemyObj->GetName() == L"GuardEnemy")
-			{
-				std::shared_ptr<GuardEnemy> enemy = std::dynamic_pointer_cast<GuardEnemy>(EnemyObj);
-				enemy->GetDamage(m_bulletDamage, m_dir);
-				GameMgr::GetInstance()->SetEnemy(enemy);
-				SetIsLife(false);
-			}
+		
 		
 			
 		}
