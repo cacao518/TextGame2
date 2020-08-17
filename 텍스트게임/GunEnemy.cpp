@@ -2,29 +2,20 @@
 #include "Timer.h"
 #include "Bullet.h"
 
+#include "BoxCollider.h"
+#include "RigidBody.h"
 
+#include "Player.h"
 GunEnemy::GunEnemy(POS position)
 	:Enemy(position), m_Status(STATUS(10.f, 10.f, 10.f))
-{/*
-	wchar_t monsterImg2_LEFT[15] =
-	{ '[',' ','@',' ','@',
-	'[','r','-','0',' ',
-	'[',' ',' ','0',' ' };
-	//memcpy(m_sprite, monsterImg2_LEFT, sizeof(wchar_t) * m_width * m_height);
-
-	wchar_t monsterImg2_RIGHT[15] =
-	{ '@',' ','@',' ',']',
-	' ','0','-','>',']',
-	' ','0',' ',' ',']' };
-	*/
-
-
+{
+	
 	m_width = 2;
 	m_height = 3;
 	m_sprite = new wchar_t[m_width * m_height];
 	memcpy(m_sprite, monsterImg2_LEFT, sizeof(wchar_t) * m_width * m_height);
 
-	m_name = L"GuardEnemy";
+	m_name = L"GunEnemy";
 	m_color = 4;
 }
 
@@ -39,13 +30,9 @@ int GunEnemy::Update()
 	{
 		m_MoveCount = 0;
 		m_dir = !m_dir;
-
-
-		//	if(m_dir)memcpy(m_sprite, monsterImg2_RIGHT, sizeof(char) * m_width * m_height);
-			//else memcpy(m_sprite, monsterImg2_LEFT, sizeof(char) * m_width * m_height);
 	}
 
-
+	DistanceCheck();
 
 
 
@@ -56,16 +43,45 @@ int GunEnemy::Update()
 
 }
 
-
-//오버라이딩
-void GunEnemy::GetDamage(float damage, bool dir)
+void GunEnemy::DistanceCheck()
 {
+	std::shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(ObjectMgr::GetInstance()->GetFrontObject(PLAYER));
+	if (nullptr == player)
+		return;
+	//플레이어와 거리 비교
+	float lenToPlayer, xDist, yDist;
+	xDist = player->GetPos().x - m_pos.x;
+	yDist = player->GetPos().y - m_pos.y;
+	lenToPlayer = sqrtf(xDist * xDist + yDist * yDist);
 
-	//Knockback(bulletPos);
-	printf("가드몬터맞음 %f ", m_Status.hp);
-	m_Status.hp -= damage;
-	if (m_Status.hp <= 0) m_Life = false;
+	if (lenToPlayer <= 12.f  )
+		Attack();
+
+
+	if (player->GetPos().x > m_pos.x)
+	{
+		m_bulletDir = true;
+		memcpy(m_sprite, monsterImg2_RIGHT, sizeof(wchar_t) * m_width * m_height);
+	}
+	else
+	{
+		m_bulletDir = false;
+		memcpy(m_sprite, monsterImg2_LEFT, sizeof(wchar_t) * m_width * m_height);
+	}
+		
 
 
 
 }
+
+void GunEnemy::Attack()
+{
+		std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(true, false, Bullet::ENEMYBULLET, m_bulletDir , POS(GetPos().x , GetPos().y+1 ));
+		ObjectMgr::GetInstance()->InsertObject(BULLET, std::dynamic_pointer_cast<GameObject>(bullet));
+		BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(bullet));
+		bullet->AddComponent(bc);
+		bc->SetIsTrigger(true);
+}
+
+
+

@@ -16,6 +16,8 @@ Enemy::Enemy(POS position)
 
 	m_name = L"Enemy";
 	m_color = 2;
+	baseColor = m_color;
+	
 }
 
 Enemy::~Enemy()
@@ -35,17 +37,12 @@ int Enemy::Update()
 		m_dir = !m_dir;
 	}
 
+	
 
 		
 
-	/*
-	m_timer += Timer::DeltaTime();
-	bool isDie = false;
-	if (m_timer >= 2.f)
-		isDie = true;
+	
 
-
-		*/
 	if (m_Life)
 		return 1;
 	else
@@ -58,14 +55,7 @@ int Enemy::LateUpdate()
 }
 
 
-void Enemy::SetHp(float damage)
-{
 
-	printf("적체력 %f ", m_Status.hp);
-	m_Status.hp -= damage;
-
-	if (m_Status.hp <= 0) m_Life = false;
-}
 
 void Enemy::Knockback(POS otherObjPos)
 {
@@ -75,13 +65,38 @@ void Enemy::Knockback(POS otherObjPos)
 		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * -12, Timer::DeltaTime() * 15);
 }
 
-void Enemy::GetDamage(float damage, POS bulletPos , bool isKnockback)
+void Enemy::GetDamage(float damage, POS bulletPos)
 {
-	if(isKnockback) Knockback(bulletPos);
+    Knockback(bulletPos);
 	printf("적체력 %f ", m_Status.hp);
 	m_Status.hp -= damage;
 	if (m_Status.hp <= 0) m_Life = false;
 		
-		
-	
 }
+
+//가드에너미용
+void Enemy::GetDamage(float damage, bool bulletDir)
+{
+
+	//if (bulletDir != m_dir) return;
+	if (bulletDir) return;
+	printf("적체력 %f ", m_Status.hp);
+	m_Status.hp -= damage;
+	if (m_Status.hp <= 0) m_Life = false;
+
+}
+
+void Enemy::damagedColor()
+{
+
+	//피격
+	if (m_isAttacked) {
+		m_color = 13;
+		m_timer += Timer::DeltaTime();
+		//무적 종료 , 색 복귀, 타이머 초기화, 반복문종료
+		if (m_timer > 2) {
+			m_color = baseColor;  m_timer = 0; m_isAttacked = false;
+		}
+	}
+}
+

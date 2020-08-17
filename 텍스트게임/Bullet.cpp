@@ -120,6 +120,17 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 		m_color = 12;
 
 	}
+
+	if (BulletType == ENEMYBULLET)
+	{
+		m_bulletSpeed = 5.f;
+		m_bulletDamage = 10.f;
+		m_width = 2;
+		m_height = 1;
+		m_sprite = new wchar_t[m_width * m_height];
+		memcpy(m_sprite, boombImg, sizeof(wchar_t) * m_width * m_height);
+		m_color = 2;
+	}
 	m_dir = dir;
 	m_gravitySpeed = 0.f;
 	m_name = L"Bullet";
@@ -140,32 +151,19 @@ int Bullet::Update()
 		{
 			//obj2->SetIsAttacked(true);
 			//obj1->SetIsAttacked(true);
-			
+			EnemyObj->SetIsAttacked(true);
 
-
-			if (EnemyObj->GetName() == L"Guard")
-			{
-
-				printf("가드맞음");
-				SetIsLife(false);
-			}
-
-		 else
-			{
 				std::shared_ptr<Enemy> enemy = std::dynamic_pointer_cast<Enemy>(EnemyObj);
 
-				if (EnemyObj->GetName() == L"GuardEnemy")
-				enemy->GetDamage(m_bulletDamage, GetPos(),false);
+				if (EnemyObj->GetName() == L"GuardEnemy" &&m_bulletType!=BOOMB)
+				enemy->GetDamage(m_bulletDamage, m_dir);
 				else
-				enemy->GetDamage(m_bulletDamage, GetPos(), true);
+				enemy->GetDamage(m_bulletDamage, GetPos());
 
 				GameMgr::GetInstance()->SetEnemy(enemy);
 				SetIsLife(false);
-			}
 			
 		
-		
-			
 		}
 
 
@@ -254,8 +252,8 @@ void Bullet::BossCannonMove()
 void Bullet::DefaultBulletMove()
 {
 	if (m_dir)
-		m_pos.x += Timer::DeltaTime() * 10;
+		m_pos.x += Timer::DeltaTime() * m_bulletSpeed;
 	else
-		m_pos.x -= Timer::DeltaTime() * 10;
+		m_pos.x -= Timer::DeltaTime() * m_bulletSpeed;
 }
 
