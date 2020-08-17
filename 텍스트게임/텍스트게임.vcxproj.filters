@@ -162,6 +162,21 @@
       <Filter>Object\05.Vehicle</Filter>
     </ClCompile>
     <ClCompile Include="Boss.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BossTank.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BossUI.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Part.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GuardEnemy.cpp">
+      <Filter>Object\01.Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
       <Filter>Object\06.Boss</Filter>
     </ClCompile>
     <ClCompile Include="Part.cpp">
@@ -279,12 +294,6 @@
       <Filter>리소스 파일</Filter>
     </Text>
     <Text Include="Logo.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
-    <Text Include="Boss1_DownPart.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
-    <Text Include="Boss1_UpPart.txt">
       <Filter>리소스 파일</Filter>
     </Text>
   </ItemGroup>
