@@ -13,21 +13,21 @@ ItemBox::ItemBox(int type, POS position)
 	m_sprite = new wchar_t[m_width * m_height];
 	if (m_type == Bullet::HEABYGUN)
 	{
-		m_weaponSpeed = 20;
+		m_weaponSpeed = 20.f;
 		m_bulletNum = 50;
 		memcpy(m_sprite, img1, sizeof(wchar_t) * m_width * m_height);
 		m_color = YELLOW;
 	}
 	else if (m_type == Bullet::MISSILE)
 	{
-		m_weaponSpeed = 10;
+		m_weaponSpeed = 10.f;
 		m_bulletNum = 20;
 		memcpy(m_sprite, img2, sizeof(wchar_t) * m_width * m_height);
 		m_color = BLUE;
 	}
 	else if (m_type == Bullet::SHOTGUN)
 	{
-		m_weaponSpeed = 5;
+		m_weaponSpeed = 5.f;
 		m_bulletNum = 10;
 		memcpy(m_sprite, img3, sizeof(wchar_t) * m_width * m_height);
 		m_color = GREEN;

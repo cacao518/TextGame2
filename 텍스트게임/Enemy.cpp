@@ -60,9 +60,9 @@ int Enemy::LateUpdate()
 void Enemy::Knockback(POS otherObjPos)
 {
 	if (ObjectMgr::GetInstance()->m_ObjectList[PLAYER].front()->GetPos().x <= m_pos.x)
-		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * 12, Timer::DeltaTime() * 8);
+		GetComponent<RigidBody>()->AddForce((int)(Timer::DeltaTime() * 12.f), (int)(Timer::DeltaTime() * 8.f));
 	else
-		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * -12, Timer::DeltaTime() * 8);
+		GetComponent<RigidBody>()->AddForce((int)(Timer::DeltaTime() * -12.f), (int)(Timer::DeltaTime() * 8.f));
 }
 
 void Enemy::GetDamage(float damage, POS bulletPos)
@@ -70,7 +70,7 @@ void Enemy::GetDamage(float damage, POS bulletPos)
     Knockback(bulletPos);
 	printf("ÀûÃ¼·Â %f ", m_Status.hp);
 	m_Status.hp -= damage;
-	if (m_Status.hp <= 0) m_Life = false;
+	if (m_Status.hp <= 0.f) m_Life = false;
 		
 }
 

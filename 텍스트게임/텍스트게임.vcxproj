@@ -155,6 +155,7 @@
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="ChargeParticle1.cpp" />
+    <ClCompile Include="EndingObj.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyUI.cpp" />
     <ClCompile Include="GameMgr.cpp" />
@@ -171,8 +172,10 @@
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneMgr.cpp" />
+    <ClCompile Include="Scene_Ending.cpp" />
     <ClCompile Include="Scene_Logo.cpp" />
     <ClCompile Include="Scene_Stage_1.cpp" />
+    <ClCompile Include="Scene_Stage_2.cpp" />
     <ClCompile Include="ScrollMgr.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -189,6 +192,7 @@
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="ChargeParticle1.h" />
+    <ClInclude Include="EndingObj.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyUI.h" />
     <ClInclude Include="GameMgr.h" />
@@ -206,9 +210,11 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneMgr.h" />
+    <ClInclude Include="Scene_Ending.h" />
     <ClInclude Include="Scene_Logo.h" />
     <ClInclude Include="Scene_Stage_1.h" />
     <ClInclude Include="RigidBody.h" />
+    <ClInclude Include="Scene_Stage_2.h" />
     <ClInclude Include="ScrollMgr.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="Terrain.h" />
@@ -225,6 +231,7 @@
     <Text Include="Boss2_CenterPart.txt" />
     <Text Include="Boss2_LeftPart.txt" />
     <Text Include="Boss2_RightPart.txt" />
+    <Text Include="Ending.txt" />
     <Text Include="Logo.txt" />
     <Text Include="map.txt" />
   </ItemGroup>

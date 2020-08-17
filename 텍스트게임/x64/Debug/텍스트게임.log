@@ -1,23 +1,2 @@
-﻿  BackGround.cpp
-  BaseUI.cpp
-  Bullet.cpp
-  Enemy.cpp
-  EnemyUI.cpp
-c:\users\administrator\team1\textgame2\텍스트게임\enemyui.cpp(71): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  GameMgr.cpp
-  GameObject.cpp
-  ObjectMgr.cpp
-  Player.cpp
-c:\users\administrator\team1\textgame2\텍스트게임\player.cpp(80): warning C4244: '-=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  PlayerUI.cpp
-  ScrollMgr.cpp
-  Terrain.cpp
-  Timer.cpp
-  텍스트게임.cpp
-c:\users\administrator\team1\textgame2\텍스트게임\텍스트게임.cpp(35): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\administrator\team1\textgame2\텍스트게임\텍스트게임.cpp(51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\administrator\team1\textgame2\텍스트게임\텍스트게임.cpp(61): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\administrator\team1\textgame2\텍스트게임\텍스트게임.cpp(65): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\administrator\team1\textgame2\텍스트게임\텍스트게임.cpp(69): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다...
-  텍스트게임.vcxproj -> C:\Users\Administrator\team1\TextGame2\x64\Debug\텍스트게임.exe
+﻿  Scene_Logo.cpp
+  텍스트게임.vcxproj -> C:\Users\우석\TextGame2\x64\Debug\텍스트게임.exe

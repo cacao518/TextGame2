@@ -57,9 +57,6 @@
     <Filter Include="Manager\SceneMgr\Scene\Stage1">
       <UniqueIdentifier>{f2cfe7ac-0a0d-477b-af06-933270ca81c0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager\SceneMgr\Scene\BossStage">
-      <UniqueIdentifier>{eac034cd-351e-41c7-8e98-fa8154247561}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\99.LogoObj">
       <UniqueIdentifier>{2b96402d-5a35-40f6-8491-a7ff2bf8dad9}</UniqueIdentifier>
     </Filter>
@@ -89,6 +86,12 @@
     </Filter>
     <Filter Include="Object\06.Boss\BossWizard">
       <UniqueIdentifier>{92133b90-f987-46f1-bc6a-f0038572012f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\SceneMgr\Scene\Stage2">
+      <UniqueIdentifier>{eac034cd-351e-41c7-8e98-fa8154247561}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\SceneMgr\Scene\Ending">
+      <UniqueIdentifier>{ef9eabcc-3ae4-4cb7-a13b-c3b7dbee2788}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +203,15 @@
     <ClCompile Include="BossWizard.cpp">
       <Filter>Object\06.Boss\BossWizard</Filter>
     </ClCompile>
+    <ClCompile Include="Scene_Ending.cpp">
+      <Filter>Manager\SceneMgr\Scene\Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_Stage_2.cpp">
+      <Filter>Manager\SceneMgr\Scene\Stage2</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingObj.cpp">
+      <Filter>Object\99.LogoObj</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectMgr.h">
@@ -304,6 +316,15 @@
     <ClInclude Include="BossWizard.h">
       <Filter>Object\06.Boss\BossWizard</Filter>
     </ClInclude>
+    <ClInclude Include="Scene_Ending.h">
+      <Filter>Manager\SceneMgr\Scene\Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_Stage_2.h">
+      <Filter>Manager\SceneMgr\Scene\Stage2</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingObj.h">
+      <Filter>Object\99.LogoObj</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="텍스트게임.rc">
@@ -333,6 +354,9 @@
       <Filter>리소스 파일</Filter>
     </Text>
     <Text Include="Boss2_RightPart.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="Ending.txt">
       <Filter>리소스 파일</Filter>
     </Text>
   </ItemGroup>

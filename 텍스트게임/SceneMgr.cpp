@@ -1,6 +1,8 @@
 #include "SceneMgr.h"
 #include "Scene_Logo.h"
 #include "Scene_Stage_1.h"
+#include "Scene_Ending.h"
+#include "Scene_Stage_2.h"
 SceneMgr* SceneMgr::instance = nullptr;
 SceneMgr::SceneMgr():m_scene(nullptr),m_curScene(SCENE_END),m_prevScene(SCENE_END)
 {
@@ -27,7 +29,11 @@ HRESULT SceneMgr::SceneChange(SCENETYPE eType)
 		case SceneMgr::STAGE_1:
 			m_scene = new Scene_Stage_1;
 			break;
-		case SceneMgr::STAGE_BOSS:
+		case SceneMgr::STAGE_2:
+			m_scene = new Scene_Stage_2;
+			break;
+		case SceneMgr::ENDING:
+			m_scene = new Scene_Ending;
 			break;
 
 		}

@@ -177,7 +177,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 
 	}
 
-	if (BulletType == METEOR)
+	if (m_bulletType == METEOR)
 	{
 		wchar_t meteorImg[16] = { L' ',L'@',L'@',L' ',L'@',L'@',L'@',L'@',L'@',L'@',L'@',L'@',L' ',L'@',L'@',L' ' };
 
@@ -216,7 +216,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 		ZeroMemory(m_sprite, sizeof(wchar_t) * m_width * m_height);
 		memcpy(m_sprite, earthquakeImg, sizeof(wchar_t) * m_width * m_height);
 		m_color = LIGHTRED;
-		m_expireTime = 1.f;
+		m_MaxTimer = 1.f;
 	}
 	m_dir = dir;
 	m_gravitySpeed = 0.f;
@@ -292,6 +292,8 @@ int Bullet::Update()
 
 	if (!m_Life)
 		return -1;
+
+	return 0;
 }
 
 int Bullet::LateUpdate()

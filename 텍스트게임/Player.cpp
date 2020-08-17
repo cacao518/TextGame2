@@ -154,14 +154,6 @@ int Player::Update()
 		}
 	}
 
-	if (m_attackDelay > 0)
-	{
-		if (m_isRide) 
-			m_attackDelay -= Timer::DeltaTime() * DEFAULT_WEAPON_SPEED;
-		else
-			m_attackDelay -= Timer::DeltaTime() * m_weaponSpeed;
-		if (m_attackDelay < 0) m_attackDelay = 0;
-	}
 
 	if (keyPress[VK_ESCAPE])
 		ObjectMgr::GetInstance()->done = true;
@@ -172,7 +164,14 @@ int Player::Update()
 	keyPress.reset();
 	keyLock.unlock();
 
-
+	if (m_attackDelay > 0)
+	{
+		if (m_isRide)
+			m_attackDelay -= Timer::DeltaTime() * DEFAULT_WEAPON_SPEED;
+		else
+			m_attackDelay -= Timer::DeltaTime() * m_weaponSpeed;
+		if (m_attackDelay < 0) m_attackDelay = 0;
+	}
 
 	if (!m_isRide)
 	{
@@ -194,6 +193,16 @@ int Player::Update()
 	{
 		m_weaponType = Bullet::HANDGUN;
 		m_weaponSpeed = 20;
+	}
+
+	if (m_Status.hp <= 0.f)
+	{
+		float respawnPosX = GetPos().x - 50.f;
+		if (respawnPosX <= 1.f)
+			SetPos(POS(1.f, 0.f));
+		else
+			SetPos(POS(respawnPosX, 0.f));
+		m_Status.hp = m_Status.maxHp;
 	}
 
 	return 1;
@@ -238,9 +247,9 @@ STATUS Player::GetStatus()
 void Player::Knockback(POS otherObjPos)
 {
 	if (otherObjPos.x <= m_pos.x)
-		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * 12, Timer::DeltaTime() * 15);
+		GetComponent<RigidBody>()->AddForce((int)(Timer::DeltaTime() * 12.f), (int)(Timer::DeltaTime() * 15.f));
 	else
-		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * -12, Timer::DeltaTime() * 15);
+		GetComponent<RigidBody>()->AddForce((int)(Timer::DeltaTime() * -12.f), (int)(Timer::DeltaTime() * 15.f));
 }
 
 void Player::GetDamage(float damage, POS enemyPos)
