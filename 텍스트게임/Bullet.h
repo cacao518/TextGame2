@@ -23,6 +23,7 @@ private:
 	bool m_chargeShoot = false;
 	float m_bulletDamage;
 	float m_bulletSpeed=10.f;
+	float m_gravitySpeed = 0.f;
 	bool m_isEnemy;
 
 	OBJTYPE m_bulletType = TYPE_END;
