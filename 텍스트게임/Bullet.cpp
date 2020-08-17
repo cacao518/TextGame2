@@ -98,6 +98,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 	}
 	if (BulletType == BOSS_CANNON)
 	{
+		m_bulletSpeed = 10.f;
 		m_bulletDamage = 40.f;
 		m_width = 3;
 		m_height = 3;
@@ -120,6 +121,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 
 	}
 	m_dir = dir;
+	m_gravitySpeed = 0.f;
 	m_name = L"Bullet";
 }
 
@@ -233,6 +235,13 @@ void Bullet::BulletMove()
 
 void Bullet::BossCannonMove()
 {
+	if (m_dir)
+		m_pos.x += Timer::DeltaTime() * m_bulletSpeed;
+	else
+		m_pos.x -= Timer::DeltaTime() * m_bulletSpeed;
+
+	m_pos.y += m_gravitySpeed * Timer::DeltaTime();
+	m_gravitySpeed += Timer::DeltaTime() * 4.f;
 }
 
 void Bullet::DefaultBulletMove()

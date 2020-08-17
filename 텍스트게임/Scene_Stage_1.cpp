@@ -55,23 +55,23 @@ Scene_Stage_1::Scene_Stage_1()
 	//BoxCollider* bc4 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(tank));
 	//tank->AddComponent(bc4);
 
-	x = 6;
-	std::shared_ptr<GuardEnemy> enemy9 = std::make_shared<GuardEnemy>(POS(x+3, y-5));
-	m_objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy9));
+	//x = 6;
+	//std::shared_ptr<GuardEnemy> enemy9 = std::make_shared<GuardEnemy>(POS(x+3, y-5));
+	//m_objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy9));
 
-	RigidBody* rb9 = new RigidBody(std::dynamic_pointer_cast<GameObject>(enemy9));
-	enemy9->AddComponent(rb9);
-	BoxCollider* bc9 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(enemy9));
-	enemy9->AddComponent(bc9);
+	//RigidBody* rb9 = new RigidBody(std::dynamic_pointer_cast<GameObject>(enemy9));
+	//enemy9->AddComponent(rb9);
+	//BoxCollider* bc9 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(enemy9));
+	//enemy9->AddComponent(bc9);
 
 
-	std::shared_ptr<Guard> enemy10 = std::make_shared<Guard>(POS(x +1, y-5 ));
-	m_objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy10));
+	//std::shared_ptr<Guard> enemy10 = std::make_shared<Guard>(POS(x +1, y-5 ));
+	//m_objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy10));
 
-	RigidBody* rb10 = new RigidBody(std::dynamic_pointer_cast<GameObject>(enemy10));
-	enemy10->AddComponent(rb10);
-	BoxCollider* bc10 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(enemy10));
-	enemy10->AddComponent(bc10);
+	//RigidBody* rb10 = new RigidBody(std::dynamic_pointer_cast<GameObject>(enemy10));
+	//enemy10->AddComponent(rb10);
+	//BoxCollider* bc10 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(enemy10));
+	//enemy10->AddComponent(bc10);
 
 	std::ifstream fp;
 	fp.open("map.txt");
