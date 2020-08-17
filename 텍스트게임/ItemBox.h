@@ -1,5 +1,6 @@
 #pragma once
 #include "Header.h"
+#include "Bullet.h"
 #include "GameObject.h"
 
 class ItemBox : public GameObject {
@@ -15,6 +16,7 @@ public:
 	void SetType(int type);
 	int GetType();
 private:
-	int m_type = 0; // 0:헤비머신건, 1:샷건
-
+	int m_type; 
+	int m_bulletNum;
+	int m_weaponSpeed;
 };
