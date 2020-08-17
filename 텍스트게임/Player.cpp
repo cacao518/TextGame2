@@ -192,7 +192,7 @@ int Player::Update()
 	if (m_bulletNum <= 0 && !m_isRide)
 	{
 		m_weaponType = Bullet::HANDGUN;
-		m_weaponSpeed = 20;
+		m_weaponSpeed = DEFAULT_WEAPON_SPEED;
 	}
 
 	if (m_Status.hp <= 0.f)
@@ -247,9 +247,9 @@ STATUS Player::GetStatus()
 void Player::Knockback(POS otherObjPos)
 {
 	if (otherObjPos.x <= m_pos.x)
-		GetComponent<RigidBody>()->AddForce((int)(Timer::DeltaTime() * 12.f), (int)(Timer::DeltaTime() * 15.f));
+		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * 12.f, Timer::DeltaTime() * 15.f);
 	else
-		GetComponent<RigidBody>()->AddForce((int)(Timer::DeltaTime() * -12.f), (int)(Timer::DeltaTime() * 15.f));
+		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * -12.f, Timer::DeltaTime() * 15.f);
 }
 
 void Player::GetDamage(float damage, POS enemyPos)

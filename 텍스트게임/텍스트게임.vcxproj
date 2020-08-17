@@ -233,8 +233,8 @@
     <Text Include="Boss2_RightPart.txt" />
     <Text Include="Ending.txt" />
     <Text Include="Logo.txt" />
-    <Text Include="map.txt" />
     <Text Include="map1.txt" />
+    <Text Include="map2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

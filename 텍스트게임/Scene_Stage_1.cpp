@@ -44,7 +44,7 @@ Scene_Stage_1::Scene_Stage_1()
 		m_objectMgr->InsertObject(UI, std::dynamic_pointer_cast<GameObject>(bossUI));
 	}
 
-	ParsingMap("map.txt",MapWidth,MapHeight);
+	ParsingMap("map1.txt",MapWidth,MapHeight);
 
 	ScrollMgr::GetInstance()->SetMapSize((float)MapWidth, (float)MapHeight);
 }

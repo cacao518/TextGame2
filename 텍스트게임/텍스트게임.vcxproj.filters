@@ -332,9 +332,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="map.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
     <Text Include="BackGround.txt">
       <Filter>리소스 파일</Filter>
     </Text>
@@ -360,6 +357,9 @@
       <Filter>리소스 파일</Filter>
     </Text>
     <Text Include="map1.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="map2.txt">
       <Filter>리소스 파일</Filter>
     </Text>
   </ItemGroup>

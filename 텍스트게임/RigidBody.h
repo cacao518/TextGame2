@@ -18,6 +18,6 @@ public:
 
 	void Update();
 	
-	void AddForce(int powerX, int powerY);
+	void AddForce(float powerX, float powerY);
 
 };

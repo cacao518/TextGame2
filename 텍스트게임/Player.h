@@ -43,8 +43,8 @@ private:
 	bool m_invincibility = false;
 	float m_timer = 0.f;
 	
-	const int ATTACK_DELAY_MAX = 10;
-	const int DEFAULT_WEAPON_SPEED = 20;
+	const float ATTACK_DELAY_MAX = 10.f;
+	const float DEFAULT_WEAPON_SPEED = 30.f;
 	int boombAmount = 10;
 
 	int m_weaponType;

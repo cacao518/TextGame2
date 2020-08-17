@@ -13,7 +13,7 @@ ItemBox::ItemBox(int type, POS position)
 	m_sprite = new wchar_t[m_width * m_height];
 	if (m_type == Bullet::HEABYGUN)
 	{
-		m_weaponSpeed = 20.f;
+		m_weaponSpeed = 30.f;
 		m_bulletNum = 50;
 		memcpy(m_sprite, img1, sizeof(wchar_t) * m_width * m_height);
 		m_color = YELLOW;

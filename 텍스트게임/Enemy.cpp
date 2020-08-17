@@ -37,12 +37,6 @@ int Enemy::Update()
 		m_dir = !m_dir;
 	}
 
-	
-
-		
-
-	
-
 	if (m_Life)
 		return 1;
 	else
@@ -60,9 +54,9 @@ int Enemy::LateUpdate()
 void Enemy::Knockback(POS otherObjPos)
 {
 	if (ObjectMgr::GetInstance()->m_ObjectList[PLAYER].front()->GetPos().x <= m_pos.x)
-		GetComponent<RigidBody>()->AddForce((int)(Timer::DeltaTime() * 12.f), (int)(Timer::DeltaTime() * 8.f));
+		GetComponent<RigidBody>()->AddForce((Timer::DeltaTime() * 12.f), (Timer::DeltaTime() * 8.f));
 	else
-		GetComponent<RigidBody>()->AddForce((int)(Timer::DeltaTime() * -12.f), (int)(Timer::DeltaTime() * 8.f));
+		GetComponent<RigidBody>()->AddForce((Timer::DeltaTime() * -12.f), (Timer::DeltaTime() * 8.f));
 }
 
 void Enemy::GetDamage(float damage, POS bulletPos)

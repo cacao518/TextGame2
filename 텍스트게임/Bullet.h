@@ -14,6 +14,7 @@ public:
 	
 	const float GetBulletDamage()const { return m_bulletDamage; }
 	const bool GetIsEnemy()const { return m_isEnemy; }
+	OBJTYPE GetType() { return m_bulletType; };
 private:
 	void BulletMove();
 	void BossCannonMove();

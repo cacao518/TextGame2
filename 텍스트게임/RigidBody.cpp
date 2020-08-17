@@ -41,7 +41,7 @@ void RigidBody::Update()
 }
 
 
-void RigidBody::AddForce(int powerX, int powerY)
+void RigidBody::AddForce(float powerX, float powerY)
 {
 	std::shared_ptr<GameObject> parentobj = parentObject.lock();
 	if (!parentobj)

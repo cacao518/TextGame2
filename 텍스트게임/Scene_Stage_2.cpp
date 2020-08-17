@@ -11,7 +11,7 @@ Scene_Stage_2::Scene_Stage_2()
 		return;
 	player->SetPos(POS(5.f, 3.f));
 
-	ParsingMap("map.txt", MapWidth, MapHeight);
+	ParsingMap("map2.txt", MapWidth, MapHeight);
 
 	ScrollMgr::GetInstance()->SetMapSize((float)MapWidth, (float)MapHeight);
 }

@@ -46,7 +46,6 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 		m_bulletDamage = 3;
 		m_width = 2;
 		m_height = 1;
-		if (!dir) reverseChar(Default, m_width * m_height);
 		m_sprite = new wchar_t[m_width * m_height];
 		ZeroMemory(m_sprite, sizeof(wchar_t) * m_width * m_height);
 
@@ -70,7 +69,6 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 		m_bulletDamage = 3;
 		m_width = 2;
 		m_height = 1;
-		if (!dir) reverseChar(MachineGun, m_width * m_height);
 		m_sprite = new wchar_t[m_width * m_height];
 		ZeroMemory(m_sprite, sizeof(wchar_t) * m_width * m_height);
 
@@ -238,20 +236,17 @@ int Bullet::Update()
 			//obj1->SetIsAttacked(true);
 			EnemyObj->SetIsAttacked(true);
 
-				std::shared_ptr<Enemy> enemy = std::dynamic_pointer_cast<Enemy>(EnemyObj);
+			std::shared_ptr<Enemy> enemy = std::dynamic_pointer_cast<Enemy>(EnemyObj);
 
-				if (EnemyObj->GetName() == L"GuardEnemy" &&m_bulletType!=BOOMB)
+			if (EnemyObj->GetName() == L"GuardEnemy" && m_bulletType != BOOMB)
 				enemy->GetDamage(m_bulletDamage, m_dir);
-				else
+			else
 				enemy->GetDamage(m_bulletDamage, GetPos());
-				
+	
 				GameMgr::GetInstance()->SetEnemy(enemy);
 			
 			if (m_bulletType != SHOTGUN) SetIsLife(false);
-				
-
 		}
-
 
 		auto bossObj = GetComponent<BoxCollider>()->OnTriggerEnter(L"Boss");
 		if (bossObj != nullptr)
@@ -274,14 +269,13 @@ int Bullet::Update()
 	
 	if (boombStep == 1) {
 
-		GetComponent<RigidBody>()->AddForce(0, 3);
+		GetComponent<RigidBody>()->AddForce(0.f, 3.f);
 		boombStep = 2;
 	}
 	if (boombStep == 2 && (GetIsLand() && GetComponent<RigidBody>()->gravitySpeed <= 0))
 	{
 		return -1;
 	}
-
 
 	BulletMove();
 
@@ -362,5 +356,10 @@ void Bullet::reverseChar(wchar_t* w, int size)
 		wchar_t temp = w[i];
 		w[i] = w[size - 1 - i];
 		w[size - 1 - i] = temp;
+	}
+	for (int i = 0; i < size; ++i)
+	{
+		if (w[i] == L'(') w[i] = L')'; else if (w[i] == L')') w[i] = L'(';
+		if (w[i] == L'<') w[i] = L'>'; else if (w[i] == L'>') w[i] = L'<';
 	}
 }

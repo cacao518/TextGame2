@@ -63,7 +63,7 @@ int Part::Update()
 			if (!bullet->GetIsEnemy())
 			{
 				static_cast<Boss*>(m_parentObj)->GetDamage(bullet->GetBulletDamage());
-				bullet->SetIsLife(false);
+				if(bullet->GetType() != Bullet::SHOTGUN) bullet->SetIsLife(false);
 				SetDamageEffect();
 			}
 			
