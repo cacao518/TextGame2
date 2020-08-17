@@ -55,11 +55,16 @@ int Part::Update()
 
 	if (m_IsDamagedPart)
 	{
-		auto bullet = boxCollider->OnTriggerEnter(L"Bullet");
+		auto bullet = std::dynamic_pointer_cast<Bullet>(boxCollider->OnTriggerEnter(L"Bullet"));
+		
 		if (nullptr != bullet)
 		{
-			static_cast<Boss*>(m_parentObj)->GetDamage(std::dynamic_pointer_cast<Bullet>(bullet)->GetBulletDamage());
-			SetDamageEffect();
+			if (!bullet->GetIsEnemy())
+			{
+				static_cast<Boss*>(m_parentObj)->GetDamage(bullet->GetBulletDamage());
+				SetDamageEffect();
+			}
+			
 		}
 	}
 
