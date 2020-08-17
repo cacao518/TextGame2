@@ -107,7 +107,7 @@ void Scene::ParsingMap(char* mapName, int mapWidth, int mapHeight)
 				boss->AddComponent(bc);
 			}
 
-			if (map[j][i] == -2) { // 啊靛各
+			if (map[index] == -2) { // 啊靛各
 				std::shared_ptr<GuardEnemy> enemy2 = std::make_shared<GuardEnemy>(POS(j, i));
 				m_objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy2));
 
@@ -116,7 +116,7 @@ void Scene::ParsingMap(char* mapName, int mapWidth, int mapHeight)
 				BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(enemy2));
 				enemy2->AddComponent(bc);
 			}
-			if (map[j][i] == -3) { // 醚各
+			if (map[index] == -3) { // 醚各
 				std::shared_ptr<GunEnemy> enemy3 = std::make_shared<GunEnemy>(POS(j, i));
 				m_objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy3));
 
