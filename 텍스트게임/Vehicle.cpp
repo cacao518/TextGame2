@@ -26,7 +26,7 @@ int Vehicle::Update()
 		if (!p->GetIsAttacked())
 		{
 			std::dynamic_pointer_cast<Player>(p)->SetIsRide(true);
-			std::dynamic_pointer_cast<Player>(p)->SetPos(m_pos);
+			std::dynamic_pointer_cast<Player>(p)->SetPos(POS(m_pos.x, m_pos.y-1));
 			m_isRide = true;
 			return -1;
 		}

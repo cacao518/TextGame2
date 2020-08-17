@@ -17,6 +17,9 @@ private:
 
 	wchar_t monsterImg2_LEFT[6] =
 		{ ' ', '0', '<', ']', ' ', 'L' };
+
+	ObjectMgr* objectMgr = ObjectMgr::GetInstance();
+	bool m_first = true;
 };
 
 

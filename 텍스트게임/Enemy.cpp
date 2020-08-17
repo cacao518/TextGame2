@@ -70,9 +70,9 @@ void Enemy::SetHp(float damage)
 void Enemy::Knockback(POS otherObjPos)
 {
 	if (ObjectMgr::GetInstance()->m_ObjectList[PLAYER].front()->GetPos().x <= m_pos.x)
-		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * 12, Timer::DeltaTime() * 15);
+		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * 12, Timer::DeltaTime() * 8);
 	else
-		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * -12, Timer::DeltaTime() * 15);
+		GetComponent<RigidBody>()->AddForce(Timer::DeltaTime() * -12, Timer::DeltaTime() * 8);
 }
 
 void Enemy::GetDamage(float damage, POS bulletPos , bool isKnockback)

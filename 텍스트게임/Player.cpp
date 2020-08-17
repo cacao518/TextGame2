@@ -8,7 +8,7 @@
 #include "ChargeParticle1.h"
 
 Player::Player(POS position)
-	:m_weaponSpeed(0), m_weaponType(Bullet::HANDGUN), GameObject(position), m_Status(STATUS(100.f,100.f,3.f))
+	:m_weaponSpeed(DEFAULT_WEAPON_SPEED), m_attackDelay(0),m_bulletNum(0), m_weaponType(Bullet::HANDGUN), GameObject(position), m_Status(STATUS(100.f,100.f,3.f))
 {
 	KeyUpdate=std::thread([&] {
 		int c;
@@ -71,18 +71,26 @@ int Player::Update()
 
 
 	//isDone = keyPress[27];
-	if (keyPress[72] && (GetIsLand() || m_jumpCount < 2)) {
+	if (keyPress['s'] && (GetIsLand() || m_jumpCount < 2)) {
 		GetComponent<RigidBody>()->AddForce(0, m_jumpPower);
 		m_jumpCount++;
 	}
 
 
-	if (keyPress[80]) {
-	
-		if (!m_charging)
-			Attack(false);
-		else
-			m_colorCount = -100;
+		printf("아래키누름");
+
+	}*/
+	if (keyPress['a'] && m_attackDelay <= 0)
+	{
+		if ((((m_weaponType != Bullet::HANDGUN) || (m_weaponType != Bullet::TANKGUN) && m_bulletNum > 0)) ||
+			(m_weaponType == Bullet::HANDGUN || m_weaponType == Bullet::TANKGUN))
+		{
+			if (!m_charging)
+				Attack(false);
+			else
+				m_colorCount = -100;
+
+		}
 	}
 	if (keyPress[75]) {
 		if(!m_isRide)
@@ -150,6 +158,16 @@ int Player::Update()
 			m_color = 9;  m_colorCount = 0;  m_charging = false;
 		}
 	}
+
+	if (m_attackDelay > 0)
+	{
+		if (m_isRide) 
+			m_attackDelay -= Timer::DeltaTime() * DEFAULT_WEAPON_SPEED;
+		else
+			m_attackDelay -= Timer::DeltaTime() * m_weaponSpeed;
+		if (m_attackDelay < 0) m_attackDelay = 0;
+	}
+
 	if (keyPress[VK_ESCAPE])
 		ObjectMgr::GetInstance()->done = true;
 
@@ -158,6 +176,7 @@ int Player::Update()
 
 	keyPress.reset();
 	keyLock.unlock();
+
 
 
 	if (!m_isRide)
@@ -174,6 +193,12 @@ int Player::Update()
 		m_dir = true;
 		m_color = CYAN;
 		//memcpy(m_sprite, m_tankImg, sizeof(wchar_t) * 7 * 2);
+	}
+
+	if (m_bulletNum <= 0 && !m_isRide)
+	{
+		m_weaponType = Bullet::HANDGUN;
+		m_weaponSpeed = 20;
 	}
 
 	return 1;
@@ -266,14 +291,17 @@ void Player::Attack(bool charge)
 		x = m_pos.x + 6;
 		y = m_pos.y;
 	}
+	if (m_weaponType == Bullet::SHOTGUN)
+	{
+		if (m_dir) x = m_pos.x+2; else x = m_pos.x - 32;
+		y = m_pos.y;
+	}
 	std::shared_ptr<Bullet> bullet = nullptr;
 	
-	if (!charge) {
-		bullet = std::make_shared<Bullet>(false, false, Bullet::HANDGUN, m_dir, POS(x, y));
-	
-	}
+	if(!charge)
+		bullet=std::make_shared<Bullet>(false, false, m_weaponType, m_dir, POS(x, y));
 	else
-		bullet = std::make_shared<Bullet>(false, true, Bullet::HANDGUN, m_dir, POS(x, y));
+		bullet = std::make_shared<Bullet>(false, true, m_weaponType, m_dir, POS(x, y));
 	
 	if (!charge && m_isRide)
 		bullet = std::make_shared<Bullet>(false, false, Bullet::TANKGUN, m_dir, POS(x, y));
@@ -287,6 +315,10 @@ void Player::Attack(bool charge)
 	bullet->AddComponent(bc);
 	bc->SetIsTrigger(true);
 
+	if (m_weaponType != Bullet::HANDGUN && !m_isRide)
+		m_bulletNum--;
+
+	m_attackDelay = ATTACK_DELAY_MAX;
  }
 
 void Player::boombAttack()
