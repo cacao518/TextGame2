@@ -27,6 +27,7 @@ private:
 	std::thread KeyUpdate;
 
 	void Attack(bool charge);
+	void boombAttack();
 	ObjectMgr* objectMgr = ObjectMgr::GetInstance();
 	wchar_t bulletImg[2] = { '0','0' };
 	bool m_dir = true; //오른쪽이 트루임
@@ -37,7 +38,8 @@ private:
 	int m_jumpPower = 6;
 	bool m_invincibility = false;
 	float m_timer = 0.f;
-	
+	int boombAmount=10;
+
 	int m_weaponType;
 	int m_weaponSpeed;
 	bool m_isRide = false;

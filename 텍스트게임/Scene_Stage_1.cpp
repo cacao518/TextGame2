@@ -13,6 +13,7 @@
 #include "BossUI.h"
 #include "Vehicle.h"
 #include "GuardEnemy.h"
+#include "Guard.h"
 Scene_Stage_1::Scene_Stage_1()
 {
 	const int MapWidth = 160;
@@ -24,7 +25,7 @@ Scene_Stage_1::Scene_Stage_1()
 	wchar_t HighGroundBlockImg[10] = { 'm','U','U','U','U','U','U','U','U','U' };
 	wchar_t AirBlockImg[2] = { 'm','U' };
 	{
-		std::shared_ptr<Player> player = std::make_shared<Player>(POS(x, y));
+		std::shared_ptr<Player> player = std::make_shared<Player>(POS(x, y-2));
 		m_objectMgr->InsertObject(PLAYER, std::dynamic_pointer_cast<GameObject>(player));
 		RigidBody* rb = new RigidBody(std::dynamic_pointer_cast<GameObject>(player));
 		player->AddComponent(rb);
@@ -46,7 +47,7 @@ Scene_Stage_1::Scene_Stage_1()
 	}
 
 	x = 8;
-	std::shared_ptr<Vehicle> tank = std::make_shared<Vehicle>(POS(x, y - 6));
+	std::shared_ptr<Vehicle> tank = std::make_shared<Vehicle>(POS(x+90, y - 6));
 	m_objectMgr->InsertObject(VEHICLE, std::dynamic_pointer_cast<GameObject>(tank));
 
 	RigidBody* rb4 = new RigidBody(std::dynamic_pointer_cast<GameObject>(tank));
@@ -55,13 +56,22 @@ Scene_Stage_1::Scene_Stage_1()
 	tank->AddComponent(bc4);
 
 	x = 6;
-	std::shared_ptr<GuardEnemy> enemy9 = std::make_shared<GuardEnemy>(POS(x+3, y));
+	std::shared_ptr<GuardEnemy> enemy9 = std::make_shared<GuardEnemy>(POS(x+3, y-5));
 	m_objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy9));
 
 	RigidBody* rb9 = new RigidBody(std::dynamic_pointer_cast<GameObject>(enemy9));
 	enemy9->AddComponent(rb9);
 	BoxCollider* bc9 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(enemy9));
 	enemy9->AddComponent(bc9);
+
+
+	std::shared_ptr<Guard> enemy10 = std::make_shared<Guard>(POS(x +1, y-5 ));
+	m_objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy10));
+
+	RigidBody* rb10 = new RigidBody(std::dynamic_pointer_cast<GameObject>(enemy10));
+	enemy10->AddComponent(rb10);
+	BoxCollider* bc10 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(enemy10));
+	enemy10->AddComponent(bc10);
 
 	std::ifstream fp;
 	fp.open("map.txt");
@@ -81,7 +91,7 @@ Scene_Stage_1::Scene_Stage_1()
 						std::dynamic_pointer_cast<GameObject>(std::make_shared<Terrain>(HighGroundBlockImg, 1, 10, POS(j, i))));
 			}
 			if (map[j][i] == 4) { // ∏ÛΩ∫≈Õ1
-				std::shared_ptr<Enemy> enemy = std::make_shared<Enemy>(POS(j, i));
+				std::shared_ptr<Enemy> enemy = std::make_shared<Enemy>(POS(j, i-5));
 				m_objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy));
 
 				RigidBody* rb = new RigidBody(std::dynamic_pointer_cast<GameObject>(enemy));

@@ -188,6 +188,9 @@
     <ClCompile Include="BossUI.cpp">
       <Filter>Object\10.UI\BossUI</Filter>
     </ClCompile>
+    <ClCompile Include="Guard.cpp">
+      <Filter>Object\01.Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectMgr.h">
@@ -280,6 +283,12 @@
     <ClInclude Include="BossUI.h">
       <Filter>Object\10.UI\BossUI</Filter>
     </ClInclude>
+    <ClInclude Include="GuardEnemy.h">
+      <Filter>Object\01.Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Guard.h">
+      <Filter>Object\01.Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="텍스트게임.rc">
@@ -296,5 +305,7 @@
     <Text Include="Logo.txt">
       <Filter>리소스 파일</Filter>
     </Text>
+    <Text Include="Boss1_DownPart.txt" />
+    <Text Include="Boss1_UpPart.txt" />
   </ItemGroup>
 </Project>
