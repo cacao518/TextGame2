@@ -151,6 +151,7 @@
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossTank.cpp" />
     <ClCompile Include="BossUI.cpp" />
+    <ClCompile Include="BossWizard.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="ChargeParticle1.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossTank.h" />
     <ClInclude Include="BossUI.h" />
+    <ClInclude Include="BossWizard.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="ChargeParticle1.h" />
@@ -220,6 +222,9 @@
     <Text Include="BackGround.txt" />
     <Text Include="Boss1_DownPart.txt" />
     <Text Include="Boss1_UpPart.txt" />
+    <Text Include="Boss2_CenterPart.txt" />
+    <Text Include="Boss2_LeftPart.txt" />
+    <Text Include="Boss2_RightPart.txt" />
     <Text Include="Logo.txt" />
     <Text Include="map.txt" />
   </ItemGroup>

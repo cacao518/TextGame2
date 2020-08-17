@@ -152,6 +152,8 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 	}
 	if (m_bulletType == BOSS_CANNON)
 	{
+		wchar_t cannonImg[9] = { L'o',L'O',L'o',L'O',L'O',L'O',L'o',L'O',L'o' };
+
 		m_bulletSpeed = 10.f;
 		m_bulletDamage = 40.f;
 		m_width = 3;
@@ -173,6 +175,37 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 		memcpy(m_sprite, boombImg, sizeof(wchar_t) * m_width * m_height);
 		m_color = 12;
 
+	}
+
+	if (BulletType == METEOR)
+	{
+		wchar_t meteorImg[16] = { L' ',L'@',L'@',L' ',L'@',L'@',L'@',L'@',L'@',L'@',L'@',L'@',L' ',L'@',L'@',L' ' };
+
+		m_bulletSpeed = 10.f;
+		m_bulletDamage = 40.f;
+		m_width = 4;
+		m_height = 4;
+		m_sprite = new wchar_t[m_width * m_height];
+		ZeroMemory(m_sprite, sizeof(wchar_t) * m_width * m_height);
+		memcpy(m_sprite, meteorImg, sizeof(wchar_t) * m_width * m_height);
+		m_color = LIGHTRED;
+	}
+
+	if (BulletType == EARTHQUAKE)
+	{
+		wchar_t earthquakeImg[24] = { L'^',L'^',L'^',L'^',L'^',L'^',L'^',L'^',
+									L'^',L'^',L'^',L'^',L'^',L'^',L'^',L'^',
+									L'^',L'^',L'^',L'^',L'^',L'^',L'^',L'^'};
+
+		m_bulletSpeed = 10.f;
+		m_bulletDamage = 40.f;
+		m_width = 8;
+		m_height = 3;
+		m_sprite = new wchar_t[m_width * m_height];
+		ZeroMemory(m_sprite, sizeof(wchar_t) * m_width * m_height);
+		memcpy(m_sprite, earthquakeImg, sizeof(wchar_t) * m_width * m_height);
+		m_color = LIGHTRED;
+		m_expireTime = 1.f;
 	}
 	m_dir = dir;
 	m_gravitySpeed = 0.f;
@@ -250,9 +283,7 @@ int Bullet::Update()
 	if (m_timer >= m_MaxTimer)
 		m_Life = false;
 
-	if (m_Life)
-		return 1;
-	else
+	if (!m_Life)
 		return -1;
 }
 
@@ -267,6 +298,12 @@ void Bullet::BulletMove()
 	{
 	case BOSS_CANNON:
 		BossCannonMove();
+		break;
+	case METEOR:
+		MeteorMove();
+		break;
+	case EARTHQUAKE:
+		EarthquakeMove();
 		break;
 	default:
 		DefaultBulletMove();
@@ -283,6 +320,22 @@ void Bullet::BossCannonMove()
 
 	m_pos.y += m_gravitySpeed * Timer::DeltaTime();
 	m_gravitySpeed += Timer::DeltaTime() * 4.f;
+}
+
+void Bullet::MeteorMove()
+{
+	m_pos.y += Timer::DeltaTime() * m_bulletSpeed;
+
+}
+
+void Bullet::EarthquakeMove()
+{
+	if(m_timer<=0.5f)
+		m_pos.y -= Timer::DeltaTime() * m_bulletSpeed;
+	else
+		m_pos.y += Timer::DeltaTime() * m_bulletSpeed;
+
+
 }
 
 void Bullet::DefaultBulletMove()

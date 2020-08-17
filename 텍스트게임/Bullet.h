@@ -3,7 +3,7 @@
 class Bullet :public GameObject
 {
 public:
-	enum OBJTYPE { HANDGUN, TANKGUN, HEABYGUN, MISSILE, SHOTGUN, BOSS_CANNON, BOOMB, TYPE_END};
+	enum OBJTYPE { HANDGUN, TANKGUN, HEABYGUN, MISSILE, SHOTGUN, BOSS_CANNON, BOOMB, EARTHQUAKE, METEOR, TYPE_END};
 
 	Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position);
 	~Bullet();
@@ -17,6 +17,8 @@ public:
 private:
 	void BulletMove();
 	void BossCannonMove();
+	void MeteorMove();
+	void EarthquakeMove();
 	void DefaultBulletMove();
 	void reverseChar(wchar_t* w, int size);
 private:

@@ -87,6 +87,9 @@
     <Filter Include="Object\10.UI\BossUI">
       <UniqueIdentifier>{f85f8c12-9f98-482a-bb3e-494f98a40ebf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\06.Boss\BossWizard">
+      <UniqueIdentifier>{92133b90-f987-46f1-bc6a-f0038572012f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="텍스트게임.cpp">
@@ -194,6 +197,9 @@
     <ClCompile Include="BossUI.cpp">
       <Filter>Object\10.UI\BossUI</Filter>
     </ClCompile>
+    <ClCompile Include="BossWizard.cpp">
+      <Filter>Object\06.Boss\BossWizard</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectMgr.h">
@@ -295,6 +301,9 @@
     <ClInclude Include="GunEnemy.h">
       <Filter>Object\01.Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="BossWizard.h">
+      <Filter>Object\06.Boss\BossWizard</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="텍스트게임.rc">
@@ -315,6 +324,15 @@
       <Filter>리소스 파일</Filter>
     </Text>
     <Text Include="Boss1_UpPart.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="Boss2_LeftPart.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="Boss2_CenterPart.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="Boss2_RightPart.txt">
       <Filter>리소스 파일</Filter>
     </Text>
   </ItemGroup>

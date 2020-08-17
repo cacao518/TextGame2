@@ -4,6 +4,7 @@
 #include "Bullet.h"
 #include "BoxCollider.h"
 #include "Timer.h"
+#include "GameMgr.h"
 Part::Part(const char* fileName, int width, int height, int baseColor, GameObject* parentObj)
 	:GameObject(POS()),m_IsDamagedPart(false),m_IsDamagingPart(false),m_parentObj(parentObj)
 {
@@ -62,6 +63,7 @@ int Part::Update()
 			if (!bullet->GetIsEnemy())
 			{
 				static_cast<Boss*>(m_parentObj)->GetDamage(bullet->GetBulletDamage());
+				bullet->SetIsLife(false);
 				SetDamageEffect();
 			}
 			
