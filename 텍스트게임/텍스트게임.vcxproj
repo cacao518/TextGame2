@@ -158,6 +158,8 @@
     <ClCompile Include="EnemyUI.cpp" />
     <ClCompile Include="GameMgr.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Guard.cpp" />
+    <ClCompile Include="GuardEnemy.cpp" />
     <ClCompile Include="ItemBox.cpp" />
     <ClCompile Include="LogoObj.cpp" />
     <ClCompile Include="ObjectMgr.cpp" />
@@ -188,6 +190,8 @@
     <ClInclude Include="EnemyUI.h" />
     <ClInclude Include="GameMgr.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Guard.h" />
+    <ClInclude Include="GuardEnemy.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="ItemBox.h" />
     <ClInclude Include="LogoObj.h" />
