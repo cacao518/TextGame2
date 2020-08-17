@@ -18,6 +18,7 @@ private:
 	void DistanceCheck();
 	void Attack();
 	bool m_bulletDir = false;
+	float attackCoolTime=0.f;
 
 	bool Attacking = false;
 	wchar_t monsterImg2_RIGHT[6] =

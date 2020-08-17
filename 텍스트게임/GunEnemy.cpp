@@ -71,8 +71,11 @@ void GunEnemy::DistanceCheck()
 
 	if (lenToPlayer <= 12.f)
 	{
-		Attack();
+		if (player->GetPos().x > m_pos.x) m_dir = true;
+		else m_dir = false;
 		Attacking = true;
+		attackCoolTime+= Timer::DeltaTime();
+		if (attackCoolTime > 2.3) { attackCoolTime = 0; Attack(); }
 	}
 	else
 		Attacking = false;
@@ -83,10 +86,9 @@ void GunEnemy::DistanceCheck()
 
 void GunEnemy::Attack()
 {
-	std::shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(ObjectMgr::GetInstance()->GetFrontObject(PLAYER));
 	
-	if (player->GetPos().x > m_pos.x) m_dir = true;
-	else m_dir = false;
+	
+
 	
 	m_bulletDir = m_dir;
 
