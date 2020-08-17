@@ -3,7 +3,7 @@
 #include "Player.h"
 Scene_Stage_2::Scene_Stage_2()
 {
-	const int MapWidth = 160;
+	const int MapWidth = 201;
 	const int MapHeight = 80;
 
 	auto& player = m_objectMgr->GetFrontObject(PLAYER);
@@ -43,7 +43,7 @@ void Scene_Stage_2::Update()
 	auto& player = m_objectMgr->GetFrontObject(PLAYER);
 	if (nullptr == player)
 		return;
-	if (player->GetPos().x >= 150.f)
+	if (player->GetPos().x >= 200.f)
 		m_sceneMgr->SceneChange(SceneMgr::ENDING);
 	if (GetAsyncKeyState(VK_RETURN))
 		m_sceneMgr->SceneChange(SceneMgr::ENDING);

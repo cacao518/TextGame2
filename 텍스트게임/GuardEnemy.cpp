@@ -8,7 +8,6 @@ GuardEnemy::GuardEnemy(POS position)
 	:Enemy(position), m_Status(STATUS(10.f, 10.f, 10.f))
 {
 
-
 	m_width = 3;
 	m_height = 3;
 	m_sprite = new wchar_t[m_width * m_height];

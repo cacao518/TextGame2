@@ -132,7 +132,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 	}
 	if (m_bulletType == SHOTGUN)
 	{
-		m_bulletDamage = 10;
+		m_bulletDamage = 6;
 		m_width = 30;
 		m_height = 2;
 		m_sprite = new wchar_t[m_width * m_height];
@@ -141,7 +141,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 	}
 	if (m_bulletType == SHOTGUN && m_chargeShoot)
 	{
-		m_bulletDamage = 15;
+		m_bulletDamage = 7;
 		m_width = 30;
 		m_height = 2;
 		m_sprite = new wchar_t[m_width * m_height];

@@ -7,6 +7,7 @@
 Enemy::Enemy(POS position)
 	:GameObject(position), m_Status(STATUS(10.f, 10.f, 5.f))
 {
+
 	wchar_t monsterImg[4] = { '*', '*', 'M', 'M' };
 
 	m_width = 2;
@@ -62,7 +63,7 @@ void Enemy::Knockback(POS otherObjPos)
 void Enemy::GetDamage(float damage, POS bulletPos)
 {
     Knockback(bulletPos);
-	printf("적체력 %f ", m_Status.hp);
+	//printf("적체력 %f ", m_Status.hp);
 	m_Status.hp -= damage;
 	if (m_Status.hp <= 0.f) m_Life = false;
 		

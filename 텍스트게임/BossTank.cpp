@@ -24,7 +24,7 @@ BossTank::BossTank(POS pos)
 	m_downPart->SetIsDamagingPart(true);
 
 	m_name = L"Boss";
-	m_status = STATUS(50.f, 2.f, 10.f);
+	m_status = STATUS(100.f, 2.f, 10.f);
 	m_curPattern = NOT_RECOGNIZE;
 	m_dir = false;
 	UpdateCenterPos();
