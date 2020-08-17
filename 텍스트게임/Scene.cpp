@@ -13,7 +13,7 @@
 #include "BossUI.h"
 #include "Vehicle.h"
 #include "GuardEnemy.h"
-#include "Guard.h"
+#include "GunEnemy.h"
 
 Scene::Scene()
 	:m_objectMgr(ObjectMgr::GetInstance()),m_sceneMgr(SceneMgr::GetInstance()),m_gameMgr(GameMgr::GetInstance())
@@ -105,6 +105,25 @@ void Scene::ParsingMap(char* mapName)
 				boss->AddComponent(rb);
 				BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(boss));
 				boss->AddComponent(bc);
+			}
+
+			if (map[j][i] == -2) { // °¡µå¸÷
+				std::shared_ptr<GuardEnemy> enemy2 = std::make_shared<GuardEnemy>(POS(j, i));
+				m_objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy2));
+
+				RigidBody* rb = new RigidBody(std::dynamic_pointer_cast<GameObject>(enemy2));
+				enemy2->AddComponent(rb);
+				BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(enemy2));
+				enemy2->AddComponent(bc);
+			}
+			if (map[j][i] == -3) { // ÃÑ¸÷
+				std::shared_ptr<GunEnemy> enemy3 = std::make_shared<GunEnemy>(POS(j, i));
+				m_objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy3));
+
+				RigidBody* rb = new RigidBody(std::dynamic_pointer_cast<GameObject>(enemy3));
+				enemy3->AddComponent(rb);
+				BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(enemy3));
+				enemy3->AddComponent(bc);
 			}
 		}
 	}

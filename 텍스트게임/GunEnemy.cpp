@@ -16,7 +16,7 @@ GunEnemy::GunEnemy(POS position)
 	memcpy(m_sprite, monsterImg2_LEFT, sizeof(wchar_t) * m_width * m_height);
 
 	m_name = L"GunEnemy";
-	m_color = 4;
+	m_color = 5;
 }
 
 int GunEnemy::Update()
