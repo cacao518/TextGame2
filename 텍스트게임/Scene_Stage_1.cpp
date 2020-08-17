@@ -46,9 +46,9 @@ Scene_Stage_1::Scene_Stage_1()
 		m_objectMgr->InsertObject(UI, std::dynamic_pointer_cast<GameObject>(bossUI));
 	}
 
-	x = 8;
+	/*x = 8;
 	std::shared_ptr<Vehicle> tank = std::make_shared<Vehicle>(POS(x+90, y - 6));
-	m_objectMgr->InsertObject(VEHICLE, std::dynamic_pointer_cast<GameObject>(tank));
+	m_objectMgr->InsertObject(VEHICLE, std::dynamic_pointer_cast<GameObject>(tank));*/
 
 	//RigidBody* rb4 = new RigidBody(std::dynamic_pointer_cast<GameObject>(tank));
 	//tank->AddComponent(rb4);

@@ -25,7 +25,6 @@ private:
 	float m_bulletSpeed=10.f;
 	bool m_isEnemy;
 
-	bool m_isEnemy;
 	OBJTYPE m_bulletType = TYPE_END;
 	int boombStep=0;
 };
