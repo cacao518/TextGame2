@@ -247,7 +247,7 @@ int Bullet::Update()
 				
 				GameMgr::GetInstance()->SetEnemy(enemy);
 				SetIsLife(false);
-			}
+			
 		if (m_bulletType != SHOTGUN) SetIsLife(false);
 				
 			
