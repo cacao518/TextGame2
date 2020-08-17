@@ -14,6 +14,8 @@ Guard::Guard(POS position)
 
 	m_name = L"Guard";
 	m_color = 5;
+
+
 }
 
 

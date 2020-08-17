@@ -1,8 +1,9 @@
 #include "GuardEnemy.h"
 #include "Timer.h"
 #include "Bullet.h"
-
-
+#include "RigidBody.h"
+#include "BoxCollider.h"
+#include "Guard.h"
 GuardEnemy::GuardEnemy(POS position)
 	:Enemy(position), m_Status(STATUS(10.f, 10.f, 10.f))
 {/*
@@ -26,6 +27,9 @@ GuardEnemy::GuardEnemy(POS position)
 
 	m_name = L"GuardEnemy";
 	m_color = 4;
+
+
+
 }
 
 int GuardEnemy::Update()
@@ -46,7 +50,18 @@ int GuardEnemy::Update()
 	}
 
 
-	
+	if (m_first)
+	{
+
+		m_first = false;
+		std::shared_ptr<Guard> enemy10 = std::make_shared<Guard>(POS(m_pos.x - 2, m_pos.y));
+		objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy10));
+
+		RigidBody* rb10 = new RigidBody(std::dynamic_pointer_cast<GameObject>(enemy10));
+		enemy10->AddComponent(rb10);
+		BoxCollider* bc10 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(enemy10));
+		enemy10->AddComponent(bc10);
+	}
 	
 
 	if (m_Life)
