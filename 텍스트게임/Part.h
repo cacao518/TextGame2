@@ -12,7 +12,7 @@ public:
 	
 	void SetIsDamagedPart(bool isDamagedPart) { m_IsDamagedPart = isDamagedPart; }
 	void SetIsDamagingPart(bool isDamagingPart) { m_IsDamagingPart = isDamagingPart; }
-
+	void SetBaseColor() { m_color = m_baseColor; }
 private:
 	void SetDamageEffect();
 	void ShowDamageEffect();

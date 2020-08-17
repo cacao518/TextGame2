@@ -44,14 +44,14 @@ Scene_Stage_1::Scene_Stage_1()
 		m_objectMgr->InsertObject(UI, std::dynamic_pointer_cast<GameObject>(bossUI));
 	}
 
-	x = 8;
-	std::shared_ptr<Vehicle> tank = std::make_shared<Vehicle>(POS(x, y - 6));
-	m_objectMgr->InsertObject(VEHICLE, std::dynamic_pointer_cast<GameObject>(tank));
+	//x = 8;
+	//std::shared_ptr<Vehicle> tank = std::make_shared<Vehicle>(POS(x, y - 6));
+	//m_objectMgr->InsertObject(VEHICLE, std::dynamic_pointer_cast<GameObject>(tank));
 
-	RigidBody* rb4 = new RigidBody(std::dynamic_pointer_cast<GameObject>(tank));
-	tank->AddComponent(rb4);
-	BoxCollider* bc4 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(tank));
-	tank->AddComponent(bc4);
+	//RigidBody* rb4 = new RigidBody(std::dynamic_pointer_cast<GameObject>(tank));
+	//tank->AddComponent(rb4);
+	//BoxCollider* bc4 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(tank));
+	//tank->AddComponent(bc4);
 
 	std::ifstream fp;
 	fp.open("map.txt");
@@ -70,24 +70,24 @@ Scene_Stage_1::Scene_Stage_1()
 				m_objectMgr->InsertObject(TERRAIN,
 						std::dynamic_pointer_cast<GameObject>(std::make_shared<Terrain>(HighGroundBlockImg, 1, 10, POS(j, i))));
 			}
-			if (map[j][i] == 4) { // 몬스터1
-				std::shared_ptr<Enemy> enemy = std::make_shared<Enemy>(POS(j, i));
-				m_objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy));
+			//if (map[j][i] == 4) { // 몬스터1
+			//	std::shared_ptr<Enemy> enemy = std::make_shared<Enemy>(POS(j, i));
+			//	m_objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy));
 
-				RigidBody* rb = new RigidBody(std::dynamic_pointer_cast<GameObject>(enemy));
-				enemy->AddComponent(rb);
-				BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(enemy));
-				enemy->AddComponent(bc);
-			}
-			if (map[j][i] == 8) { // 헤비머신건
-				std::shared_ptr<ItemBox> item = std::make_shared<ItemBox>(Bullet::HANDGUN, POS(j, i));
-				m_objectMgr->InsertObject(ITEMBOX, std::dynamic_pointer_cast<GameObject>(item));
+			//	RigidBody* rb = new RigidBody(std::dynamic_pointer_cast<GameObject>(enemy));
+			//	enemy->AddComponent(rb);
+			//	BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(enemy));
+			//	enemy->AddComponent(bc);
+			//}
+			//if (map[j][i] == 8) { // 헤비머신건
+			//	std::shared_ptr<ItemBox> item = std::make_shared<ItemBox>(Bullet::HANDGUN, POS(j, i));
+			//	m_objectMgr->InsertObject(ITEMBOX, std::dynamic_pointer_cast<GameObject>(item));
 
-				RigidBody* rb3 = new RigidBody(std::dynamic_pointer_cast<GameObject>(item));
-				item->AddComponent(rb3);
-				BoxCollider* bc3 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(item));
-				item->AddComponent(bc3);
-			}
+			//	RigidBody* rb3 = new RigidBody(std::dynamic_pointer_cast<GameObject>(item));
+			//	item->AddComponent(rb3);
+			//	BoxCollider* bc3 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(item));
+			//	item->AddComponent(bc3);
+			//}
 			if (map[j][i] == 9)
 			{
 				std::shared_ptr<BossTank> boss = std::make_shared<BossTank>(POS(j, i));

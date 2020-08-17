@@ -2,7 +2,9 @@
 #include "Part.h"
 #include "Timer.h"
 #include "BoxCollider.h"
+#include "RigidBody.h"
 #include "Player.h"
+#include "Bullet.h"
 BossTank::BossTank(POS pos)
 	:Boss(pos),m_upPart(nullptr),m_downPart(nullptr)
 {
@@ -22,8 +24,10 @@ BossTank::BossTank(POS pos)
 	m_downPart->SetIsDamagingPart(true);
 
 	m_name = L"Boss";
-	m_status = STATUS(50.f, 5.f, 10.f);
-	m_curPattern = IDLE;
+	m_status = STATUS(50.f, 2.f, 10.f);
+	m_curPattern = NOT_RECOGNIZE;
+	m_dir = false;
+	UpdateCenterPos();
 }
 
 BossTank::~BossTank()
@@ -32,6 +36,7 @@ BossTank::~BossTank()
 
 int BossTank::Update()
 {
+	UpdateCenterPos();
 	if (m_status.hp <= 0)
 		return -1;
 	ProgressPattern();
@@ -60,18 +65,32 @@ void BossTank::Render()
 		m_downPart->Render();
 }
 
+void BossTank::UpdateCenterPos()
+{
+	m_centerPos = m_pos + POS(15.f, 12.f);
+}
+
 void BossTank::ProgressPattern()
 {
 	switch (m_curPattern)
 	{
+	case NOT_RECOGNIZE:
+		ProgressNotRecognize();
+		break;
 	case IDLE:
 		ProgressIdle();
 		break;
 	case MOVE:
 		ProgressMove();
 		break;
+	case SHOT_READY:
+		ProgressShotReady();
+		break;
 	case SHOT:
 		ProgressShot();
+		break;
+	case RUSH_READY:
+		ProgressRushReady();
 		break;
 	case RUSH:
 		ProgressRush();
@@ -87,16 +106,18 @@ void BossTank::ProgressIdle()
 	if (m_patternTimer >= 2.f)
 	{
 		std::shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(ObjectMgr::GetInstance()->GetFrontObject(PLAYER));
-
-		int lenToPlayer, xDist, yDist;
-		xDist = player->GetPos().x - GetPos().x;
-		yDist = player->GetPos().y - GetPos().y;
+		if (nullptr == player)
+			return;
+		//플레이어와 거리 비교
+		float lenToPlayer, xDist, yDist;
+		xDist = player->GetPos().x - m_centerPos.x;
+		yDist = player->GetPos().y - m_centerPos.y;
 		lenToPlayer = sqrtf(xDist * xDist + yDist * yDist);
 
-		if (lenToPlayer <= 3.f)
+		if (lenToPlayer <= 25.f)
 			SetPattern(MOVE);
-		else if (lenToPlayer <= 8.f)
-			SetPattern(SHOT);
+		else if (lenToPlayer <= 40.f)
+			SetPattern(SHOT_READY);
 		else
 			SetPattern(RUSH_READY);
 	}
@@ -104,16 +125,90 @@ void BossTank::ProgressIdle()
 
 void BossTank::ProgressMove()
 {
+	std::shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(ObjectMgr::GetInstance()->GetFrontObject(PLAYER));
+	if (nullptr == player)
+		return;
+
+	
+	//플레이어와 거리 비교
+	float lenToPlayer, xDist, yDist;
+	xDist = player->GetPos().x - m_centerPos.x;
+	yDist = player->GetPos().y - m_centerPos.y;
+	lenToPlayer = sqrtf(xDist * xDist + yDist * yDist);
+
+	float dir = GetPos().x - player->GetPos().x;
+	dir /= fabs(dir);
+	if (lenToPlayer <= 30.f)
+	{
+		SetPos(GetPos() + POS(dir * m_status.moveSpeed*Timer::DeltaTime(), 0));
+	}
+	else if (lenToPlayer >= 40.f)
+	{
+		SetPos(GetPos() + POS(-dir * m_status.moveSpeed*Timer::DeltaTime(), 0));
+	}
+
+	if (m_patternTimer >= 3.f)
+		SetPattern(IDLE);
 }
 
 void BossTank::ProgressShot()
 {
+	std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(true, false, Bullet::BOSS_CANNON, m_dir, POS(GetPos().x + 2, GetPos().y + 5));
+	ObjectMgr::GetInstance()->InsertObject(BULLET, std::dynamic_pointer_cast<GameObject>(bullet));
+	BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(bullet));
+	bullet->AddComponent(bc);
+	bc->SetIsTrigger(true);
+
+	SetPattern(IDLE);
+}
+
+void BossTank::ProgressShotReady()
+{
+	m_upPart->SetColor(LIGHTGREEN);
+	if (m_patternTimer >= 3.f)
+	{
+		SetPattern(SHOT);
+		m_upPart->SetBaseColor();
+	}
 }
 
 void BossTank::ProgressRush()
 {
+	
+	if (m_patternTimer <= 2.f)
+		SetPos(GetPos() + POS(-m_status.moveSpeed * 7.f * Timer::DeltaTime(), 0));
+	else if (m_patternTimer <= 4.f)
+		SetPos(GetPos() + POS(m_status.moveSpeed * 7.f * Timer::DeltaTime(), 0));
+	else
+		SetPattern(IDLE);
+
 }
 
 void BossTank::ProgressRushReady()
 {
+	m_upPart->SetColor(LIGHTGREEN);
+	m_downPart->SetColor(LIGHTGREEN);
+	if (m_patternTimer >= 3.f)
+	{
+		SetPattern(RUSH);
+		m_upPart->SetBaseColor();
+		m_downPart->SetBaseColor();
+	}
+}
+
+void BossTank::ProgressNotRecognize()
+{
+	std::shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(ObjectMgr::GetInstance()->GetFrontObject(PLAYER));
+	if (nullptr == player)
+		return;
+
+
+	//플레이어와 거리 비교
+	float lenToPlayer, xDist, yDist;
+	xDist = player->GetPos().x - m_centerPos.x;
+	yDist = player->GetPos().y - m_centerPos.y;
+	lenToPlayer = sqrtf(xDist * xDist + yDist * yDist);
+
+	if (lenToPlayer <= 40.f)
+		SetPattern(IDLE);
 }
