@@ -56,17 +56,16 @@ std::shared_ptr<GameObject> BoxCollider::TriggerCheck(wchar_t* otherObjName)
 }
 int BoxCollider::TerrainCheck(std::shared_ptr<GameObject>& obj1, std::shared_ptr<GameObject>& obj2)
 {
-    if (obj1->GetPos().x< obj2->GetPos().x + obj2->GetWidth() &&
-        obj1->GetPos().x + obj1->GetWidth() > obj2->GetPos().x &&
-        obj1->GetPos().y< obj2->GetPos().y + obj2->GetHeight() &&
-        obj1->GetPos().y + obj1->GetHeight() >obj2->GetPos().y)
+    if (obj1->GetPos().x + obj1->GetWidth() - 1 >= obj2->GetPos().x &&
+        obj1->GetPos().x <= obj2->GetPos().x && !(obj1->GetIsLand()))
     {
-		
-			obj1->SetIsLand(true);
-			obj1->SetCollisionObjPos(obj2->GetPos());
-			return 1;
-		
-	}
+        if (obj1->GetPos().y + obj1->GetHeight() - 1 >= obj2->GetPos().y - 1 && obj1->GetPos().y <= obj2->GetPos().y - 1)
+        {
+            obj1->SetIsLand(true);
+            obj1->SetCollisionObjPos(obj2->GetPos());
+            return 1;
+        }
+    }
 	return 0;
 }
 

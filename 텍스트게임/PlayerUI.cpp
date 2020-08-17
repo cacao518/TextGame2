@@ -1,5 +1,7 @@
 #include "PlayerUI.h"
 #include "Player.h"
+#include "stdio.h"
+
 PlayerUI::PlayerUI()
 	:BaseUI(),m_playerStatus(STATUS(0.f,0.f,0.f))
 {
@@ -19,6 +21,8 @@ PlayerUI::PlayerUI()
 	m_name = L"PlayerUI";
 
 	m_objectName = nullptr;
+	m_bulletNumImg = nullptr;
+	m_BombNumImg = nullptr;
 }
 
 PlayerUI::~PlayerUI()
@@ -37,8 +41,24 @@ void PlayerUI::UpdatePlayerStatus()
 		return;
 	m_playerStatus = player->GetStatus();
 	m_objectName = player->GetName();
-}
 
+	wchar_t img[3];
+	if(player->GetBulletNum() < 10)
+		wsprintf(img, L"0%d", player->GetBulletNum());
+	else
+		wsprintf(img, L"%d", player->GetBulletNum());
+	m_bulletNumImg = new wchar_t[3];
+	memcpy(m_bulletNumImg, img, sizeof(wchar_t) * 3);
+
+	wchar_t img2[3];
+	if (player->GetBombNum() < 10)
+		wsprintf(img2, L"0%d", player->GetBombNum());
+	else
+		wsprintf(img2, L"%d", player->GetBombNum());
+	m_BombNumImg = new wchar_t[3];
+	memcpy(m_BombNumImg, img2, sizeof(wchar_t) * 3);
+}
+	
 int PlayerUI::Update()
 {
 
@@ -57,6 +77,10 @@ void PlayerUI::Render()
 		ObjectMgr::GetInstance()->Draw(m_objectName, (int)wcslen(m_objectName), 1, (int)m_pos.x, (int)m_pos.y - 1,LIGHTBLUE);
 	if (nullptr != m_sprite)
 		ObjectMgr::GetInstance()->Draw(m_sprite, m_width, m_height, (int)m_pos.x, (int)m_pos.y,BLUE);
+	if (nullptr != m_bulletNumImg)
+		ObjectMgr::GetInstance()->Draw(m_bulletNumImg, 3, 1, (int)m_pos.x+7, (int)m_pos.y-1, YELLOW);
+	if (nullptr != m_BombNumImg)
+		ObjectMgr::GetInstance()->Draw(m_BombNumImg, 3, 1, (int)m_pos.x + 11, (int)m_pos.y - 1, LIGHTRED);
 }
 
 void PlayerUI::UpdateHpBar()

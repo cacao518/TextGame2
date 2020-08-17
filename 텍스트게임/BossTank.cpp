@@ -103,7 +103,7 @@ void BossTank::ProgressPattern()
 
 void BossTank::ProgressIdle()
 {
-	if (m_patternTimer >= 2.f)
+	if (m_patternTimer >= 1.f)
 	{
 		std::shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(ObjectMgr::GetInstance()->GetFrontObject(PLAYER));
 		if (nullptr == player)
@@ -147,7 +147,7 @@ void BossTank::ProgressMove()
 		SetPos(GetPos() + POS(-dir * m_status.moveSpeed*Timer::DeltaTime(), 0));
 	}
 
-	if (m_patternTimer >= 3.f)
+	if (m_patternTimer >= 2.f)
 		SetPattern(IDLE);
 }
 
@@ -165,7 +165,7 @@ void BossTank::ProgressShot()
 void BossTank::ProgressShotReady()
 {
 	m_upPart->SetColor(LIGHTGREEN);
-	if (m_patternTimer >= 3.f)
+	if (m_patternTimer >= 1.f)
 	{
 		SetPattern(SHOT);
 		m_upPart->SetBaseColor();
@@ -188,7 +188,7 @@ void BossTank::ProgressRushReady()
 {
 	m_upPart->SetColor(LIGHTGREEN);
 	m_downPart->SetColor(LIGHTGREEN);
-	if (m_patternTimer >= 3.f)
+	if (m_patternTimer >= 2.f)
 	{
 		SetPattern(RUSH);
 		m_upPart->SetBaseColor();

@@ -23,6 +23,9 @@ private:
 	const wchar_t* m_objectName;
 	wchar_t m_BaseImg[36];
 
+	wchar_t* m_bulletNumImg;
+	wchar_t* m_BombNumImg;
+
 	std::weak_ptr<Player> m_player;
 };
 

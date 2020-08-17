@@ -20,7 +20,11 @@ public:
 	void GetDamage(float damage, POS enemyPos);
 	void SetIsRide(int flag);
 	int GetIsRide();
-	void SetWeapon(int weaponType, int weaponSpeed) { m_weaponType = weaponType; m_weaponSpeed = weaponSpeed; };
+	void SetWeapon(int weaponType, int weaponSpeed, int bulletNum) {
+		m_weaponType = weaponType; m_weaponSpeed = weaponSpeed; m_bulletNum = bulletNum;
+	}
+	int GetBulletNum() { return m_bulletNum; };
+	int GetBombNum() { return boombAmount; };
 private:
 	std::bitset<0xff> keyPress;
 	std::mutex keyLock;
@@ -38,10 +42,15 @@ private:
 	int m_jumpPower = 6;
 	bool m_invincibility = false;
 	float m_timer = 0.f;
-	int boombAmount=10;
+	
+	const int ATTACK_DELAY_MAX = 10;
+	const int DEFAULT_WEAPON_SPEED = 20;
+	int boombAmount = 10;
 
 	int m_weaponType;
 	int m_weaponSpeed;
+	int m_attackDelay; // 0이 되어야 공격 가능하다.
+	int m_bulletNum;
 	bool m_isRide = false;
 	wchar_t m_leftImg[6], m_rightImg[6], m_attackImg[6], m_tankImg[14];
 	
