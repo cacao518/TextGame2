@@ -22,18 +22,33 @@ GunEnemy::GunEnemy(POS position)
 int GunEnemy::Update()
 {
 
-	if (m_dir) m_pos.x += Timer::DeltaTime() * 5;
-	else  m_pos.x -= Timer::DeltaTime() * 5;
 
-	m_MoveCount += Timer::DeltaTime();
-	if (m_MoveCount > 3)
+
+	
+
+	//공격중일 땐 이동 안함 
+	if (!Attacking)
 	{
-		m_MoveCount = 0;
-		m_dir = !m_dir;
+		if (m_dir) m_pos.x += Timer::DeltaTime() * 5;
+		else m_pos.x -= Timer::DeltaTime() * 5;
+		
+		
+
+		m_MoveCount += Timer::DeltaTime();
+		if (m_MoveCount > 3)
+		{
+			m_MoveCount = 0;
+			m_dir = !m_dir;
+		}
 	}
+	
+
+	
 
 	DistanceCheck();
 
+	if (m_dir) memcpy(m_sprite, monsterImg2_RIGHT, sizeof(wchar_t) * m_width * m_height);
+	else memcpy(m_sprite, monsterImg2_LEFT, sizeof(wchar_t) * m_width * m_height);
 
 
 	if (m_Life)
@@ -54,21 +69,13 @@ void GunEnemy::DistanceCheck()
 	yDist = player->GetPos().y - m_pos.y;
 	lenToPlayer = sqrtf(xDist * xDist + yDist * yDist);
 
-	if (lenToPlayer <= 12.f  )
-		Attack();
-
-
-	if (player->GetPos().x > m_pos.x)
+	if (lenToPlayer <= 12.f)
 	{
-		m_bulletDir = true;
-		memcpy(m_sprite, monsterImg2_RIGHT, sizeof(wchar_t) * m_width * m_height);
+		Attack();
+		Attacking = true;
 	}
 	else
-	{
-		m_bulletDir = false;
-		memcpy(m_sprite, monsterImg2_LEFT, sizeof(wchar_t) * m_width * m_height);
-	}
-		
+		Attacking = false;
 
 
 
@@ -76,6 +83,13 @@ void GunEnemy::DistanceCheck()
 
 void GunEnemy::Attack()
 {
+	std::shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(ObjectMgr::GetInstance()->GetFrontObject(PLAYER));
+	
+	if (player->GetPos().x > m_pos.x) m_dir = true;
+	else m_dir = false;
+	
+	m_bulletDir = m_dir;
+
 		std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(true, false, Bullet::ENEMYBULLET, m_bulletDir , POS(GetPos().x , GetPos().y+1 ));
 		ObjectMgr::GetInstance()->InsertObject(BULLET, std::dynamic_pointer_cast<GameObject>(bullet));
 		BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(bullet));

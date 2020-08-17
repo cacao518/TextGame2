@@ -18,6 +18,8 @@ private:
 	void DistanceCheck();
 	void Attack();
 	bool m_bulletDir = false;
+
+	bool Attacking = false;
 	wchar_t monsterImg2_RIGHT[6] =
 	{ L'0', L' ', L'[', L'r', L'L', L' ' };
 
