@@ -4,7 +4,7 @@ class Scene;
 class SceneMgr
 {
 public:
-	enum SCENETYPE { LOGO, STAGE_1, STAGE_BOSS, SCENE_END };
+	enum SCENETYPE { LOGO, STAGE_1, STAGE_2, ENDING, SCENE_END };
 private:
 	explicit SceneMgr();
 	~SceneMgr();

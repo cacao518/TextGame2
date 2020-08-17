@@ -18,5 +18,5 @@ public:
 private:
 	int m_type; 
 	int m_bulletNum;
-	int m_weaponSpeed;
+	float m_weaponSpeed;
 };

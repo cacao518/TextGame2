@@ -24,34 +24,34 @@ Scene::~Scene()
 {
 }
 
-void Scene::ParsingMap(char* mapName)
+void Scene::ParsingMap(char* mapName, int mapWidth, int mapHeight)
 {
-	const int MapWidth = 160;
-	const int MapHeight = 80;
 
-	int map[MapWidth][MapHeight];
+	int* map = new int[mapWidth * mapHeight];
+	
 	wchar_t GroundBlockImg[5] = { 'm','U','U','U','U' };
 	wchar_t HighGroundBlockImg[10] = { 'm','U','U','U','U','U','U','U','U','U' };
 	wchar_t AirBlockImg[2] = { 'm','U' };
 
 	std::ifstream fp;
 	fp.open(mapName);
-	for (int i = 0; i < MapHeight; i++) {
-		for (int j = 0; j < MapWidth; j++) {
-			fp >> map[j][i];
-			if (map[j][i] == 1) { // 바닥 지형
+	for (int i = 0; i < mapHeight; i++) {
+		for (int j = 0; j < mapWidth; j++) {
+			int index = i * mapWidth + j;
+			fp >> map[index];
+			if (map[index] == 1) { // 바닥 지형
 				m_objectMgr->InsertObject(TERRAIN,
 					std::dynamic_pointer_cast<GameObject>(std::make_shared<Terrain>(GroundBlockImg, 1, 5, POS(j, i))));
 			}
-			if (map[j][i] == 2) { // 공중 지형
+			if (map[index] == 2) { // 공중 지형
 				m_objectMgr->InsertObject(TERRAIN,
 					std::dynamic_pointer_cast<GameObject>(std::make_shared<Terrain>(AirBlockImg, 1, 2, POS(j, i))));
 			}
-			if (map[j][i] == 3) { // 언덕 지형
+			if (map[index] == 3) { // 언덕 지형
 				m_objectMgr->InsertObject(TERRAIN,
 					std::dynamic_pointer_cast<GameObject>(std::make_shared<Terrain>(HighGroundBlockImg, 1, 10, POS(j, i))));
 			}
-			if (map[j][i] == 4) { // 몬스터1
+			if (map[index] == 4) { // 몬스터1
 				std::shared_ptr<Enemy> enemy = std::make_shared<Enemy>(POS(j, i));
 				m_objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy));
 
@@ -60,7 +60,7 @@ void Scene::ParsingMap(char* mapName)
 				BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(enemy));
 				enemy->AddComponent(bc);
 			}
-			if (map[j][i] == 6) { // 헤비머신건
+			if (map[index] == 6) { // 헤비머신건
 				std::shared_ptr<ItemBox> item = std::make_shared<ItemBox>(Bullet::HEABYGUN, POS(j, i));
 				m_objectMgr->InsertObject(ITEMBOX, std::dynamic_pointer_cast<GameObject>(item));
 
@@ -69,7 +69,7 @@ void Scene::ParsingMap(char* mapName)
 				BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(item));
 				item->AddComponent(bc);
 			}
-			if (map[j][i] == 7) { // 로켓런처
+			if (map[index] == 7) { // 로켓런처
 				std::shared_ptr<ItemBox> item = std::make_shared<ItemBox>(Bullet::MISSILE, POS(j, i));
 				m_objectMgr->InsertObject(ITEMBOX, std::dynamic_pointer_cast<GameObject>(item));
 
@@ -78,7 +78,7 @@ void Scene::ParsingMap(char* mapName)
 				BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(item));
 				item->AddComponent(bc);
 			}
-			if (map[j][i] == 8) { // 샷건
+			if (map[index] == 8) { // 샷건
 				std::shared_ptr<ItemBox> item = std::make_shared<ItemBox>(Bullet::SHOTGUN, POS(j, i));
 				m_objectMgr->InsertObject(ITEMBOX, std::dynamic_pointer_cast<GameObject>(item));
 
@@ -87,7 +87,7 @@ void Scene::ParsingMap(char* mapName)
 				BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(item));
 				item->AddComponent(bc);
 			}
-			if (map[j][i] == -1) { // 탈것
+			if (map[index] == -1) { // 탈것
 				std::shared_ptr<Vehicle> tank = std::make_shared<Vehicle>(POS(j, i));
 				m_objectMgr->InsertObject(VEHICLE, std::dynamic_pointer_cast<GameObject>(tank));
 
@@ -96,7 +96,7 @@ void Scene::ParsingMap(char* mapName)
 				BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(tank));
 				tank->AddComponent(bc);
 			}
-			if (map[j][i] == 9)
+			if (map[index] == 9)
 			{
 				std::shared_ptr<BossTank> boss = std::make_shared<BossTank>(POS(j, i));
 				m_objectMgr->InsertObject(BOSS, std::dynamic_pointer_cast<GameObject>(boss));
@@ -109,6 +109,6 @@ void Scene::ParsingMap(char* mapName)
 		}
 	}
 	fp.close();
-
+	delete map;
 	m_objectMgr->InsertObject(BACKGROUND, std::dynamic_pointer_cast<GameObject>(std::make_shared<BackGround>(POS(0, 0))));
 }

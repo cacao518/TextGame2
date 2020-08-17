@@ -154,14 +154,6 @@ int Player::Update()
 		}
 	}
 
-	if (m_attackDelay > 0)
-	{
-		if (m_isRide) 
-			m_attackDelay -= (int)(Timer::DeltaTime() * DEFAULT_WEAPON_SPEED);
-		else
-			m_attackDelay -= (int)(Timer::DeltaTime() * m_weaponSpeed);
-		if (m_attackDelay < 0) m_attackDelay = 0;
-	}
 
 	if (keyPress[VK_ESCAPE])
 		ObjectMgr::GetInstance()->done = true;
@@ -172,7 +164,14 @@ int Player::Update()
 	keyPress.reset();
 	keyLock.unlock();
 
-
+	if (m_attackDelay > 0)
+	{
+		if (m_isRide)
+			m_attackDelay -= Timer::DeltaTime() * DEFAULT_WEAPON_SPEED;
+		else
+			m_attackDelay -= Timer::DeltaTime() * m_weaponSpeed;
+		if (m_attackDelay < 0) m_attackDelay = 0;
+	}
 
 	if (!m_isRide)
 	{

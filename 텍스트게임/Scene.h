@@ -22,6 +22,6 @@ protected:
 	ObjectMgr* m_objectMgr;
 	GameMgr* m_gameMgr;
 
-	void ParsingMap(char* mapName);
+	void ParsingMap(char* mapName,int mapWidth,int mapHeight);
 };
 

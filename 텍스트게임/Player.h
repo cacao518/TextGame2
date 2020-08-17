@@ -20,7 +20,7 @@ public:
 	void GetDamage(float damage, POS enemyPos);
 	void SetIsRide(int flag);
 	int GetIsRide();
-	void SetWeapon(int weaponType, int weaponSpeed, int bulletNum) {
+	void SetWeapon(int weaponType, float weaponSpeed, int bulletNum) {
 		m_weaponType = weaponType; m_weaponSpeed = weaponSpeed; m_bulletNum = bulletNum;
 	}
 	int GetBulletNum() { return m_bulletNum; };
@@ -48,8 +48,8 @@ private:
 	int boombAmount = 10;
 
 	int m_weaponType;
-	int m_weaponSpeed;
-	int m_attackDelay; // 0이 되어야 공격 가능하다.
+	float m_weaponSpeed;
+	float m_attackDelay; // 0이 되어야 공격 가능하다.
 	int m_bulletNum;
 	bool m_isRide = false;
 	wchar_t m_leftImg[6], m_rightImg[6], m_attackImg[6], m_tankImg[14];
