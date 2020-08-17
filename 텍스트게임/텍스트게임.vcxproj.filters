@@ -194,6 +194,9 @@
     <ClCompile Include="BossUI.cpp">
       <Filter>Object\10.UI\BossUI</Filter>
     </ClCompile>
+    <ClCompile Include="GunEnemy.cpp">
+      <Filter>Object\01.Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectMgr.h">
@@ -290,6 +293,9 @@
       <Filter>Object\01.Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Guard.h">
+      <Filter>Object\01.Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="GunEnemy.h">
       <Filter>Object\01.Enemy</Filter>
     </ClInclude>
   </ItemGroup>

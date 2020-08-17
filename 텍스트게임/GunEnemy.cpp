@@ -1,9 +1,9 @@
-#include "GuardEnemy.h"
+#include "GunEnemy.h"
 #include "Timer.h"
 #include "Bullet.h"
 
 
-GuardEnemy::GuardEnemy(POS position)
+GunEnemy::GunEnemy(POS position)
 	:Enemy(position), m_Status(STATUS(10.f, 10.f, 10.f))
 {/*
 	wchar_t monsterImg2_LEFT[15] =
@@ -22,13 +22,13 @@ GuardEnemy::GuardEnemy(POS position)
 	m_width = 2;
 	m_height = 3;
 	m_sprite = new wchar_t[m_width * m_height];
-	memcpy(m_sprite, monsterImg2_LEFT , sizeof(wchar_t) * m_width * m_height);
+	memcpy(m_sprite, monsterImg2_LEFT, sizeof(wchar_t) * m_width * m_height);
 
 	m_name = L"GuardEnemy";
 	m_color = 4;
 }
 
-int GuardEnemy::Update()
+int GunEnemy::Update()
 {
 
 	if (m_dir) m_pos.x += Timer::DeltaTime() * 5;
@@ -40,14 +40,14 @@ int GuardEnemy::Update()
 		m_MoveCount = 0;
 		m_dir = !m_dir;
 
-	
-	//	if(m_dir)memcpy(m_sprite, monsterImg2_RIGHT, sizeof(char) * m_width * m_height);
-		//else memcpy(m_sprite, monsterImg2_LEFT, sizeof(char) * m_width * m_height);
+
+		//	if(m_dir)memcpy(m_sprite, monsterImg2_RIGHT, sizeof(char) * m_width * m_height);
+			//else memcpy(m_sprite, monsterImg2_LEFT, sizeof(char) * m_width * m_height);
 	}
 
 
-	
-	
+
+
 
 	if (m_Life)
 		return 1;
@@ -57,4 +57,15 @@ int GuardEnemy::Update()
 }
 
 
+//오버라이딩
+void GunEnemy::GetDamage(float damage, bool dir)
+{
 
+	//Knockback(bulletPos);
+	printf("가드몬터맞음 %f ", m_Status.hp);
+	m_Status.hp -= damage;
+	if (m_Status.hp <= 0) m_Life = false;
+
+
+
+}

@@ -1,22 +1,22 @@
 #pragma once
 #include "GameObject.h"
 #include "Enemy.h"
-class GuardEnemy : public Enemy
+class GunEnemy : public Enemy
 {
 public:
-	GuardEnemy(POS position);
-	//void GetDamage(float damage, bool dir) ;
+	GunEnemy(POS position);
+	void GetDamage(float damage, bool dir);
 	int Update();
-	
+
 
 
 private:
 	STATUS m_Status;
 	wchar_t monsterImg2_RIGHT[6] =
-		 { '0', ' ', '[', 'r', 'L', ' ' };
+	{ '0', ' ', '[', 'r', 'L', ' ' };
 
 	wchar_t monsterImg2_LEFT[6] =
-		{ ' ', '0', '<', ']', ' ', 'L' };
+	{ ' ', '0', '<', ']', ' ', 'L' };
 };
 
 

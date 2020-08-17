@@ -13,7 +13,7 @@ public:
 
 	void Knockback(POS otherObjPos);
 	const STATUS& GetStatus()const { return m_Status; }
-	void GetDamage(float damage, POS bulletPos);
+	void GetDamage(float damage, POS bulletPos,bool isKnockback);
 
 protected:
 	ObjectMgr* objectMgr = ObjectMgr::GetInstance();

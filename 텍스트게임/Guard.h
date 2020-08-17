@@ -12,8 +12,8 @@ public:
 private:
 	STATUS m_Status;
 
-	wchar_t monsterImg2_LEFT[3] =
-	{ '[','[','[' };
+	wchar_t monsterImg2_LEFT[6] =
+	{ '[','[','[', '[','[','[' };
 };
 
 

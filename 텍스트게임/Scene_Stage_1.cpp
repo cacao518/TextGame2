@@ -64,6 +64,8 @@ Scene_Stage_1::Scene_Stage_1()
 	//BoxCollider* bc9 = new BoxCollider(std::dynamic_pointer_cast<GameObject>(enemy9));
 	//enemy9->AddComponent(bc9);
 
+	std::shared_ptr<Guard> enemy10 = std::make_shared<Guard>(POS(x , y-5 ));
+	m_objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy10));
 
 	//std::shared_ptr<Guard> enemy10 = std::make_shared<Guard>(POS(x +1, y-5 ));
 	//m_objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy10));
