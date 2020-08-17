@@ -359,5 +359,8 @@
     <Text Include="Ending.txt">
       <Filter>리소스 파일</Filter>
     </Text>
+    <Text Include="map1.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
   </ItemGroup>
 </Project>
