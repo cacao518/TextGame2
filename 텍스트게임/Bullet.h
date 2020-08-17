@@ -22,7 +22,6 @@ private:
 	void DefaultBulletMove();
 private:
 	float m_MaxTimer;
-	int m_bulletSpeed;
 	float m_timer = 0.f;
 	bool m_chargeShoot = false;
 	float m_bulletDamage;
@@ -30,7 +29,7 @@ private:
 	float m_gravitySpeed = 0.f;
 	bool m_isEnemy;
 
-	OBJTYPE m_bulletType = TYPE_END;
+	OBJTYPE m_type = TYPE_END;
 	int boombStep=0;
 };
 

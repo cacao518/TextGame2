@@ -11,9 +11,8 @@
 #include "Guard.h"
 
 Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position)
-	:GameObject(position), m_isEnemy(isEnemy), m_bulletDamage(0.f), m_timer(0.f),m_bulletType((OBJTYPE)BulletType)
+	:GameObject(position), m_isEnemy(isEnemy), m_bulletDamage(0.f), m_timer(0.f),m_type((OBJTYPE)BulletType)
 {
-	m_type = BulletType;
 	m_chargeShoot = charge;
 	if (m_type != SHOTGUN)
 	{
@@ -38,11 +37,10 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 
 	wchar_t ShotGun[60] = { L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#' };
 	wchar_t ChargeShotGun[60] = { L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#', L'#', L'#',L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#',L'#', L'#' };
-	if (m_type == HANDGUN)
 	wchar_t boombImg[2] = { L'0',L'0' };
 
 
-	if (BulletType == HANDGUN)
+	if (m_type == HANDGUN)
 	{
 		m_bulletDamage = 1;
 		m_width = 2;
@@ -162,7 +160,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 		m_color = LIGHTRED;
 	}
 
-	if (BulletType == BOOMB)
+	if (m_type == BOOMB)
 	{
 		m_bulletSpeed = 4.f;
 		boombStep = 1;
@@ -175,7 +173,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 
 	}
 
-	if (BulletType == METEOR)
+	if (m_type == METEOR)
 	{
 		wchar_t meteorImg[16] = { L' ',L'@',L'@',L' ',L'@',L'@',L'@',L'@',L'@',L'@',L'@',L'@',L' ',L'@',L'@',L' ' };
 
@@ -189,7 +187,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 		m_color = LIGHTRED;
 	}
 
-	if (BulletType == EARTHQUAKE)
+	if (m_type == EARTHQUAKE)
 	{
 		wchar_t earthquakeImg[24] = { L'^',L'^',L'^',L'^',L'^',L'^',L'^',L'^',
 									L'^',L'^',L'^',L'^',L'^',L'^',L'^',L'^',
@@ -203,7 +201,7 @@ Bullet::Bullet(bool isEnemy, bool charge, int BulletType, bool dir, POS position
 		ZeroMemory(m_sprite, sizeof(wchar_t) * m_width * m_height);
 		memcpy(m_sprite, earthquakeImg, sizeof(wchar_t) * m_width * m_height);
 		m_color = LIGHTRED;
-		m_expireTime = 1.f;
+		m_MaxTimer = 1.f;
 	}
 	m_dir = dir;
 	m_gravitySpeed = 0.f;
@@ -312,7 +310,7 @@ int Bullet::LateUpdate()
 
 void Bullet::BulletMove()
 {
-	switch (m_bulletType)
+	switch (m_type)
 	{
 	case BOSS_CANNON:
 		BossCannonMove();
@@ -359,8 +357,8 @@ void Bullet::EarthquakeMove()
 void Bullet::DefaultBulletMove()
 {
 	if (m_dir)
-		m_pos.x += Timer::DeltaTime() * 10;
+		m_pos.x += Timer::DeltaTime() * m_bulletSpeed;
 	else
-		m_pos.x -= Timer::DeltaTime() * 10;
+		m_pos.x -= Timer::DeltaTime() * m_bulletSpeed;
 }
 

@@ -68,11 +68,11 @@ Scene_Stage_1::Scene_Stage_1()
 			//	std::shared_ptr<Enemy> enemy = std::make_shared<Enemy>(POS(j, i));
 			//	m_objectMgr->InsertObject(ENEMY, std::dynamic_pointer_cast<GameObject>(enemy));
 
-				RigidBody* rb = new RigidBody(std::dynamic_pointer_cast<GameObject>(enemy));
-				enemy->AddComponent(rb);
-				BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(enemy));
-				enemy->AddComponent(bc);
-			}
+			//	RigidBody* rb = new RigidBody(std::dynamic_pointer_cast<GameObject>(enemy));
+			//	enemy->AddComponent(rb);
+			//	BoxCollider* bc = new BoxCollider(std::dynamic_pointer_cast<GameObject>(enemy));
+			//	enemy->AddComponent(bc);
+			//}
 			if (map[j][i] == 6) { // 헤비머신건
 				std::shared_ptr<ItemBox> item = std::make_shared<ItemBox>(Bullet::HEABYGUN, POS(j, i));
 				m_objectMgr->InsertObject(ITEMBOX, std::dynamic_pointer_cast<GameObject>(item));
