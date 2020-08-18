@@ -8,9 +8,8 @@ class BoxCollider {
 
 private:
 	std::weak_ptr<GameObject> parentObject;
-	//std::list<std::shared_ptr<GameObject>> m_ObjList[TYPE_END];
 public:
-	bool isTrigger; // ture 이면 나를 주체로 모든 obj 순회를 돈다.
+	bool isTrigger; 
 
 public:
 	BoxCollider(std::shared_ptr<GameObject>& obj);

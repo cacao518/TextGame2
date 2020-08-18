@@ -75,7 +75,7 @@ void Enemy::GetDamage(float damage, bool bulletDir)
 
 	//if (bulletDir != m_dir) return;
 	if (bulletDir) return;
-	printf("적체력 %f ", m_Status.hp);
+	//printf("적체력 %f ", m_Status.hp);
 	m_Status.hp -= damage;
 	if (m_Status.hp <= 0) m_Life = false;
 

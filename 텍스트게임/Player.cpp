@@ -235,7 +235,7 @@ void Player::Render()
 
 void Player::SetHp(float damage)
 {
-	printf("%f", m_Status.hp);
+	//printf("%f", m_Status.hp);
 	m_Status.hp -= damage;
 }
 
